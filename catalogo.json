@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "build_id": "2026-10-06-681837e0",
-  "built_at": "2026-10-06T13:23:42Z",
-  "generator_commit": "81983a2",
+  "build_id": "2026-11-09-486b0133",
+  "built_at": "2026-11-09T16:25:25Z",
+  "generator_commit": "ae0be2c",
   "tileset": {
     "name": "protomaps-basemap",
     "version": "4.15.2",
@@ -10,14 +10,14 @@
   },
   "source": {
     "kind": "protomaps-build",
-    "timestamp": "2026-10-06T09:01:00.282Z",
-    "url": "https://build.protomaps.com/20261006.pmtiles",
-    "checksum": "681837e0fc3c11fccf60847f63356daf6b996becdcd4e75ec09cc3a691f2acfa",
-    "osm_timestamp": "2026-10-06T04:00:00Z"
+    "timestamp": "2026-11-09T09:05:07.016Z",
+    "url": "https://build.protomaps.com/20261109.pmtiles",
+    "checksum": "486b01339886dc58b27f2ee70ee74badece550a8a0f4da980a67e9a9252d84a7",
+    "osm_timestamp": "2026-11-09T04:00:00Z"
   },
   "tile_format": "mvt",
   "tile_compression": "gzip",
-  "release_url": "https://github.com/Murkiriel/carcara/releases/download/2026-10-06-681837e0/",
+  "release_url": "https://github.com/murkiriel/carcara/releases/download/2026-11-09-486b0133/",
   "attribution": "© colaboradores do OpenStreetMap (ODbL 1.0); cobertura do solo: © ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium (CC BY 4.0); esquema e perfil: Protomaps; limites das UFs: IBGE",
   "resources": {
     "file": "carcara-recursos.tar.gz",
@@ -26,8 +26,8 @@
   },
   "base": {
     "file": "carcara-base.pmtiles",
-    "bytes": 44313972,
-    "sha256": "c09dfe1f6e2aaa2102d94a73f1b3c1bd954ff9bc5171d7316c61ef6573428a92",
+    "bytes": 44160981,
+    "sha256": "0a37191fe53bcb5f751bfda297974cf5de22863afc48fb81ed42c4fee0668c2b",
     "tiles": 2295,
     "minzoom": 0,
     "maxzoom": 9,
@@ -48,8 +48,8 @@
     "AC": {
       "name": "Acre",
       "file": "carcara-AC.pmtiles",
-      "bytes": 62209589,
-      "sha256": "1b02d0e8f028ad136bca91c83a81ce7549fb9be506315a15db2944ef6c3f2585",
+      "bytes": 62311523,
+      "sha256": "ff0d8cf0e1dea08191ef3a83352f13a8c612b1f9ac166942afe5c2e0d12da737",
       "tiles": 165980,
       "minzoom": 0,
       "maxzoom": 15,
@@ -67,8 +67,8 @@
       ],
       "light": {
         "file": "carcara-AC-leve.pmtiles",
-        "bytes": 20048847,
-        "sha256": "7507c6c0a340120f82448d8960f9f95076d36ac9b41eba18a4a757f72262ec2a",
+        "bytes": 20093760,
+        "sha256": "a883861af6b73192444847564241529f6ad03d8e2f069eb768b7bde3f9f4b38f",
         "tiles": 10841,
         "minzoom": 0,
         "maxzoom": 13
@@ -77,8 +77,8 @@
     "AL": {
       "name": "Alagoas",
       "file": "carcara-AL.pmtiles",
-      "bytes": 35550202,
-      "sha256": "8b8561f68a7d9cfece7d9b562b53690a2bcfb8493a6fa6aa403ddbe7ec3bcafe",
+      "bytes": 35658234,
+      "sha256": "4601ea1fa0981776e603a3223ad3ee356165d495c90dea268db61df7d646ab13",
       "tiles": 31765,
       "minzoom": 0,
       "maxzoom": 15,
@@ -96,8 +96,8 @@
       ],
       "light": {
         "file": "carcara-AL-leve.pmtiles",
-        "bytes": 10071472,
-        "sha256": "bdac7178d9ac227c2310351cc406f90d533376bf57555ed350c4dcbfc5e3fff6",
+        "bytes": 10098507,
+        "sha256": "e2af42798ccf40904da62d35224c498de33c37b8fb6ad7b2f61da379b046f897",
         "tiles": 2187,
         "minzoom": 0,
         "maxzoom": 13
@@ -106,8 +106,8 @@
     "AM": {
       "name": "Amazonas",
       "file": "carcara-AM.pmtiles",
-      "bytes": 215018826,
-      "sha256": "b693b65f7058b91d364adf04f99eb899634aef66655c0154711ba23b9d2c4e1e",
+      "bytes": 213705552,
+      "sha256": "ae52a5278461d881e8322e796c8425f926d7eb8c5974c000d3692299ccd47705",
       "tiles": 1455690,
       "minzoom": 0,
       "maxzoom": 15,
@@ -125,8 +125,8 @@
       ],
       "light": {
         "file": "carcara-AM-leve.pmtiles",
-        "bytes": 64484343,
-        "sha256": "3e92ca3132ba988b41d5650075dcdde2c458a4e2cf9d5f4176cadb71313bcf00",
+        "bytes": 64336625,
+        "sha256": "f8086820eb578fa8e9c6a8a9c60590ac694c60f89f76232d961e883fcb675b72",
         "tiles": 92351,
         "minzoom": 0,
         "maxzoom": 13
@@ -135,8 +135,8 @@
     "AP": {
       "name": "Amapá",
       "file": "carcara-AP.pmtiles",
-      "bytes": 23686212,
-      "sha256": "107b5c1daa8fc8398965a1ef056621a5b3060f69b94ed5f6170b297b159681d0",
+      "bytes": 23787686,
+      "sha256": "376b6b51564311f6300d323716d478b4f240caba86685cb2e534f665dfb697d3",
       "tiles": 141635,
       "minzoom": 0,
       "maxzoom": 15,
@@ -154,8 +154,8 @@
       ],
       "light": {
         "file": "carcara-AP-leve.pmtiles",
-        "bytes": 7712412,
-        "sha256": "381a8a3f33e7b8a955a19796cd8caf630200f6a9fe914d2d5169d400cd2282b0",
+        "bytes": 7732727,
+        "sha256": "bb8b7e5954e564199dce530c7e718e6f291262272cea0e657adb38b9a214884b",
         "tiles": 9280,
         "minzoom": 0,
         "maxzoom": 13
@@ -164,8 +164,8 @@
     "BA": {
       "name": "Bahia",
       "file": "carcara-BA.pmtiles",
-      "bytes": 295895205,
-      "sha256": "bf74877c6788f88427617af771c49eab294c295c01e656dc8ff92ed407c2bb80",
+      "bytes": 296394136,
+      "sha256": "b5fa218c7db86c08c675e333a79ac4f5efe4380f6a2d1ab828fdc255e111d7d9",
       "tiles": 562894,
       "minzoom": 0,
       "maxzoom": 15,
@@ -183,8 +183,8 @@
       ],
       "light": {
         "file": "carcara-BA-leve.pmtiles",
-        "bytes": 77120680,
-        "sha256": "dfbac7142abcf3df38535ad088bf6100c9904b74b6dcd2dccd76a69bef9f8378",
+        "bytes": 77160707,
+        "sha256": "8897d9cafc6f95399851e53befe33ecf84188d393527a52c8d4415a9624b506c",
         "tiles": 36071,
         "minzoom": 0,
         "maxzoom": 13
@@ -193,8 +193,8 @@
     "CE": {
       "name": "Ceará",
       "file": "carcara-CE.pmtiles",
-      "bytes": 159128400,
-      "sha256": "ee4eb7ceea3a66bf6b5d272cc5a50e4a4e64d7b29563ba2f93499b79cdaecc68",
+      "bytes": 159701812,
+      "sha256": "3b77c98854fa9f7a42b086154a013ea1d3c6b5f399600a6293cd6e49e956c92f",
       "tiles": 146423,
       "minzoom": 0,
       "maxzoom": 15,
@@ -212,8 +212,8 @@
       ],
       "light": {
         "file": "carcara-CE-leve.pmtiles",
-        "bytes": 31565053,
-        "sha256": "85a10097fd6da21ed584f33eebc6b93ddabf9d0f9f675e776a019f6d98b698a8",
+        "bytes": 31717559,
+        "sha256": "bbd99846837af019b025d7afea81d7000de1f0997600c5b26f37cdccbe32545b",
         "tiles": 9524,
         "minzoom": 0,
         "maxzoom": 13
@@ -222,8 +222,8 @@
     "DF": {
       "name": "Distrito Federal",
       "file": "carcara-DF.pmtiles",
-      "bytes": 47993949,
-      "sha256": "a08b7711be8bfbafc44f5ad4a54d59d39d50c54743979169f821c35aeb04bc07",
+      "bytes": 48122777,
+      "sha256": "f99cea8a24adf678f6766333934d44f92fac53681c07381c31311d99c6ac0a0c",
       "tiles": 7868,
       "minzoom": 0,
       "maxzoom": 15,
@@ -241,8 +241,8 @@
       ],
       "light": {
         "file": "carcara-DF-leve.pmtiles",
-        "bytes": 7086713,
-        "sha256": "109539f7d4b24db9ea194754dd3c20398906d7640162d1525d82b001105374d6",
+        "bytes": 7119851,
+        "sha256": "ff5b0760332f8d7e85a867119c4970be1610cc98a8cca6f42bf9fc278ae9e569",
         "tiles": 576,
         "minzoom": 0,
         "maxzoom": 13
@@ -251,8 +251,8 @@
     "ES": {
       "name": "Espírito Santo",
       "file": "carcara-ES.pmtiles",
-      "bytes": 364405903,
-      "sha256": "76b8dba6f12dc1404d347a6c82ae1985bce335be4d51d3de8ace24233cd48f3b",
+      "bytes": 364460931,
+      "sha256": "8b32ff173cd9810d261e10a812870c7c904a5e7698da51aa9d193abb921e092c",
       "tiles": 54797,
       "minzoom": 0,
       "maxzoom": 15,
@@ -270,8 +270,8 @@
       ],
       "light": {
         "file": "carcara-ES-leve.pmtiles",
-        "bytes": 124891460,
-        "sha256": "8799fcdda882cb4c369fe75b55e4539aaf5a9746efcd571d2d9c6ff74a635bff",
+        "bytes": 124898803,
+        "sha256": "15156414e96f5e07d632e43480748dcf3785f86a2d9fab5a85ead89f5c98efcb",
         "tiles": 3670,
         "minzoom": 0,
         "maxzoom": 13
@@ -280,8 +280,8 @@
     "GO": {
       "name": "Goiás",
       "file": "carcara-GO.pmtiles",
-      "bytes": 182976604,
-      "sha256": "385c163b70bb0d10dcd1041c1cac5e5cd045a70c426cfce55cf9056dd43b562d",
+      "bytes": 184774923,
+      "sha256": "802d1aabb9d5d7ce143df6cbac240d7083e98d69b45a03341fc300a7b6cfb85c",
       "tiles": 355106,
       "minzoom": 0,
       "maxzoom": 15,
@@ -299,8 +299,8 @@
       ],
       "light": {
         "file": "carcara-GO-leve.pmtiles",
-        "bytes": 50425888,
-        "sha256": "b9c630b12ec8b1ce149066b0e1d87948e5ed34ebc3c34f70d8a1bb72be1332da",
+        "bytes": 50931897,
+        "sha256": "afca22e1fb53c12c27c62867af088033911eeeba65ffac9f62eeaec39953eea8",
         "tiles": 22896,
         "minzoom": 0,
         "maxzoom": 13
@@ -309,8 +309,8 @@
     "MA": {
       "name": "Maranhão",
       "file": "carcara-MA.pmtiles",
-      "bytes": 112713199,
-      "sha256": "7318a0aeb9c4eb8f59c4e008fac73512baf67711331c17214578cfe7156f007f",
+      "bytes": 113099519,
+      "sha256": "679493d1c77206932c4b0691780f143ecfb3c7eebb38478e11fa1aeb7133cd4a",
       "tiles": 324222,
       "minzoom": 0,
       "maxzoom": 15,
@@ -328,8 +328,8 @@
       ],
       "light": {
         "file": "carcara-MA-leve.pmtiles",
-        "bytes": 28141035,
-        "sha256": "9f56489188afe8b1bd3ba1f88e33c97d7a89dd09e9f034d5bb16f30e53fea2aa",
+        "bytes": 28177141,
+        "sha256": "32abfb2b492a51ab90af0adf71eaf7057ca99583f7c9cee97bfa98ec1a9c7b21",
         "tiles": 20930,
         "minzoom": 0,
         "maxzoom": 13
@@ -338,8 +338,8 @@
     "MG": {
       "name": "Minas Gerais",
       "file": "carcara-MG.pmtiles",
-      "bytes": 593847606,
-      "sha256": "6b5b791377f37fb5e2e7974497c74ed93ead72d8c9597dca1f6871aaa351ea10",
+      "bytes": 595335598,
+      "sha256": "7ca36d51641ab99cbcb3622efb83dc53d6fc5fbcedf588a0c43b8a8de95cd9ea",
       "tiles": 616660,
       "minzoom": 0,
       "maxzoom": 15,
@@ -357,8 +357,8 @@
       ],
       "light": {
         "file": "carcara-MG-leve.pmtiles",
-        "bytes": 182967513,
-        "sha256": "0fda480e75d3fc5322cddd5e4827231e4437ef136fe01e153f0a8cc7fa6677e0",
+        "bytes": 183298107,
+        "sha256": "5a3b0eef437d1a1879e040641ea6535a64e5edc2abd9484a5d1aa2c3e8eae954",
         "tiles": 39438,
         "minzoom": 0,
         "maxzoom": 13
@@ -367,8 +367,8 @@
     "MS": {
       "name": "Mato Grosso do Sul",
       "file": "carcara-MS.pmtiles",
-      "bytes": 111199282,
-      "sha256": "81821ad971f1a478bebeccdc89ab39304aeda819215aa2d910e8640e06093ed9",
+      "bytes": 111568084,
+      "sha256": "a52ce821bde786b57fa5288df21ca5b66e03ed9b625932d0ff0432ac607c3b23",
       "tiles": 385183,
       "minzoom": 0,
       "maxzoom": 15,
@@ -386,8 +386,8 @@
       ],
       "light": {
         "file": "carcara-MS-leve.pmtiles",
-        "bytes": 29469090,
-        "sha256": "231f5c2353d12319a2ea2d58bb47a07cad625cd140a94cc1309b8004005611f0",
+        "bytes": 29560880,
+        "sha256": "f3f8cdd8ab4c926915d9de8e354f7987b8bc32a40b1d7304b776dcfdfae4a58c",
         "tiles": 24691,
         "minzoom": 0,
         "maxzoom": 13
@@ -396,8 +396,8 @@
     "MT": {
       "name": "Mato Grosso",
       "file": "carcara-MT.pmtiles",
-      "bytes": 230848986,
-      "sha256": "b7b2619b680a28425be5835e855a2ab10bc5a3f5ba45ace5a11ed19b398fb249",
+      "bytes": 232235899,
+      "sha256": "12183966cc51c2204030f229a2dcbdd7d219fea0267fea70d12688daf41ac371",
       "tiles": 886897,
       "minzoom": 0,
       "maxzoom": 15,
@@ -415,8 +415,8 @@
       ],
       "light": {
         "file": "carcara-MT-leve.pmtiles",
-        "bytes": 59009684,
-        "sha256": "5989e2002e3a3aa98423bc9473bceb706f412819ec9bc28c7af6db93ffb6e23a",
+        "bytes": 59314636,
+        "sha256": "5b7789cafba763661675df7eb1f4ac9aba1bfd3179da87014b09237579fc2807",
         "tiles": 56413,
         "minzoom": 0,
         "maxzoom": 13
@@ -425,8 +425,8 @@
     "PA": {
       "name": "Pará",
       "file": "carcara-PA.pmtiles",
-      "bytes": 206340069,
-      "sha256": "cd28d6880db2e622843723f38249401213d1cf59164ac99b98bbe39475201074",
+      "bytes": 206752878,
+      "sha256": "f41f3280675df5c9094207382e05f42ce9d1397408e8c8c3299d9fce9a6f25ee",
       "tiles": 1165728,
       "minzoom": 0,
       "maxzoom": 15,
@@ -444,8 +444,8 @@
       ],
       "light": {
         "file": "carcara-PA-leve.pmtiles",
-        "bytes": 56125536,
-        "sha256": "7981819f93d81136a55ac443fb2681398cb932ced4ab1e7cda1b323ae7b6b353",
+        "bytes": 56204431,
+        "sha256": "3f15ad8bfd0f014ef5703fad1736c7c6d02bb8b88a6aafdb5acbeafc54455600",
         "tiles": 73981,
         "minzoom": 0,
         "maxzoom": 13
@@ -454,8 +454,8 @@
     "PB": {
       "name": "Paraíba",
       "file": "carcara-PB.pmtiles",
-      "bytes": 75590312,
-      "sha256": "3196d83c8a6d34d5c5cf4ecefaeee487dfdfdf929d18939cfc2e486718b4dc85",
+      "bytes": 75902286,
+      "sha256": "2b037a38f46f402e9c538d1e85414a787001992566b718a1976a2cf2f1854bc4",
       "tiles": 62521,
       "minzoom": 0,
       "maxzoom": 15,
@@ -473,8 +473,8 @@
       ],
       "light": {
         "file": "carcara-PB-leve.pmtiles",
-        "bytes": 21077492,
-        "sha256": "cdf89104efec6f17471e6cb3b7c9060a76747afd82287fe04a56e7e794a865c7",
+        "bytes": 21193522,
+        "sha256": "153b9327243361092b7f672ccdf8dd9e771aec8b6b754663087cdedbbb5d6c02",
         "tiles": 4231,
         "minzoom": 0,
         "maxzoom": 13
@@ -483,8 +483,8 @@
     "PE": {
       "name": "Pernambuco",
       "file": "carcara-PE.pmtiles",
-      "bytes": 104885044,
-      "sha256": "509eae70ab3289ae74cf99f3ffdc0e6477daa53990d011423302dd5e6afacaba",
+      "bytes": 105616074,
+      "sha256": "6f0604a8f15e796fcb0ec13dfd47ecfad92d1e70141332cdb29888e5eb9e3def",
       "tiles": 105303,
       "minzoom": 0,
       "maxzoom": 15,
@@ -502,8 +502,8 @@
       ],
       "light": {
         "file": "carcara-PE-leve.pmtiles",
-        "bytes": 26177437,
-        "sha256": "f0dbc64b0eb820cdd6fdbf8035c13170735797264cf74abebfe416b00c7c65ef",
+        "bytes": 26413533,
+        "sha256": "d62cde3cdaa0548479ede2efe98839b65843186200ddac88e1e2b2e9e49b9009",
         "tiles": 7037,
         "minzoom": 0,
         "maxzoom": 13
@@ -512,8 +512,8 @@
     "PI": {
       "name": "Piauí",
       "file": "carcara-PI.pmtiles",
-      "bytes": 115315121,
-      "sha256": "103503de979677e7bee4c44ce9b702567912d796865f9059b0a20324daa00e0c",
+      "bytes": 115653394,
+      "sha256": "fcee398d26924b12dfdbf8f548a55136ef6ac24477f0914ef39ca57e7e20a6c0",
       "tiles": 248897,
       "minzoom": 0,
       "maxzoom": 15,
@@ -531,8 +531,8 @@
       ],
       "light": {
         "file": "carcara-PI-leve.pmtiles",
-        "bytes": 25255982,
-        "sha256": "aab3f72136db989dda3c768b24982bb30213e9f8771c3ea98090b1da2505b12c",
+        "bytes": 25288737,
+        "sha256": "7f300ebb94b1817d6227aa517e31d20e012249312e86f54953cf266e02aba596",
         "tiles": 16134,
         "minzoom": 0,
         "maxzoom": 13
@@ -541,8 +541,8 @@
     "PR": {
       "name": "Paraná",
       "file": "carcara-PR.pmtiles",
-      "bytes": 327851037,
-      "sha256": "b89cad89807a225520631cfbd77ca37acb95c5ba59bd94033609b12761248b1b",
+      "bytes": 330246341,
+      "sha256": "69a57b6c45e724ab5ceeb5366966797aebfaf04e1136dea1c82609e63189f317",
       "tiles": 231867,
       "minzoom": 0,
       "maxzoom": 15,
@@ -560,8 +560,8 @@
       ],
       "light": {
         "file": "carcara-PR-leve.pmtiles",
-        "bytes": 99496251,
-        "sha256": "5394c60374a6bda16880e45b258357fb61642d0f354e63902e6894f31fba93ef",
+        "bytes": 100267085,
+        "sha256": "2f7cef0ee53d74c5f57cfc36dc274ccf9369c6b1357f8e77daf092b93dc3fe67",
         "tiles": 14914,
         "minzoom": 0,
         "maxzoom": 13
@@ -570,8 +570,8 @@
     "RJ": {
       "name": "Rio de Janeiro",
       "file": "carcara-RJ.pmtiles",
-      "bytes": 115797757,
-      "sha256": "2c9bef95196d6ad05592c4465a377de9780bf254d281666ebacbfc1b36988e27",
+      "bytes": 116337223,
+      "sha256": "c4c4c9bcfc41fc38b8510804013fc895c2090cabad53de6992dd13740d431d9a",
       "tiles": 57532,
       "minzoom": 0,
       "maxzoom": 15,
@@ -589,8 +589,8 @@
       ],
       "light": {
         "file": "carcara-RJ-leve.pmtiles",
-        "bytes": 31808163,
-        "sha256": "a631db702b55da1a9f2e511348bc48f0902eb29c3b66524a1e4f6c6cb5aa5861",
+        "bytes": 31900189,
+        "sha256": "1bf713b6ff32ec5dc1c5f609c55a12f7e5a96f821f3ce40c92e779595ff3684b",
         "tiles": 3875,
         "minzoom": 0,
         "maxzoom": 13
@@ -599,8 +599,8 @@
     "RN": {
       "name": "Rio Grande do Norte",
       "file": "carcara-RN.pmtiles",
-      "bytes": 43747636,
-      "sha256": "d225b30b0ef3dda4202beda72fa69cb164a4fb18d5869c74d5850ab0f03b8961",
+      "bytes": 43803344,
+      "sha256": "b3c0e6a6f1eac75bc50f11bf1269aa8fac7845d9269acfc4eb129cd4756daa59",
       "tiles": 56411,
       "minzoom": 0,
       "maxzoom": 15,
@@ -618,8 +618,8 @@
       ],
       "light": {
         "file": "carcara-RN-leve.pmtiles",
-        "bytes": 12287750,
-        "sha256": "1f62d448a2a4179d15a3729fb57ec904a307f0b37f102c469116d400c0a713c0",
+        "bytes": 12293146,
+        "sha256": "3c7f6ddcb70cfb3bc644d6c0606b8b98796bc7961fb4fe81f940dfed0b999baa",
         "tiles": 3795,
         "minzoom": 0,
         "maxzoom": 13
@@ -628,8 +628,8 @@
     "RO": {
       "name": "Rondônia",
       "file": "carcara-RO.pmtiles",
-      "bytes": 53604865,
-      "sha256": "921fd6a3e7f6bf17307a3df83874f8255cb68266452862c5068d00bdbd197360",
+      "bytes": 53676492,
+      "sha256": "3234bd4980dae647d89bb125f64d80da4bad594f946cacf0b169a23dbdb09356",
       "tiles": 239663,
       "minzoom": 0,
       "maxzoom": 15,
@@ -647,8 +647,8 @@
       ],
       "light": {
         "file": "carcara-RO-leve.pmtiles",
-        "bytes": 15255775,
-        "sha256": "e4541b9df5404f660a430b845a55dfedf57bcf194493b62aace54865662206db",
+        "bytes": 15269316,
+        "sha256": "0ce49c6b3b9b1fa9fd8ec5ad06517cc163e65b3930dd8ed251ec3ca85f861f06",
         "tiles": 15524,
         "minzoom": 0,
         "maxzoom": 13
@@ -657,8 +657,8 @@
     "RR": {
       "name": "Roraima",
       "file": "carcara-RR.pmtiles",
-      "bytes": 38906596,
-      "sha256": "05e66a36dc64e76f0727e53cce6cffee364ddfb9b3179c13b2a28522bfe1d8a1",
+      "bytes": 38973453,
+      "sha256": "a41f0fcfb665e7cbc05b80188b39957f614653c2d77780ce2c32830b4cd56d45",
       "tiles": 220303,
       "minzoom": 0,
       "maxzoom": 15,
@@ -676,8 +676,8 @@
       ],
       "light": {
         "file": "carcara-RR-leve.pmtiles",
-        "bytes": 11739634,
-        "sha256": "2961f81b8d1af3f97017ca9f75718f3af043092885f734943e282d831f8b84bb",
+        "bytes": 11752540,
+        "sha256": "85cf084773e6a5754efa07f7773005ebc40a4ddb132981f7699ae95ba00fe8a5",
         "tiles": 14360,
         "minzoom": 0,
         "maxzoom": 13
@@ -686,8 +686,8 @@
     "RS": {
       "name": "Rio Grande do Sul",
       "file": "carcara-RS.pmtiles",
-      "bytes": 280674324,
-      "sha256": "5e03b6afefd88909789fdc9961c9f1e6a036222704e376d26afad4a1a7cf1c44",
+      "bytes": 284476046,
+      "sha256": "26dc297e44a84104db6f1fa5119649a228cfb4a4132b6bfb8374786b8a5d2d8a",
       "tiles": 347690,
       "minzoom": 0,
       "maxzoom": 15,
@@ -705,8 +705,8 @@
       ],
       "light": {
         "file": "carcara-RS-leve.pmtiles",
-        "bytes": 67666594,
-        "sha256": "844b07a2c9d95d584b625cf5ceb7926fe6837e91ddc503375d5bc4b3cb242e00",
+        "bytes": 68768702,
+        "sha256": "2cd7a40f56f74a498051362cedf2f91b35f8640f3907c00c213235954a59c21b",
         "tiles": 22475,
         "minzoom": 0,
         "maxzoom": 13
@@ -715,8 +715,8 @@
     "SC": {
       "name": "Santa Catarina",
       "file": "carcara-SC.pmtiles",
-      "bytes": 228498291,
-      "sha256": "c4b41984b7894b3132db202a0fec70619e861aa1c8bbd08749fae895c0568ce4",
+      "bytes": 228811889,
+      "sha256": "df6d3c34eae3af9740222722a34e04caae17d9291156f20a19b6426691fedebf",
       "tiles": 123775,
       "minzoom": 0,
       "maxzoom": 15,
@@ -734,8 +734,8 @@
       ],
       "light": {
         "file": "carcara-SC-leve.pmtiles",
-        "bytes": 57815502,
-        "sha256": "f929a28f54a2790b56130724a674e32760ea14540445fcbd063742a874116a1f",
+        "bytes": 57865190,
+        "sha256": "a3a09b312b1610560cb669020cd993ff8f2d6f9649ca768617cb9801062748a6",
         "tiles": 8141,
         "minzoom": 0,
         "maxzoom": 13
@@ -744,8 +744,8 @@
     "SE": {
       "name": "Sergipe",
       "file": "carcara-SE.pmtiles",
-      "bytes": 29526600,
-      "sha256": "a4a44b296ad90d1f0b5e90544840d1840c9f67fcf4839a3f46fbdf32fd1849ce",
+      "bytes": 29649616,
+      "sha256": "a60da953105d85c14fc21fd0438f62662024976f418eee525405b2c14acbc90c",
       "tiles": 25376,
       "minzoom": 0,
       "maxzoom": 15,
@@ -763,8 +763,8 @@
       ],
       "light": {
         "file": "carcara-SE-leve.pmtiles",
-        "bytes": 7862690,
-        "sha256": "96afdca6b0554cb728eb457ba24787ba142d140b596c5041b814af9a68a4a4ce",
+        "bytes": 7889108,
+        "sha256": "7ba09d06cb60f5526acea66ccfc34d6eaebb279af7d603473e64d0866fd8c649",
         "tiles": 1759,
         "minzoom": 0,
         "maxzoom": 13
@@ -773,8 +773,8 @@
     "SP": {
       "name": "São Paulo",
       "file": "carcara-SP.pmtiles",
-      "bytes": 495729303,
-      "sha256": "5d33745b0884b2781fa436d5d2205588d60c72a06aefc58b6ef11eb9e802026e",
+      "bytes": 496971349,
+      "sha256": "ebb8c49fbbbdd90248d2098b66b68a30c142b595f0ede9d2351eed64eb7fb2cf",
       "tiles": 283071,
       "minzoom": 0,
       "maxzoom": 15,
@@ -792,8 +792,8 @@
       ],
       "light": {
         "file": "carcara-SP-leve.pmtiles",
-        "bytes": 126196562,
-        "sha256": "46e98332ac4cd5d164b7a6ab66bc03e683d1f25e3141dd01d7629ee49868fd91",
+        "bytes": 126456227,
+        "sha256": "1e4b4f493338b156b216e0ff5c10e9a70dc44185978b4153b1022abd8d5968fc",
         "tiles": 18346,
         "minzoom": 0,
         "maxzoom": 13
@@ -802,8 +802,8 @@
     "TO": {
       "name": "Tocantins",
       "file": "carcara-TO.pmtiles",
-      "bytes": 67890936,
-      "sha256": "0dd5d8d9c6c586f44c115ea1488c97ee01e620e11a94f04123f7379b46b6bb38",
+      "bytes": 68786589,
+      "sha256": "2232f0bb29c79ffd5a23fe1e5d5c6317f1932e5a608b353a596b04685eec346f",
       "tiles": 279025,
       "minzoom": 0,
       "maxzoom": 15,
@@ -821,8 +821,8 @@
       ],
       "light": {
         "file": "carcara-TO-leve.pmtiles",
-        "bytes": 17018819,
-        "sha256": "09c22e9f4a7fd6060790672458d10b53088db7fd2543ca434110137addc81144",
+        "bytes": 17238983,
+        "sha256": "bc889b38f3ba1f88f319b48efd96bda4e560c941225c62211af3d1ce23079be7",
         "tiles": 18074,
         "minzoom": 0,
         "maxzoom": 13
