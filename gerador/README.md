@@ -1,9 +1,8 @@
 # Gerador
 
 O programa que recorta o build da Protomaps por estado, valida os pacotes e os publica.
-**Já recorta, valida, monta o catálogo, sabe publicar e tem o agendamento escrito. Uma geração completa das 27
-UFs já foi feita em casa e passou em todas as travas; nenhuma foi publicada, e o workflow da geração nunca
-rodou no GitHub.** Hoje ele baixa a malha do IBGE, monta os polígonos
+Gera e publica pelo GitHub Actions, toda semana, no domingo. Ele lê a malha das UFs do IBGE (a cópia versionada
+em [`ibge_malha_uf.json`](ibge_malha_uf.json), conferida pelo sha256; nada é baixado do IBGE), monta os polígonos
 de recorte, escolhe o build, recorta os pacotes (o de cada estado, o leve e a base), monta o pacote de recursos
 (ícones e fontes), passa tudo pelas travas de validação e escreve o `catalogo.json` da geração. O desenho completo está em [`../docs/ARQUITETURA.md`](../docs/ARQUITETURA.md) e
 [`../docs/GERACAO.md`](../docs/GERACAO.md); o que falta, em [`PENDENCIAS.md`](PENDENCIAS.md).
@@ -134,7 +133,8 @@ quantos bytes cada recorte teria. O resultado vai para `data/medicoes/tamanhos_<
 |---|---|
 | `carcara/config.py` | Tudo o que muda o resultado: endereços, zooms, margem, versão da ferramenta, intervalo, gerações mantidas |
 | `carcara/net.py` | Download com retomada e novas tentativas |
-| `carcara/sources.py` | O build mais recente do índice da Protomaps e a malha das UFs do IBGE, os dois conferidos |
+| `carcara/sources.py` | O build mais recente do índice da Protomaps e a malha das UFs do IBGE (a cópia versionada), os dois conferidos |
+| `ibge_malha_uf.json` | A malha das UFs do IBGE, versionada; o sha256 fica no `config.py`, e trocá-la é decisão consciente |
 | `carcara/regions.py` | O polígono de cada UF com a margem e o do Brasil, gravados como GeoJSON |
 | `generate.py` | Ponto de entrada da geração |
 | `carcara/extraction.py` | O `pmtiles extract` (simulação e recorte de verdade), o cabeçalho, os metadados e a conferência de um arquivo |
@@ -181,7 +181,7 @@ Tudo o que o gerador baixa ou produz vai para `data/`, que fica fora do git:
 
 | Pasta | Conteúdo |
 |---|---|
-| `data/raw/` | Malha do IBGE; arquivo de recursos baixado |
+| `data/raw/` | Arquivo de recursos baixado |
 | `data/dist/` | Os pacotes prontos, `catalogo.json`, `pacotes.json` e `geracao.json` |
 | `data/regioes/` | Um GeoJSON por UF e o do Brasil |
 | `data/medicoes/` | Resultados das medições |

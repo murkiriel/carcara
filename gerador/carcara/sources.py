@@ -1,4 +1,4 @@
-"""O que vem de fora: o índice de builds da Protomaps e a malha das UFs do IBGE.
+"""O que vem de fora: o índice de builds da Protomaps e a malha das UFs do IBGE (a cópia versionada, conferida).
 
 O build é escolhido sempre pelo índice (`builds.json`), nunca por um endereço montado com a data: a Protomaps guarda
 os builds da última semana e avisa que os endereços podem mudar. Um build de outra versão maior do esquema é
@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Dict, Optional
 
 from . import config, net
+from .util import file_hash
 
 # Espera base entre tentativas, em segundos (multiplicada pelo número da tentativa). Os testes zeram.
 RETRY_DELAY = 10
@@ -74,21 +75,17 @@ def mesh_problem(path: Path) -> Optional[str]:
 
 
 def ibge_mesh() -> Path:
-    """Garante data/raw/ibge_malha_uf.json (GeoJSON das 27 UFs, código IBGE em `codarea`), sempre conferido."""
-    config.RAW.mkdir(parents=True, exist_ok=True)
-    dest = config.RAW / "ibge_malha_uf.json"
-    if dest.exists():
-        problem = mesh_problem(dest)
-        if problem is None:
-            return dest
-        print(f"[ibge] malha guardada inválida ({problem}); baixando de novo")
-        dest.unlink()
-    updated = dest.with_name(dest.name + ".novo")
-    print("[ibge] baixando a malha das UFs...")
-    net.download(config.IBGE_MESH_URL, updated, delay=RETRY_DELAY)
-    problem = mesh_problem(updated)
+    """A malha das UFs (GeoJSON das 27 UFs, código IBGE em `codarea`): a cópia versionada, config.IBGE_MESH_COPY,
+    conferida pelas 27 UFs e pelo sha256 do config. Nada é baixado, como no Andorinha: a mesma malha gera sempre a
+    mesma divisão dos pacotes, e a geração não depende da API do IBGE (que deixou de responder ao Actions em
+    2026-11-04)."""
+    copy = config.IBGE_MESH_COPY
+    problem = mesh_problem(copy)
     if problem is not None:
-        updated.unlink()
-        raise RuntimeError(f"a malha do IBGE veio inválida ({problem}): {config.IBGE_MESH_URL}")
-    updated.replace(dest)
-    return dest
+        raise RuntimeError(f"a malha do IBGE em {copy.name} não serve ({problem})")
+    sha256 = file_hash(copy, "sha256")
+    if sha256 != config.IBGE_MESH_COPY_SHA256:
+        raise RuntimeError(f"{copy.name} mudou (sha256 {sha256}, o config espera {config.IBGE_MESH_COPY_SHA256}): "
+                           "uma malha nova muda a divisão dos pacotes; confira e atualize o IBGE_MESH_COPY_SHA256")
+    print(f"[ibge] malha das UFs: {copy.name}, 27 UFs, sha256 confere")
+    return copy

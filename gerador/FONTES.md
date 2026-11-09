@@ -165,7 +165,7 @@ Lido do código do gerador dos tiles de roteamento.
 | Item | Valor |
 |---|---|
 | Extrato do Brasil | `https://download.openstreetmap.fr/extracts/south-america/brazil-latest.osm.pbf`, com a data em `brazil.state.txt` e o md5 em `brazil.osm.pbf.md5` na mesma pasta |
-| Malha das UFs | API de malhas do IBGE, versão 3 (`https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR…`), com o código da UF em `codarea` |
+| Malha das UFs | API de malhas do IBGE, versão 3 (`https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR…`), com o código da UF em `codarea`. A geração usa a cópia versionada `gerador/ibge_malha_uf.json` (baixada em 2026-11-09, idêntica à de 2026-10-01 e à do Andorinha; sha256 no config) |
 | Margem do recorte | 0,05° |
 | Intervalo entre gerações | Uma por semana, no domingo (até 2026-11-09, 29 dias) |
 | Gerações mantidas | 12 (até 2026-11-09, 3) |

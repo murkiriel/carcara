@@ -383,10 +383,8 @@ class CapitalsTest(unittest.TestCase):
         self.assertEqual(sorted(config.STATES), sorted(validation.CAPITALS))
 
     def test_each_capital_falls_inside_its_state(self):
-        mesh = config.RAW / "ibge_malha_uf.json"
-        if not mesh.exists():
-            self.skipTest("sem a malha do IBGE em data/raw (rode o gerador ou a medição uma vez)")
-        polygons = regions.state_polygons(mesh)
+        # A cópia versionada que a geração usa: o teste roda também no CI, onde antes era pulado sem a malha baixada.
+        polygons = regions.state_polygons(config.IBGE_MESH_COPY)
         for state, (name, lat, lon) in validation.CAPITALS.items():
             self.assertTrue(polygons[state].contains(Point(lon, lat)), f"{name} fora de {state}")
 

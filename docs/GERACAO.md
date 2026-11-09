@@ -16,7 +16,9 @@ bytes necessárias.
 1. **Escolher o build.** Ler `https://build-metadata.protomaps.dev/builds.json` e pegar a entrada mais recente.
    Cada entrada tem `key` (nome do arquivo), `size`, `md5sum`, `b3sum`, `uploaded` e `version`. Recusar se a versão
    maior não for a esperada (4).
-2. **Baixar a malha das UFs** do IBGE e conferir que tem as 27 unidades.
+2. **Ler a malha das UFs** do IBGE, a cópia versionada em `gerador/ibge_malha_uf.json`, e conferir as 27 unidades e o
+   sha256 do `config.py`. Nada é baixado do IBGE, como no Andorinha: a API deixou de responder ao Actions em
+   2026-11-04.
 3. **Montar os polígonos:** cada UF com a margem de 0,05°, gravada como GeoJSON; o Brasil para a base.
 4. **Recortar cada estado:**
 
@@ -195,7 +197,8 @@ Coisas que já deram problema e que o gerador deve nascer sabendo:
 
 | Lição | O que fazer |
 |---|---|
-| O IBGE manda a malha compactada com gzip para os executores do GitHub, mesmo sem o pedido aceitar compressão | O download detecta e descompacta; a malha é sempre conferida depois de baixada |
+| O IBGE manda a malha compactada com gzip para os executores do GitHub, mesmo sem o pedido aceitar compressão | O download detecta e descompacta (vale para qualquer download) |
+| A API de malhas do IBGE deixou de responder aos executores do GitHub (desde 2026-11-04; de um endereço no Brasil, responde) | A malha vai versionada no repositório, com o sha256 no config, como no Andorinha; a geração não acessa o IBGE |
 | O `ubuntu-latest` muda de versão com o tempo | Fixar a imagem (`ubuntu-24.04`) e as versões das actions |
 | O agendamento do GitHub atrasa horas e pode pular disparos, sobretudo em repositório novo e no minuto zero | Dois disparos por dia, e a regra "publicada de antes do último domingo" tenta de novo nos dias seguintes; o cron fica no minuto 17 |
 | Um run agendado que espera na fila lê o catálogo de antes da publicação e tenta gerar de novo | O job `interval` lê o catálogo do `main` atual, não o do commit que disparou |

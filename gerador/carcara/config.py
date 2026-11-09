@@ -96,9 +96,16 @@ EMBEDDED_ATTRIBUTION = (
 # Marca que o gerador cria em DIST ao começar e apaga ao terminar: se ela existe, a geração caiu no meio.
 IN_PROGRESS_MARKER = "GERACAO_EM_ANDAMENTO"
 
-# Malha oficial das UFs (API de malhas do IBGE, v3, qualidade máxima): o polígono de cada pacote.
+# Malha oficial das UFs (API de malhas do IBGE, v3, qualidade máxima): o polígono de cada pacote. A geração usa só a
+# cópia no repositório, como no Andorinha: baixada desta URL em 2026-11-09 (1.001.279 bytes, as 27 UFs), idêntica byte
+# a byte à de 2026-10-01, que gerou as primeiras releases, e à do Andorinha. Até 2026-11-09 a geração baixava a malha;
+# desde 2026-11-04 a API não respondia aos executores do GitHub Actions. Para trocar a cópia (uma divisa mudou):
+# baixar desta URL, conferir com `sources.mesh_problem` e atualizar o sha256; os pacotes da geração seguinte podem
+# mudar de composição.
 IBGE_MESH_URL = ("https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR"
                  "?formato=application/vnd.geo%2Bjson&intrarregiao=UF&qualidade=maxima")
+IBGE_MESH_COPY = GENERATOR_DIR / "ibge_malha_uf.json"
+IBGE_MESH_COPY_SHA256 = "4435b2e0e62de6d68f5c5387e01efc31655242948ae9434b78a3b5b05582e497"
 
 USER_AGENT = "carcara-gerador/1"
 

@@ -173,10 +173,11 @@ carcara/
 │   ├── LICENSE               MIT (código)                                             (existe)
 │   ├── requirements.txt                                                               (existe)
 │   ├── generate.py           ponto de entrada da geração                    (existe: recorta e valida)
+│   ├── ibge_malha_uf.json    a malha das UFs do IBGE, versionada (sha256 no config)   (existe)
 │   ├── carcara/
 │   │   ├── config.py         endereços, zooms, margem, ferramenta, intervalo, gerações (existe)
 │   │   ├── net.py            download com retomada e novas tentativas                 (existe)
-│   │   ├── sources.py        build da Protomaps pelo índice, malha do IBGE            (existe)
+│   │   ├── sources.py        build da Protomaps pelo índice, malha do IBGE conferida  (existe)
 │   │   ├── regions.py        polígonos das UFs com margem, GeoJSON para o recorte     (existe)
 │   │   ├── extraction.py     chama o pmtiles extract e lê o que ele informa           (existe)
 │   │   ├── packs.py          os pacotes de uma geração: estado, leve e base           (existe)
