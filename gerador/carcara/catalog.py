@@ -123,7 +123,8 @@ def save(catalog: dict, dest: Path) -> None:
 
 
 def _strip_accents(text: str) -> str:
-    return unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
+    """A chave de ordem dos nomes: sem acento e sem caixa ("Rio de Janeiro" antes de "Rio Grande do Norte")."""
+    return unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode().casefold()
 
 
 def _mb(size: int) -> str:

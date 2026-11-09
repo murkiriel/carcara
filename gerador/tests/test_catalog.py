@@ -209,9 +209,12 @@ class DownloadsTableTest(unittest.TestCase):
         cat["states"] = {state: dict(cat["states"]["DF"], name=config.STATES[state]) for state in config.STATES}
         rows = [line.split("|")[1].strip() for line in catalog.downloads_table(cat).splitlines()
                 if line.startswith("| ") and "carcara-" in line and "carcara-base" not in line]
-        strip = lambda n: unicodedata.normalize("NFKD", n).encode("ascii", "ignore").decode()  # noqa: E731
+        strip = lambda n: unicodedata.normalize("NFKD", n).encode("ascii", "ignore").decode().casefold()  # noqa: E731
         self.assertEqual(sorted(rows, key=strip), rows)
         self.assertLess(rows.index("Pará (PA)"), rows.index("Paraíba (PB)"))
+        # Sem diferença de caixa: o "de" minúsculo não manda o Rio de Janeiro para depois do Rio Grande.
+        self.assertLess(rows.index("Rio de Janeiro (RJ)"), rows.index("Rio Grande do Norte (RN)"))
+        self.assertLess(rows.index("Mato Grosso (MT)"), rows.index("Mato Grosso do Sul (MS)"))
 
     def test_heading_says_which_generation_and_which_data(self):
         table = self.table()
