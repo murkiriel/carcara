@@ -132,7 +132,9 @@ class GenerationWorkflowTest(unittest.TestCase):
         self.assertIn("if: github.event_name != 'schedule' || github.repository == 'Murkiriel/carcara'", self.interval)
 
     def test_the_official_repository_is_the_one_the_generator_publishes_to(self):
-        self.assertIn(f"github.repository == '{config.GITHUB_REPO}'", self.interval)
+        # O `==` das expressões do Actions ignora maiúsculas, e o GITHUB_REPOSITORY segue a grafia atual do login
+        # (que pode mudar sem o workflow mudar): a comparação aqui é a mesma.
+        self.assertIn(f"github.repository == '{config.GITHUB_REPO}'".lower(), self.interval.lower())
 
     def test_generation_waits_for_the_interval_job(self):
         self.assertIn("needs: interval\n", self.generate)
@@ -209,7 +211,7 @@ class FailureAlertTest(unittest.TestCase):
 
     def test_only_on_schedule_and_only_in_the_official_repository(self):
         self.assertIn("github.event_name == 'schedule'", self.alert)
-        self.assertIn(f"github.repository == '{config.GITHUB_REPO}'", self.alert)
+        self.assertIn(f"github.repository == '{config.GITHUB_REPO}'".lower(), self.alert.lower())  # sem caixa, como o Actions
 
     def test_may_only_touch_issues(self):
         self.assertRegex(self.alert, r"permissions:\n\s+issues: write\n")
