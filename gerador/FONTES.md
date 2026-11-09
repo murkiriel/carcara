@@ -167,8 +167,8 @@ Lido do código do gerador dos tiles de roteamento.
 | Extrato do Brasil | `https://download.openstreetmap.fr/extracts/south-america/brazil-latest.osm.pbf`, com a data em `brazil.state.txt` e o md5 em `brazil.osm.pbf.md5` na mesma pasta |
 | Malha das UFs | API de malhas do IBGE, versão 3 (`https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR…`), com o código da UF em `codarea` |
 | Margem do recorte | 0,05° |
-| Intervalo entre gerações | 29 dias |
-| Gerações mantidas | 3 |
+| Intervalo entre gerações | Uma por semana, no domingo (até 2026-11-09, 29 dias) |
+| Gerações mantidas | 12 (até 2026-11-09, 3) |
 
 ### Contas sobre tiles
 
@@ -286,7 +286,7 @@ por estado está em [`PENDENCIAS.md`](PENDENCIAS.md), seção "Geração complet
 
 | Afirmação | Onde aparece | Como conferir |
 |---|---|---|
-| O disparo agendado do workflow `gerar` (o job `interval` parando antes dos 29 dias, e gerando depois) | GERACAO, PENDENCIAS | Olhar os runs agendados depois de 2026-10-02 |
+| O disparo agendado do workflow `gerar` com a regra do domingo (o job `interval` parando no meio da semana e gerando no domingo) | GERACAO, PENDENCIAS | Olhar os runs agendados depois de 2026-11-09. A regra antiga, dos 29 dias, foi vista funcionando: a geração agendada de 2026-10-06 publicou sozinha |
 | O OpenMapTiles vai só até o zoom 14 | DECISOES (D5) | Documentação do OpenMapTiles |
 | A Protomaps publica estilos prontos em mais de uma variação de cores | CONSUMO | Repositório `protomaps/basemaps`, pasta de estilos |
 | Opções `--osm_path` e `--output` do Planetiler | GERACAO | Documentação do Planetiler, na versão do perfil escolhida |

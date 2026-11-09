@@ -155,7 +155,7 @@ O pacote traz ainda `LEIAME.md` (origem e revisão), `fonts/OFL.txt` e `sprites/
 - **Versão maior diferente não convive.** Se o catálogo publicar uma versão maior nova, os estilos precisam ser
   atualizados junto, e os pacotes antigos e novos não devem ser desenhados com o mesmo estilo.
 - **Apagar:** remover o arquivo. Nenhum outro pacote depende dele.
-- As releases guardam as 3 gerações mais recentes. Usar sempre o `release_url` do catálogo.
+- As releases guardam as 12 gerações mais recentes (uma por semana). Usar sempre o `release_url` do catálogo.
 
 ## Crédito
 

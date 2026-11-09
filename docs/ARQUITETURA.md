@@ -153,8 +153,8 @@ Pontos do contrato:
   leves e os recursos. Cerca de 5,9 GB por geração.
 - O `catalogo.json` da raiz aponta sempre para a geração mais recente. Quem consome usa o `release_url` do
   catálogo, nunca um link fixo.
-- Ficam no ar as 3 gerações mais recentes (cerca de 18 GB); as anteriores são apagadas depois de cada
-  publicação.
+- Ficam no ar as 12 gerações mais recentes (uma por semana, cerca de 3 meses e 71 GB); as anteriores são apagadas
+  depois de cada publicação. Cada release leva também o `LICENCA-DADOS.txt`, com a licença e a atribuição.
 - Limites do GitHub, conferidos em 2026-10-01: cada arquivo abaixo de 2 GiB, até 1.000 arquivos por release, sem
   limite para o tamanho total nem para o tráfego.
 - A release é criada como rascunho e só é publicada com todos os arquivos enviados e conferidos. Um envio que
@@ -186,13 +186,15 @@ carcara/
 │   │   ├── mvt.py            lê as camadas de um tile, para as travas                 (existe)
 │   │   ├── catalog.py        monta o catalogo.json e a tabela do README               (existe)
 │   │   ├── publishing.py     release em rascunho, envio, publicação, limpeza das antigas (existe)
-│   │   ├── schedule.py       a regra dos 29 dias; sem geração publicada, não gera     (existe)
+│   │   ├── schedule.py       a regra do domingo; sem geração publicada, não gera      (existe)
+│   │   ├── alert.py          a issue "Geração falhando" das execuções agendadas      (existe)
 │   │   └── run_record.py     tempos e uso de máquina da geração                       (existe)
 │   ├── scripts/
 │   │   ├── install_pmtiles.py   instala a ferramenta, com o sha256 conferido          (existe)
 │   │   ├── measure.py           simula os recortes e registra os tamanhos             (existe)
 │   │   ├── publish.py           linha de comando da publicação                        (existe)
-│   │   └── due.py               diz ao workflow se está na hora de gerar              (existe)
+│   │   ├── due.py               diz ao workflow se está na hora de gerar              (existe)
+│   │   └── alert.py             abre, comenta ou fecha a issue de falha               (existe)
 │   ├── licencas/             textos de licença que vão dentro do pacote de recursos   (existe)
 │   ├── tests/                                                                         (existe)
 │   └── data/                 fora do git: downloads, pacotes, medições, a ferramenta

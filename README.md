@@ -6,7 +6,7 @@ O Carcará publica o **mapa base vetorial do Brasil em arquivos prontos para uso
 (o país inteiro em zoom baixo), um pacote por estado (até o zoom 15, e uma versão leve até o zoom 13) e um pacote
 de recursos (ícones e fontes).
 Os arquivos são [PMTiles](https://docs.protomaps.com/pmtiles/), no esquema de camadas do
-[basemap da Protomaps](https://docs.protomaps.com/basemaps/layers), recortados de novo a cada 29 dias do build
+[basemap da Protomaps](https://docs.protomaps.com/basemaps/layers), recortados de novo toda semana, no domingo, do build
 diário que a Protomaps gera do OpenStreetMap, e publicados como arquivos de release, com um `catalogo.json` na
 raiz.
 
@@ -92,10 +92,10 @@ Geração **2026-10-06-681837e0**: build da Protomaps de 2026-10-06, com dados d
 |---|---|
 | Geração publicada | A da seção [Baixar](#baixar), sempre a mais recente; a data de cada geração está no `built_at` do [`catalogo.json`](catalogo.json) |
 | Gerador | Recorta o build por estado, passa a geração pelas nove travas de validação, monta o catálogo e publica ([`gerador/`](gerador/README.md)) |
-| Agendamento | Uma geração nova a cada 29 dias, pelo GitHub Actions, com dois disparos por dia para um cobrir o outro ([`docs/GERACAO.md`](docs/GERACAO.md)) |
-| Se a geração falhar | A geração publicada continua no ar, o disparo seguinte tenta de novo, e fica aberta uma [issue](https://github.com/Murkiriel/carcara/issues) "A geração agendada está falhando" até a próxima dar certo |
-| Pacotes | 56 arquivos por geração, cerca de 6 GB com os leves; os 27 completos somam cerca de 4,6 GB, o maior perto de 600 MB |
-| Gerações guardadas | As 3 mais recentes, como releases |
+| Agendamento | Uma geração nova toda semana, no domingo, pelo GitHub Actions; se o domingo falhar, os dias seguintes tentam de novo ([`docs/GERACAO.md`](docs/GERACAO.md)) |
+| Se a geração falhar | A geração publicada continua no ar, o disparo seguinte tenta de novo, e fica aberta uma [issue](https://github.com/Murkiriel/carcara/issues) "Geração falhando" até a próxima dar certo |
+| Pacotes | 56 arquivos por geração, cerca de 6 GB com os leves, mais o `LICENCA-DADOS.txt` com a licença e a atribuição; os 27 completos somam cerca de 4,6 GB, o maior perto de 600 MB |
+| Gerações guardadas | As 12 mais recentes (cerca de 3 meses), como releases |
 | Origem dos tiles | Só o recorte do build da Protomaps (etapa A; a geração própria, etapa B, não está planejada: [`docs/DECISOES.md`](docs/DECISOES.md)) |
 | Medições e decisões com os números | Base até o zoom 9, pacote de estado desde o zoom 0, pacote leve até o zoom 13 ([`gerador/PENDENCIAS.md`](gerador/PENDENCIAS.md)) |
 

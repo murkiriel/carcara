@@ -16,9 +16,10 @@ gerador ser escrito. As decisões que ainda dependem de medição estão em [`PE
 | D6 | Origem dos tiles: recorte do build da Protomaps (etapa A). A geração própria (etapa B) não está planejada | Confirmada (2026-10-01): só a etapa A |
 | D7 | Na etapa B, gerar o Brasil inteiro e só então recortar por estado | Vale só para a etapa B, que não tem data |
 | D8 | Um arquivo por estado, lido no lugar, sem desempacotar | Confirmada com a etapa A (2026-10-01) |
-| D9 | Mesmo molde dos projetos irmãos: `catalogo.json`, releases, 29 dias, 3 gerações | Confirmada com a etapa A (2026-10-01) |
+| D9 | Mesmo molde dos projetos irmãos: `catalogo.json`, releases, agendamento, limpeza das antigas | Confirmada com a etapa A (2026-10-01); agendamento e limpeza revistos em D12 |
 | D10 | Gerações diferentes podem conviver; versões maiores do esquema, não | Confirmada com a etapa A (2026-10-01) |
 | D11 | Recorte pela malha das UFs do IBGE, com margem | Confirmada com a etapa A (2026-10-01) |
+| D12 | Geração toda semana, no domingo, com 12 gerações nas releases, aviso de falha por issue e `LICENCA-DADOS.txt` em cada release, como no Andorinha | Decidida pelo dono (2026-11-09) |
 
 "Confirmada com a etapa A" quer dizer: em 2026-10-01 o dono escolheu a etapa A e mandou executar o desenho
 como está. Os detalhes que ainda dependem de número (zoom da base, pacote leve, gerações mantidas) continuam
@@ -39,7 +40,7 @@ O mapa base não entra no repositório dos tiles de roteamento, embora os dois p
   precisa de 15 níveis de zoom.
 
 O que os projetos compartilham é o desenho, não o repositório: o formato do `catalogo.json`, a malha do IBGE, a
-divisão em pacote base mais pacotes por estado, a regra dos 29 dias e a limpeza de releases antigas.
+divisão em pacote base mais pacotes por estado, o agendamento e a limpeza de releases antigas.
 
 ## D2: nome
 
@@ -134,8 +135,9 @@ estado é trocar um arquivo. Os detalhes para quem consome estão em [`CONSUMO.m
 
 - `catalogo.json` na raiz, chaves em inglês, campo `schema`.
 - Pacotes como arquivos de release; a etiqueta da release é o `build_id`.
-- Geração a cada 29 dias pelo GitHub Actions: cron diário mais um job que só deixa gerar com 29 dias ou mais.
-- Ficam as 3 gerações mais recentes; as anteriores são apagadas depois de cada publicação.
+- Geração pelo GitHub Actions: cron diário mais um job que decide se está na hora. Até 2026-11-09, a cada 29 dias;
+  desde então, toda semana (D12).
+- Ficam as gerações mais recentes; as anteriores são apagadas depois de cada publicação. Eram 3; desde D12, 12.
 - Publicação recusada se a geração registrou falha ou se um pacote encolheu além da tolerância.
 
 ## D10: gerações e versões

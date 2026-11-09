@@ -29,7 +29,7 @@ class EnvironmentTest(unittest.TestCase):
         self.assertEqual("/opt/pmtiles/pmtiles", reload_config(CARCARA_PMTILES="/opt/pmtiles/pmtiles").PMTILES)
 
     def test_kept_generations(self):
-        self.assertEqual(3, reload_config().KEEP_GENERATIONS)
+        self.assertEqual(12, reload_config().KEEP_GENERATIONS)  # semanal: ~3 meses, como no Andorinha
         self.assertEqual(5, reload_config(CARCARA_KEEP_GENERATIONS="5").KEEP_GENERATIONS)
         self.assertEqual(0, reload_config(CARCARA_KEEP_GENERATIONS="0").KEEP_GENERATIONS)  # 0 = não apaga
 
@@ -43,9 +43,6 @@ class FixedValuesTest(unittest.TestCase):
         self.assertEqual(15, config.MAX_ZOOM)
         self.assertEqual(13, config.LIGHT_MAX_ZOOM)
         self.assertEqual(9, config.BASE_MAX_ZOOM)
-
-    def test_generation_interval(self):
-        self.assertEqual(29, config.GENERATION_INTERVAL_DAYS)
 
     def test_asset_limit_leaves_room_below_the_release_limit(self):
         # O GitHub recusa arquivo de release a partir de 2 GiB.

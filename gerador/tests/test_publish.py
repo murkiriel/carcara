@@ -190,7 +190,29 @@ class PublishGenerationTest(World):
         self.publish()
         release = self.gh.releases[TAG]
         self.assertFalse(release["draft"])
-        self.assertEqual(56, len(release["assets"]))
+        self.assertEqual(57, len(release["assets"]))  # os 56 do catálogo e o LICENCA-DADOS.txt
+
+    def test_license_file_goes_up_beside_the_packages(self):
+        """Como no Andorinha: quem baixa só os arquivos da release recebe a licença e a atribuição."""
+        self.publish()
+        self.assertIn(publishing.LICENSE_FILE, self.gh.releases[TAG]["assets"])
+        written = (self.dist / publishing.LICENSE_FILE).read_text(encoding="utf-8")
+        self.assertEqual(publishing.license_text(self.cat), written)
+
+    def test_license_file_is_not_in_the_catalog(self):
+        """O catálogo e a conferência continuam só com os pacotes: quem lê o catálogo não vê o arquivo."""
+        self.assertNotIn(publishing.LICENSE_FILE, [entry["file"] for entry in publishing.files(self.cat)])
+
+    def test_license_says_who_to_credit_and_where_the_data_came_from(self):
+        text = publishing.license_text(self.cat)
+        for expected in (config.ATTRIBUTION, "ODbL", "CC BY 4.0", TAG, self.cat["source"]["url"],
+                         self.cat["source"]["osm_timestamp"], "IBGE", "openstreetmap.org/copyright"):
+            self.assertIn(expected, text)
+
+    def test_license_carries_the_full_odbl_text(self):
+        """Sozinho, sem o repositório: o texto inteiro da licença vai junto."""
+        odbl = (config.REPO / "LICENSE").read_text(encoding="utf-8")
+        self.assertIn(odbl.strip(), publishing.license_text(self.cat))
 
     def test_catalog_and_readme_only_change_after_the_release_is_public(self):
         seen = {}

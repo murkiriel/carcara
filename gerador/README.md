@@ -107,7 +107,7 @@ O workflow [`gerar.yml`](../.github/workflows/gerar.yml) roda todo dia e pergunt
 hora:
 
 ```
-python scripts/due.py            # lê o catalogo.json da raiz; gera se a geração publicada tem 29 dias ou mais
+python scripts/due.py            # lê o catalogo.json da raiz; gera se a publicada é de antes do último domingo
 python scripts/due.py --manual   # disparo à mão: sempre gera
 ```
 
@@ -144,8 +144,10 @@ quantos bytes cada recorte teria. O resultado vai para `data/medicoes/tamanhos_<
 | `carcara/catalog.py` | O `catalogo.json` da geração e a tabela de downloads do README |
 | `carcara/publishing.py` | As travas da publicação, a release em rascunho, a conferência e a limpeza das antigas |
 | `scripts/publish.py` | Linha de comando da publicação |
-| `carcara/schedule.py` | A regra dos 29 dias: quando o agendamento gera, e quando não |
+| `carcara/schedule.py` | A regra do domingo: quando o agendamento gera, e quando não |
 | `scripts/due.py` | Linha de comando da regra, chamada pelo workflow `gerar` |
+| `carcara/alert.py` | A issue "Geração falhando": abre, comenta ou fecha conforme o resultado da execução agendada |
+| `scripts/alert.py` | Linha de comando do aviso, chamada pelo job `alert` do workflow `gerar` |
 | `carcara/mvt.py` | O mínimo de leitura de um tile vetorial: camadas e número de feições |
 | `carcara/pmtiles_tool.py` | Instala o `pmtiles` fixado e recusa outra versão |
 | `carcara/resources.py` | Monta o pacote de ícones e fontes, de uma revisão fixa, com o conteúdo conferido |
@@ -159,7 +161,7 @@ quantos bytes cada recorte teria. O resultado vai para `data/medicoes/tamanhos_<
 | Variável | Para quê | Padrão |
 |---|---|---|
 | `CARCARA_PMTILES` | Caminho do binário `pmtiles` | `pmtiles`, no `PATH` |
-| `CARCARA_KEEP_GENERATIONS` | Quantas gerações ficam nas releases (0 = não apaga) | 3 |
+| `CARCARA_KEEP_GENERATIONS` | Quantas gerações ficam nas releases (0 = não apaga) | 12 |
 | `CARCARA_LIGHT` | `0` desliga os pacotes leves | ligado |
 | `CARCARA_MIN_FREE_DISK_GB` | Espaço livre exigido antes de recortar | 12 |
 | `CARCARA_REPO` | O repositório das releases, para os links do catálogo (`dono/nome`) | o do GitHub Actions, senão o oficial |

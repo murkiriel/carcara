@@ -1,10 +1,11 @@
 # Gera uma geração completa (recorte do build da Protomaps por estado -> pacotes leves -> recursos -> validação ->
 # catálogo) e publica a release e o catalogo.json pelo scripts/publish.py, com todas as travas dele.
 #
-# A cada 29 dias, como nos projetos irmãos: todo dia, às 03:17 e às 09:17 em Brasília, o job "interval" lê a data da
-# geração publicada (built_at do catalogo.json da raiz) e só segue para a geração se ela tiver 29 dias ou mais, ou se
-# houver uma geração extra marcada (GENERATE_FROM) e a publicada for de antes dela (scripts/due.py). Se a geração
-# falhar, o disparo seguinte tenta de novo: a publicada continua com a data velha.
+# Toda semana, no domingo, como no Andorinha: todo dia, às 03:17 e às 09:17 em Brasília, o job "interval" lê a data
+# da geração publicada (built_at do catalogo.json da raiz) e só segue para a geração se ela for de antes do último
+# domingo, 00:00 em Brasília (scripts/due.py). Num domingo normal, gera às 03:17 e o disparo das 09:17 só confere a
+# data. Se a geração falhar, o disparo seguinte tenta de novo, nos dias seguintes também, e o job "alert" abre a issue
+# "Geração falhando": a publicada continua no ar com a data velha.
 #
 # A PRIMEIRA geração nunca sai sozinha: sem catalogo.json na raiz, o agendamento não gera. Ela é disparada à mão
 # (Actions -> gerar -> Run workflow), com "publish" marcado. À mão, a qualquer momento, o workflow gera; só publica
@@ -60,11 +61,7 @@ jobs:
         id: age
         env:
           MANUAL: ${{ github.event_name != 'schedule' && '--manual' || '' }}
-          # Geração extra, fora do intervalo, como nos projetos irmãos: a partir desta data (UTC), gera se a geração
-          # publicada for de antes dela (e tenta de novo nos dias seguintes se falhar). Depois de publicar, não tem
-          # mais efeito, e os 29 dias passam a contar dessa geração. Vazio = só o intervalo.
-          GENERATE_FROM: "2026-10-06"
-        run: python3 gerador/scripts/due.py $MANUAL --generate-from "$GENERATE_FROM"
+        run: python3 gerador/scripts/due.py $MANUAL
 
   generate:
     needs: interval
@@ -137,39 +134,23 @@ jobs:
           python scripts/publish.py --release --commit --push $ACCEPT_DROP
 
   alert:
-    # Aviso de falha: sem ele, uma geração agendada que falha só aparece para quem abre a aba Actions, e o disparo
-    # seguinte falha calado de novo. Uma issue só por vez: cada falha seguinte comenta nela, e a primeira geração que
-    # dá certo a fecha. Só no agendamento: à mão, quem disparou já está olhando.
+    # Aviso de falha, como no Andorinha e no Pardal: numa execução agendada que falhou, abre a issue "Geração falhando"
+    # (ou comenta nela); na primeira que gerar e publicar, comenta e fecha (scripts/alert.py). À mão não avisa: quem
+    # disparou está olhando. Sem isto, as gerações agendadas de 2026-11-04 a 2026-11-09 falharam sem ninguém saber.
     needs: [interval, generate]
     if: always() && github.event_name == 'schedule' && github.repository == 'Murkiriel/carcara'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
+      contents: read
       issues: write
-    env:
-      GH_TOKEN: ${{ github.token }}
-      GH_REPO: ${{ github.repository }}
-      TITLE: "A geração agendada está falhando"
-      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
     steps:
-      - name: Abrir ou comentar a issue de falha
-        if: needs.interval.result == 'failure' || needs.generate.result == 'failure' || needs.generate.result == 'cancelled'
-        run: |
-          number=$(gh issue list --state open --limit 100 --json number,title \
-            --jq "map(select(.title == env.TITLE)) | .[0].number // empty")
-          if [ -n "$number" ]; then
-            gh issue comment "$number" --body "Falhou de novo: $RUN_URL"
-          else
-            gh issue create --title "$TITLE" --body "A geração agendada falhou: $RUN_URL
+      - uses: actions/checkout@v7
 
-          O relatório (geracao.json, com o motivo) fica nos artefatos do run por 14 dias. A geração publicada continua a anterior, e o disparo seguinte tenta de novo. Cada nova falha comenta aqui; a primeira geração que der certo fecha esta issue."
-          fi
-
-      - name: Fechar a issue de falha
-        if: needs.generate.result == 'success'
-        run: |
-          number=$(gh issue list --state open --limit 100 --json number,title \
-            --jq "map(select(.title == env.TITLE)) | .[0].number // empty")
-          if [ -n "$number" ]; then
-            gh issue close "$number" --comment "Voltou a funcionar: $RUN_URL"
-          fi
+      - name: Issue "Geração falhando"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INTERVAL_RESULT: ${{ needs.interval.result }}
+          GENERATE_RESULT: ${{ needs.generate.result }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: python3 gerador/scripts/alert.py --interval "$INTERVAL_RESULT" --generate "$GENERATE_RESULT" --run-url "$RUN_URL"

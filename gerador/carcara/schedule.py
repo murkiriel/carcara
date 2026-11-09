@@ -1,6 +1,10 @@
-"""Quando gerar de novo: a geração publicada tem uma data (`built_at` do catalogo.json da raiz), e o agendamento só
-segue para a geração quando ela completa o intervalo, ou no dia marcado para uma geração extra (como nos projetos
-irmãos). A linha de comando fica em scripts/due.py.
+"""Quando gerar de novo: toda semana, no domingo, como no Andorinha. O agendamento dispara todo dia, e só segue para a
+geração quando a publicada (`built_at` do catalogo.json da raiz) é de antes do último domingo, 00:00 em Brasília.
+Assim, num domingo normal, gera no primeiro disparo e os seguintes só conferem a data; se o domingo falhar, os dias
+seguintes tentam de novo até sair. A linha de comando fica em scripts/due.py.
+
+Até 2026-11-09 a regra era "a cada 29 dias desde a geração publicada", com uma geração extra marcada; mudou para
+semanal, como no Andorinha, para os projetos irmãos andarem no mesmo passo e o domingo ficar previsível.
 
 Diferente dos projetos irmãos, de propósito: **sem geração publicada, o agendamento não gera.** A primeira geração é
 sempre disparada à mão, para a primeira release nunca sair sozinha. E um catálogo que não dá para ler também não
@@ -9,11 +13,14 @@ gera: quem decide é uma pessoa, e o job fica vermelho para ela ver.
 from __future__ import annotations
 
 import json
-from datetime import date, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional, Tuple
 
 OK, MISSING, UNREADABLE = "ok", "missing", "unreadable"
+
+# O domingo é o de Brasília: sem horário de verão desde 2019, sempre UTC-3.
+BRASILIA = timezone(timedelta(hours=-3), "Brasília")
 
 
 def read_published(catalog: Path) -> Tuple[str, Optional[str]]:
@@ -28,14 +35,24 @@ def read_published(catalog: Path) -> Tuple[str, Optional[str]]:
     return (OK, built_at) if isinstance(built_at, str) else (UNREADABLE, None)
 
 
-def generation_due(status: str, built_at: Optional[str], now: datetime, interval_days: int,
-                   manual: bool = False, generate_from: Optional[date] = None) -> Tuple[bool, str]:
-    """(gera?, motivo). Os dias são arredondados, para o horário da geração não empurrar a seguinte para o dia
-    depois: uma geração que terminou às 08:00 conta 29 dias no agendamento das 06:17 do 29º dia.
+def week_start(now: datetime) -> datetime:
+    """O domingo mais recente (o de hoje, se hoje é domingo), 00:00 em Brasília, em UTC."""
+    local = now.astimezone(BRASILIA)
+    sunday = local.date() - timedelta(days=(local.weekday() + 1) % 7)  # weekday(): segunda 0 ... domingo 6
+    return datetime(sunday.year, sunday.month, sunday.day, tzinfo=BRASILIA).astimezone(timezone.utc)
 
-    `generate_from` marca uma geração extra, fora do intervalo: a partir desse dia (UTC), gera se a publicada for
-    de antes dele, e tenta de novo nos dias seguintes se falhar. Depois de publicar, não tem mais efeito, e o
-    intervalo passa a contar da geração extra. Nunca faz a primeira geração: essa continua sendo à mão."""
+
+def _day(moment: datetime) -> str:
+    return moment.astimezone(BRASILIA).strftime("%d/%m")
+
+
+def _parse(built_at: Optional[str]) -> datetime:
+    return datetime.strptime(built_at or "", "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+
+
+def generation_due(status: str, built_at: Optional[str], now: datetime, manual: bool = False) -> Tuple[bool, str]:
+    """(gera?, motivo). Gera se a geração publicada é de antes do último domingo (00:00 em Brasília). Nunca faz a
+    primeira geração, nem gera com um catálogo ilegível: essas ficam para uma pessoa, à mão."""
     if manual:
         return True, "disparado à mão: gera"
     if status == MISSING:
@@ -43,16 +60,15 @@ def generation_due(status: str, built_at: Optional[str], now: datetime, interval
     try:
         if status != OK:
             raise ValueError(status)
-        built = datetime.strptime(built_at or "", "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+        built = _parse(built_at)
     except ValueError:
         return False, ("o catálogo publicado não tem uma data legível: o agendamento não gera; conserte o catálogo "
                        "ou dispare à mão")
-    if generate_from and now.date() >= generate_from and built.date() < generate_from:
-        return True, f"geração extra marcada para {generate_from} (publicada em {built_at}): gera"
-    days = (now - built + timedelta(hours=12)) // timedelta(days=1)
-    if days >= interval_days:
-        return True, f"geração publicada em {built_at} ({days} dias): gera"
-    return False, f"geração publicada em {built_at} ({days} dias): ainda não, gera ao completar {interval_days} dias"
+    start = week_start(now)
+    if built < start:
+        return True, f"geração publicada em {built_at}, antes do domingo {_day(start)}: gera"
+    return False, (f"geração publicada em {built_at}, já nesta semana (desde o domingo {_day(start)}): "
+                   f"ainda não, gera no domingo {_day(start + timedelta(days=7))}")
 
 
 def is_readable(status: str, built_at: Optional[str]) -> bool:
@@ -60,7 +76,7 @@ def is_readable(status: str, built_at: Optional[str]) -> bool:
     if status == MISSING:
         return True
     try:
-        datetime.strptime(built_at or "", "%Y-%m-%dT%H:%M:%SZ")
+        _parse(built_at)
     except ValueError:
         return False
     return status == OK

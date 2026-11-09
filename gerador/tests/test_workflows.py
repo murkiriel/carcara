@@ -80,7 +80,7 @@ def step(job_text: str, name: str) -> str:
 
 
 class GenerationWorkflowTest(unittest.TestCase):
-    """O workflow gerar roda todo dia e só segue para a geração quando a publicada completa o intervalo."""
+    """O workflow gerar roda todo dia e só segue para a geração quando a publicada é de antes do último domingo."""
 
     def setUp(self):
         self.text = workflows()["gerar.yml"]
@@ -195,11 +195,12 @@ class GenerationWorkflowTest(unittest.TestCase):
 
 
 class FailureAlertTest(unittest.TestCase):
-    """Uma geração agendada que falha abre uma issue (ou comenta na que já está aberta), e a primeira que dá certo a
-    fecha. Sem isso, a falha só aparece para quem abre a aba Actions."""
+    """Uma geração agendada que falha abre a issue "Geração falhando" (ou comenta nela), e a primeira que dá certo a
+    fecha, como no Andorinha. A lógica fica em scripts/alert.py (testada em test_alert.py); aqui, só a ligação."""
 
     def setUp(self):
-        self.code = "\n".join(code_lines(workflows()["gerar.yml"]))
+        self.text = workflows()["gerar.yml"]
+        self.code = "\n".join(code_lines(self.text))
         self.alert = job(self.code, "alert")
 
     def test_there_is_an_alert_job(self):
@@ -213,22 +214,17 @@ class FailureAlertTest(unittest.TestCase):
         self.assertIn("github.event_name == 'schedule'", self.alert)
         self.assertIn(f"github.repository == '{config.GITHUB_REPO}'".lower(), self.alert.lower())  # sem caixa, como o Actions
 
-    def test_may_only_touch_issues(self):
-        self.assertRegex(self.alert, r"permissions:\n\s+issues: write\n")
-        self.assertNotIn("contents: write", self.alert)
-        self.assertNotIn("actions/checkout", self.alert)
+    def test_hands_the_job_results_to_the_tested_script(self):
+        self.assertIn("scripts/alert.py", self.alert)
+        for value in ("${{ needs.interval.result }}", "${{ needs.generate.result }}", "${{ github.run_id }}"):
+            self.assertIn(value, self.alert)
 
-    def test_a_failure_in_either_job_opens_or_comments(self):
-        opening = step(self.alert, "Abrir ou comentar a issue de falha")
-        self.assertIn("needs.interval.result == 'failure'", opening)
-        self.assertIn("needs.generate.result", opening)
-        self.assertIn("gh issue create", opening)
-        self.assertIn("gh issue comment", opening)  # disparo seguinte que falha não abre outra
-
-    def test_a_success_closes_it(self):
-        closing = step(self.alert, "Fechar a issue de falha")
-        self.assertIn("if: needs.generate.result == 'success'\n", closing)
-        self.assertIn("gh issue close", closing)
+    def test_only_the_alert_job_writes_issues(self):
+        top = self.code.split("\njobs:\n", 1)[0]
+        self.assertNotIn("issues:", top)
+        self.assertIn("      issues: write\n", self.alert)
+        self.assertIn("      contents: read\n", self.alert)
+        self.assertNotIn("issues:", job(self.code, "generate"))
 
 
 if __name__ == "__main__":

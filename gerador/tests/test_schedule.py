@@ -1,117 +1,116 @@
-"""A regra do agendamento: gera de novo quando a geração publicada completa o intervalo (29 dias), e nunca gera
-sozinho a primeira geração."""
+"""A regra do agendamento: gera toda semana, no domingo (Brasília), e nos dias seguintes até sair, se o domingo falhar,
+como no Andorinha. E nunca gera sozinho a primeira geração, nem com um catálogo que não dá para ler (regra própria do
+Carcará).
+
+Até 2026-11-09 a regra era "29 dias desde a geração publicada", com uma geração extra marcada (GENERATE_FROM); os testes
+dela saíram com ela. Datas de referência: 2026-11-01, 2026-11-08 e 2026-11-15 são domingos. O agendamento dispara às
+06:17 e às 12:17 UTC (03:17 e 09:17 em Brasília)."""
 import json
 import os
 import subprocess
 import sys
 import tempfile
 import unittest
-from datetime import date, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 GENERATOR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(GENERATOR))
 from carcara import config, schedule  # noqa: E402
 
-BUILT = "2026-10-01T18:21:32Z"
+LAST_WEEK = "2026-11-01T07:30:00Z"   # geração de domingo, 01/11
+THIS_WEEK = "2026-11-08T07:30:00Z"   # geração de domingo, 08/11
 
 
 def utc(text: str) -> datetime:
     return datetime.strptime(text, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
 
 
-def after(**delta) -> datetime:
-    return utc(BUILT) + timedelta(**delta)
+class WeekStartTest(unittest.TestCase):
+    """schedule.week_start: o domingo, 00:00 em Brasília, mais recente (ou o de agora)."""
+
+    def test_brasilia_is_three_hours_behind_utc(self):
+        self.assertEqual(timedelta(hours=-3), schedule.BRASILIA.utcoffset(None))
+
+    def test_on_sunday_it_is_the_same_day(self):
+        self.assertEqual(utc("2026-11-08T03:00:00Z"), schedule.week_start(utc("2026-11-08T06:17:00Z")))
+
+    def test_in_the_middle_of_the_week_it_is_the_last_sunday(self):
+        self.assertEqual(utc("2026-11-08T03:00:00Z"), schedule.week_start(utc("2026-11-11T15:00:00Z")))
+
+    def test_saturday_night_in_brasilia_is_still_the_previous_week(self):
+        """Sábado, 23:00 em Brasília, já é domingo em UTC: a semana ainda é a do domingo anterior."""
+        self.assertEqual(utc("2026-11-01T03:00:00Z"), schedule.week_start(utc("2026-11-08T02:00:00Z")))
 
 
 class GenerationDueTest(unittest.TestCase):
     def due(self, built_at, now, status=schedule.OK, **kwargs):
-        return schedule.generation_due(status, built_at, now, 29, **kwargs)[0]
+        return schedule.generation_due(status, built_at, utc(now), **kwargs)[0]
 
-    def test_default_interval_is_29_days(self):
-        self.assertEqual(29, config.GENERATION_INTERVAL_DAYS)
+    def test_sunday_generates_when_the_published_is_from_last_week(self):
+        self.assertTrue(self.due(LAST_WEEK, "2026-11-08T06:17:00Z"))
 
-    def test_28_days_is_too_early(self):
-        self.assertFalse(self.due(BUILT, after(days=28)))
+    def test_second_sunday_run_stops_after_the_publication(self):
+        self.assertFalse(self.due(THIS_WEEK, "2026-11-08T12:17:00Z"))
 
-    def test_29_days_generates(self):
-        self.assertTrue(self.due(BUILT, after(days=29)))
+    def test_the_rest_of_the_week_waits(self):
+        for day in range(9, 15):  # segunda, 09/11, a sábado, 14/11
+            for hour in ("06:17", "12:17"):
+                self.assertFalse(self.due(THIS_WEEK, f"2026-11-{day:02d}T{hour}:00Z"), f"{day}/11 {hour}")
+        self.assertFalse(self.due(THIS_WEEK, "2026-11-15T02:59:00Z"))  # sábado, 23:59 em Brasília
 
-    def test_days_are_rounded(self):
-        """28 dias e 13 h já contam como 29: o horário da geração não empurra a seguinte para o dia depois."""
-        self.assertTrue(self.due(BUILT, after(days=28, hours=13)))
-        self.assertFalse(self.due(BUILT, after(days=28, hours=11)))
+    def test_next_sunday_generates(self):
+        self.assertTrue(self.due(THIS_WEEK, "2026-11-15T06:17:00Z"))
 
-    def test_scheduled_run_after_a_scheduled_generation(self):
-        """Geração agendada termina por volta das 08:00 UTC; 29 dias depois, o agendamento das 07:17 já gera."""
-        self.assertTrue(self.due("2026-10-30T08:00:00Z", utc("2026-11-28T07:17:00Z")))
-        self.assertFalse(self.due("2026-10-30T08:00:00Z", utc("2026-11-27T07:17:00Z")))
+    def test_failed_sunday_is_retried_on_the_following_days(self):
+        self.assertTrue(self.due(LAST_WEEK, "2026-11-08T12:17:00Z"))
+        self.assertTrue(self.due(LAST_WEEK, "2026-11-09T06:17:00Z"))
+        self.assertTrue(self.due(LAST_WEEK, "2026-11-12T12:17:00Z"))
+
+    def test_a_generation_weeks_old_generates(self):
+        """A publicada hoje (2026-10-06) tem semanas: o primeiro disparo depois da mudança já gera."""
+        self.assertTrue(self.due("2026-10-06T13:29:08Z", "2026-11-10T06:17:00Z"))
+
+    def test_saturday_night_utc_is_not_sunday_yet(self):
+        """Sábado, 22:00 em Brasília: com UTC no lugar de Brasília, geraria um dia antes."""
+        self.assertFalse(self.due(LAST_WEEK, "2026-11-08T01:00:00Z"))
+
+    def test_the_week_starts_at_sunday_midnight_in_brasilia(self):
+        self.assertFalse(self.due("2026-11-08T03:00:00Z", "2026-11-08T12:17:00Z"))
+        self.assertTrue(self.due("2026-11-08T02:59:59Z", "2026-11-08T12:17:00Z"))
+
+    def test_a_manual_generation_in_the_week_does_not_delay_sunday(self):
+        self.assertTrue(self.due("2026-11-11T15:00:00Z", "2026-11-15T06:17:00Z"))
 
     def test_no_published_generation_does_not_generate_on_schedule(self):
-        # A primeira geração é sempre disparada à mão: o agendamento nunca publica uma primeira release sozinho.
-        due, reason = schedule.generation_due(schedule.MISSING, None, after(days=100), 29)
+        # Regra própria do Carcará: a primeira geração é sempre disparada à mão.
+        due, reason = schedule.generation_due(schedule.MISSING, None, utc("2026-11-15T06:17:00Z"))
         self.assertFalse(due)
         self.assertIn("à mão", reason)
 
     def test_unreadable_catalog_does_not_generate_on_schedule(self):
-        due, reason = schedule.generation_due(schedule.UNREADABLE, None, after(days=100), 29)
+        due, reason = schedule.generation_due(schedule.UNREADABLE, None, utc("2026-11-15T06:17:00Z"))
         self.assertFalse(due)
         self.assertIn("catálogo", reason)
 
     def test_date_in_another_format_counts_as_unreadable(self):
-        self.assertFalse(self.due("ontem", after(days=100)))
+        self.assertFalse(self.due("ontem", "2026-11-15T06:17:00Z"))
 
     def test_manual_always_generates(self):
-        self.assertTrue(self.due(BUILT, after(hours=1), manual=True))
-        self.assertTrue(self.due(None, after(hours=1), status=schedule.MISSING, manual=True))
-        self.assertTrue(self.due(None, after(hours=1), status=schedule.UNREADABLE, manual=True))
+        self.assertTrue(self.due(THIS_WEEK, "2026-11-08T12:17:00Z", manual=True))
+        self.assertTrue(self.due(None, "2026-11-08T12:17:00Z", status=schedule.MISSING, manual=True))
+        self.assertTrue(self.due(None, "2026-11-08T12:17:00Z", status=schedule.UNREADABLE, manual=True))
 
-    def test_reason_says_the_age(self):
-        due, reason = schedule.generation_due(schedule.OK, BUILT, after(days=10), 29)
-        self.assertFalse(due)
-        self.assertIn("10 dias", reason)
-        self.assertIn("29", reason)
-
-
-class ExtraGenerationTest(unittest.TestCase):
-    """Uma geração extra, fora do intervalo, como nos projetos irmãos: a partir do dia marcado, gera se a publicada
-    for de antes dele, e tenta de novo nos dias seguintes se falhar; depois de publicar, não tem mais efeito."""
-
-    PUBLISHED = "2026-10-05T14:19:28Z"
-    MARKED = date(2026, 10, 6)
-
-    def due(self, built_at, now, generate_from=MARKED, status=schedule.OK):
-        return schedule.generation_due(status, built_at, utc(now), 29, generate_from=generate_from)
-
-    def test_before_the_marked_day_it_waits(self):
-        self.assertFalse(self.due(self.PUBLISHED, "2026-10-05T23:59:00Z")[0])
-
-    def test_on_the_marked_day_it_generates(self):
-        due, reason = self.due(self.PUBLISHED, "2026-10-06T06:17:00Z")
+    def test_reasons_say_the_sundays(self):
+        due, reason = schedule.generation_due(schedule.OK, LAST_WEEK, utc("2026-11-09T06:17:00Z"))
         self.assertTrue(due)
-        self.assertIn("2026-10-06", reason)
+        self.assertIn("08/11", reason)
+        due, reason = schedule.generation_due(schedule.OK, THIS_WEEK, utc("2026-11-10T06:17:00Z"))
+        self.assertFalse(due)
+        self.assertIn("15/11", reason)
 
-    def test_keeps_trying_on_the_following_days_until_it_publishes(self):
-        self.assertTrue(self.due(self.PUBLISHED, "2026-10-06T12:17:00Z")[0])
-        self.assertTrue(self.due(self.PUBLISHED, "2026-10-08T06:17:00Z")[0])
-
-    def test_once_published_it_has_no_effect(self):
-        self.assertFalse(self.due("2026-10-06T06:40:00Z", "2026-10-06T12:17:00Z")[0])
-        self.assertFalse(self.due("2026-10-06T06:40:00Z", "2026-10-07T06:17:00Z")[0])
-
-    def test_the_interval_goes_on_counting_from_the_extra_generation(self):
-        self.assertFalse(self.due("2026-10-06T06:40:00Z", "2026-11-03T06:17:00Z")[0])
-        self.assertTrue(self.due("2026-10-06T06:40:00Z", "2026-11-04T06:17:00Z")[0])
-
-    def test_without_a_marked_day_only_the_interval_counts(self):
-        self.assertFalse(self.due(self.PUBLISHED, "2026-10-06T06:17:00Z", generate_from=None)[0])
-
-    def test_a_marked_day_does_not_hold_back_the_interval(self):
-        self.assertTrue(self.due("2026-09-01T07:10:00Z", "2026-10-01T06:17:00Z")[0])
-
-    def test_a_marked_day_never_makes_the_first_generation(self):
-        """A regra própria do Carcará vale também aqui: sem geração publicada, o agendamento não gera."""
-        self.assertFalse(self.due(None, "2026-10-06T06:17:00Z", status=schedule.MISSING)[0])
+    def test_the_29_day_rule_is_gone(self):
+        self.assertFalse(hasattr(config, "GENERATION_INTERVAL_DAYS"))
 
 
 class PublishedCatalogTest(unittest.TestCase):
@@ -123,8 +122,8 @@ class PublishedCatalogTest(unittest.TestCase):
         self._tmp.cleanup()
 
     def test_reads_built_at(self):
-        self.catalog.write_text(json.dumps({"built_at": BUILT}), encoding="utf-8")
-        self.assertEqual((schedule.OK, BUILT), schedule.read_published(self.catalog))
+        self.catalog.write_text(json.dumps({"built_at": THIS_WEEK}), encoding="utf-8")
+        self.assertEqual((schedule.OK, THIS_WEEK), schedule.read_published(self.catalog))
 
     def test_missing_catalog(self):
         self.assertEqual((schedule.MISSING, None), schedule.read_published(self.catalog))
@@ -162,7 +161,6 @@ class DueScriptTest(unittest.TestCase):
         env = {**os.environ, "GITHUB_OUTPUT": str(self.output)}
         done = subprocess.run([sys.executable, str(GENERATOR / "scripts" / "due.py"), "--catalog", str(catalog), *args],
                               capture_output=True, text=True, encoding="utf-8", env=env)
-        # A data recusada pelo argparse sai antes de gravar a saída: nada gravado é "".
         written = self.output.read_text(encoding="utf-8") if self.output.exists() else ""
         return done.returncode, written, done.stdout
 
@@ -170,13 +168,15 @@ class DueScriptTest(unittest.TestCase):
         built_at = (datetime.now(timezone.utc) - timedelta(days=days_ago)).strftime("%Y-%m-%dT%H:%M:%SZ")
         return json.dumps({"built_at": built_at})
 
-    def test_recent_generation(self):
-        code, output, log = self.run_script(self.stamp(3))
+    def test_generation_from_this_week(self):
+        # Acabou de sair: é sempre desta semana, qualquer que seja o dia em que o teste roda.
+        code, output, log = self.run_script(self.stamp(0))
         self.assertEqual((0, "run=false\n"), (code, output))
-        self.assertIn("3 dias", log)
+        self.assertIn("domingo", log)
 
-    def test_old_generation(self):
-        self.assertEqual((0, "run=true\n"), self.run_script(self.stamp(40))[:2])
+    def test_generation_from_before_last_sunday(self):
+        # Oito dias atrás é sempre de antes do último domingo.
+        self.assertEqual((0, "run=true\n"), self.run_script(self.stamp(8))[:2])
 
     def test_no_catalog_does_not_run_and_is_not_an_error(self):
         code, output, log = self.run_script(None)
@@ -190,18 +190,12 @@ class DueScriptTest(unittest.TestCase):
         self.assertEqual(1, code)
 
     def test_manual(self):
-        self.assertEqual((0, "run=true\n"), self.run_script(self.stamp(3), "--manual")[:2])
+        self.assertEqual((0, "run=true\n"), self.run_script(self.stamp(0), "--manual")[:2])
         self.assertEqual((0, "run=true\n"), self.run_script(None, "--manual")[:2])
 
-    def test_extra_generation_from_the_command_line(self):
-        self.assertEqual((0, "run=true\n"), self.run_script(self.stamp(3), "--generate-from", date.today().isoformat())[:2])
-        self.assertEqual((0, "run=false\n"), self.run_script(self.stamp(3), "--generate-from", "")[:2])
-
-    def test_a_bad_extra_date_is_an_error(self):
-        self.assertEqual(2, self.run_script(self.stamp(3), "--generate-from", "amanha")[0])
-
-    def test_interval_from_the_command_line(self):
-        self.assertEqual((0, "run=true\n"), self.run_script(self.stamp(3), "--interval-days", "2")[:2])
+    def test_the_old_options_are_gone(self):
+        for option in ("--generate-from", "--interval-days"):
+            self.assertEqual(2, self.run_script(self.stamp(0), option, "1")[0], option)
 
 
 if __name__ == "__main__":

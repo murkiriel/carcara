@@ -68,7 +68,7 @@ reais são a medição M3.
 ### Convivência com a Protomaps
 
 A página de downloads desaconselha apontar aplicativos para o endereço dos builds e recomenda copiar o tileset
-para armazenamento próprio. Um recorte a cada 29 dias é exatamente essa cópia. Cuidados:
+para armazenamento próprio. Um recorte por semana é exatamente essa cópia. Cuidados:
 
 - manter os 4 pedidos em paralelo do padrão, sem acelerar;
 - ler sempre o `builds.json` em vez de montar o endereço na mão ("os endereços podem mudar");
@@ -148,11 +148,12 @@ nos projetos irmãos, e pode ser disparado à mão. São dois por dia porque um 
 cobre o primeiro e, se o primeiro já publicou, só confere a data e para. A regra fica em `carcara/schedule.py`, e o
 workflow a consulta por `scripts/due.py`.
 
-- Job `interval`: lê o `built_at` do `catalogo.json` da raiz e só deixa gerar com 29 dias ou mais. A conta é
-  arredondada (12 horas), para o horário da geração não empurrar a seguinte para o dia depois.
-- **Geração extra por data** (`GENERATE_FROM` no workflow, `--generate-from` no `due.py`), como nos projetos
-  irmãos: a partir do dia marcado (UTC), gera se a publicada for de antes dele, e tenta de novo nos dias seguintes
-  se falhar; depois de publicar, não tem mais efeito, e os 29 dias passam a contar dela. Marcada para 2026-10-06.
+- Job `interval`: lê o `built_at` do `catalogo.json` da raiz e só deixa gerar se ele for de antes do último
+  domingo, 00:00 em Brasília (toda semana, como no Andorinha). Num domingo normal, gera às 03:17 e o disparo das
+  09:17 só confere a data; se o domingo falhar, segunda tenta de novo, e assim por diante até sair. Uma geração à
+  mão no meio da semana não adia o domingo seguinte.
+- Até 2026-11-09 a regra era "29 dias ou mais", com uma geração extra marcada por data (`GENERATE_FROM`); as duas
+  saíram com a mudança para semanal.
 - **Sem `catalogo.json` na raiz, o agendamento não gera.** A primeira geração é sempre disparada à mão, para a
   primeira release nunca sair sozinha. Nisto o projeto difere dos irmãos, de propósito.
 - Catálogo que não dá para ler, ou sem a data: o agendamento não gera, e o job termina com erro, para alguém ver.
@@ -164,11 +165,12 @@ workflow a consulta por `scripts/due.py`.
 - As outras opções do disparo à mão: `states` (só algumas UFs; geração parcial não é publicada) e `accept_drop`
   (passa por cima da trava de queda). O que é digitado chega aos comandos por variável de ambiente.
 - Uma geração por vez: um disparo que chega com outra em curso espera, não cancela.
-- Se a geração falhar, tenta de novo no dia seguinte: o `built_at` publicado continua velho.
+- Se a geração falhar, tenta de novo no disparo seguinte: o `built_at` publicado continua velho.
 - No agendamento, só roda no repositório oficial: um fork não gera sozinho.
-- Job `alert`: no agendamento, se o `interval` ou o `generate` falhar, abre a issue "A geração agendada está
-  falhando", com o link do run; cada falha seguinte comenta nela em vez de abrir outra, e a primeira geração que dá
-  certo a fecha. Só tem permissão de mexer em issues. Disparo à mão não avisa: quem disparou já está olhando.
+- Job `alert`, como no Andorinha e no Pardal: no agendamento, se o `interval` ou o `generate` falhar, abre a issue
+  "Geração falhando", com o link do run; cada falha seguinte comenta nela em vez de abrir outra, e a primeira geração
+  que dá certo a fecha (`scripts/alert.py`, lógica em `carcara/alert.py`). Só tem permissão de ler o repositório e
+  mexer em issues. Disparo à mão não avisa: quem disparou já está olhando.
 
 ## Publicação
 
@@ -195,7 +197,7 @@ Coisas que já deram problema e que o gerador deve nascer sabendo:
 |---|---|
 | O IBGE manda a malha compactada com gzip para os executores do GitHub, mesmo sem o pedido aceitar compressão | O download detecta e descompacta; a malha é sempre conferida depois de baixada |
 | O `ubuntu-latest` muda de versão com o tempo | Fixar a imagem (`ubuntu-24.04`) e as versões das actions |
-| O agendamento do GitHub atrasa horas e pode pular disparos, sobretudo em repositório novo e no minuto zero | A regra "29 dias ou mais" tolera atraso; o cron fica no minuto 17 |
+| O agendamento do GitHub atrasa horas e pode pular disparos, sobretudo em repositório novo e no minuto zero | Dois disparos por dia, e a regra "publicada de antes do último domingo" tenta de novo nos dias seguintes; o cron fica no minuto 17 |
 | Um run agendado que espera na fila lê o catálogo de antes da publicação e tenta gerar de novo | O job `interval` lê o catálogo do `main` atual, não o do commit que disparou |
 | `raw.githubusercontent.com` responde 404 em repositório privado | Enquanto o repositório for privado, a data vem do arquivo no checkout |
 | O extrato do Brasil troca uma vez por dia, por volta de 01:00 UTC; um download nessa hora pode pegar meio arquivo | Conferir o md5 publicado ao lado, antes e depois do download |

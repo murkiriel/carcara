@@ -257,14 +257,43 @@ def release_notes(cat: dict) -> str:
             f"repositório.\n\n{cat['attribution']}")
 
 
+LICENSE_FILE = "LICENCA-DADOS.txt"
+
+
+def license_text(cat: dict) -> str:
+    """A licença e a atribuição de uma geração, para ir na release ao lado dos pacotes, como no Andorinha: quem baixa
+    só os arquivos recebe o aviso. O texto da ODbL vai inteiro (o LICENSE da raiz do repositório)."""
+    odbl = (config.REPO / "LICENSE").read_text(encoding="utf-8").strip()
+    source = cat["source"]
+    return (f"Carcará, geração {cat['build_id']}: mapa base vetorial do Brasil por estado, em PMTiles, no esquema "
+            f"{cat['tileset']['name']} {cat['tileset']['version']}.\n\n"
+            f"{config.ATTRIBUTION}\n\n"
+            "Os pacotes desta release são uma base de dados derivada do OpenStreetMap, distribuída sob a Open "
+            "Database License (ODbL) 1.0, cujo texto inteiro segue abaixo. Cite \"© colaboradores do "
+            "OpenStreetMap\" (https://www.openstreetmap.org/copyright). Quem publicar uma base derivada destes "
+            "pacotes precisa mantê-la sob a ODbL.\n\n"
+            "A camada de cobertura do solo (landcover, zooms 0 a 7) vem do ESA WorldCover, sob CC BY 4.0 "
+            "(https://creativecommons.org/licenses/by/4.0/), com o crédito acima.\n\n"
+            "Dados de origem:\n"
+            f"- Build da Protomaps de {source['timestamp']}, com dados do OpenStreetMap de {source['osm_timestamp']}: "
+            f"{source['url']}\n"
+            "- Recorte por estado: malha de UFs do IBGE, https://servicodados.ibge.gov.br/api/docs/malhas\n\n"
+            f"Gerador (código sob MIT): https://github.com/{config.GITHUB_REPO}\n\n"
+            f"{'=' * 78}\n\n{odbl}\n")
+
+
 def publish_generation(cat: dict, dist: Path, repo: Path, gh: Gh, git: Git, commit: bool, push: bool, keep: int,
                        log: Callable[[str], None] = print) -> None:
-    """Sobe a release da geração `cat`, e só então grava o catálogo e a tabela do README em `repo`; com `commit`,
-    faz o commit só desses dois arquivos; com `push`, envia e apaga as releases antigas."""
+    """Sobe a release da geração `cat` (os arquivos do catálogo e, por último, o LICENCA-DADOS.txt, gravado em
+    `dist`), e só então grava o catálogo e a tabela do README em `repo`; com `commit`, faz o commit só desses dois
+    arquivos; com `push`, envia e apaga as releases antigas."""
     tag = cat["build_id"]
+    license_path = dist / LICENSE_FILE
+    license_path.write_text(license_text(cat), encoding="utf-8", newline="\n")
     uploads = [(dist / entry["file"], entry["sha256"]) for entry in files(cat)]
+    uploads.append((license_path, file_hash(license_path)))
     publish_release(gh, tag, uploads, f"Carcará {tag}", release_notes(cat))
-    log(f"Release {tag} publicada com {len(uploads)} arquivos.")
+    log(f"Release {tag} publicada com {len(uploads) - 1} arquivos e o {LICENSE_FILE}.")
 
     catalog.save(cat, repo / ROOT_FILES[0])
     readme = repo / ROOT_FILES[1]

@@ -52,13 +52,11 @@ ASSETS_REVISION = "028c18f713baecad011301ff7a69acc39bcc2ae7"
 ASSETS_ARCHIVE_URL = "https://github.com/protomaps/basemaps-assets/archive/{revision}.tar.gz"
 ASSETS_CONTENT_SHA256 = "adc3f37d6993a52f1562eb89d7a0e7b1f279bd17ca4838c9225e7dfc372a4968"
 
-# De quantos em quantos dias o agendamento gera de novo.
-GENERATION_INTERVAL_DAYS = 29
-
 # Quantas gerações ficam nas releases: a do catálogo publicado e as anteriores mais recentes. As demais são apagadas
-# no fim de cada publicação. 0 = não apaga nenhuma. CARCARA_KEEP_GENERATIONS muda.
+# no fim de cada publicação. 0 = não apaga nenhuma. CARCARA_KEEP_GENERATIONS muda. Com uma geração por semana, 12
+# dão cerca de 3 meses, a mesma janela das 3 gerações de 29 dias de antes (e o mesmo número do Andorinha).
 _keep = os.environ.get("CARCARA_KEEP_GENERATIONS")
-KEEP_GENERATIONS = int(_keep) if _keep not in (None, "") else 3
+KEEP_GENERATIONS = int(_keep) if _keep not in (None, "") else 12
 
 # O GitHub Releases recusa arquivo a partir de 2 GiB; esta é a trava, com folga.
 MAX_ASSET_BYTES = 1_900_000_000
