@@ -1,13 +1,8 @@
 # Carcará — mapa base do Brasil por estado, para uso offline
 
-> **Projeto novo, público desde 2026-10-05.** A primeira release saiu em 2026-10-02, num repositório privado
-> que foi recriado público com um commit só; a geração publicada agora é a de 2026-10-05. O que já foi
-> conferido e o que ainda é suposição está separado em [`gerador/FONTES.md`](gerador/FONTES.md) e
-> [`gerador/PENDENCIAS.md`](gerador/PENDENCIAS.md).
+## O que é
 
-## O que vai ser
-
-O Carcará vai publicar o **mapa base vetorial do Brasil em arquivos prontos para uso offline**: um pacote base
+O Carcará publica o **mapa base vetorial do Brasil em arquivos prontos para uso offline**: um pacote base
 (o país inteiro em zoom baixo), um pacote por estado (até o zoom 15, e uma versão leve até o zoom 13) e um pacote
 de recursos (ícones e fontes).
 Os arquivos são [PMTiles](https://docs.protomaps.com/pmtiles/), no esquema de camadas do
@@ -86,23 +81,23 @@ Geração **2026-10-06-681837e0**: build da Protomaps de 2026-10-06, com dados d
 |---|---|
 | [`docs/DECISOES.md`](docs/DECISOES.md) | O que foi decidido, o que é só proposta, e as alternativas descartadas |
 | [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md) | Pacotes, zooms, recorte por estado, `catalogo.json`, releases, estrutura do repositório, licenças |
-| [`docs/GERACAO.md`](docs/GERACAO.md) | Como os pacotes serão gerados (o recorte do build da Protomaps), validação, agendamento e publicação |
+| [`docs/GERACAO.md`](docs/GERACAO.md) | Como os pacotes são gerados (o recorte do build da Protomaps), validação, agendamento e publicação |
 | [`docs/CONSUMO.md`](docs/CONSUMO.md) | Como um aplicativo ou site lê os pacotes |
 | [`gerador/FONTES.md`](gerador/FONTES.md) | Fontes externas: o que foi conferido, quando e onde |
 | [`gerador/PENDENCIAS.md`](gerador/PENDENCIAS.md) | Medições que faltam, decisões em aberto e riscos |
 
 ## Situação
 
-| Item | Situação em 2026-10-05 |
+| Item | Como está |
 |---|---|
-| Nome | `carcara`, definitivo desde 2026-10-02 ([`docs/DECISOES.md`](docs/DECISOES.md)) |
-| Repositório no GitHub | Público desde 2026-10-05, recriado com um commit só depois da revisão de abertura |
-| Gerador | Pronto: recorta o build por estado, passa a geração pelas nove travas de validação, monta o catálogo e publica ([`gerador/`](gerador/README.md)). Rodou inteiro em casa e no GitHub Actions. O agendamento (a cada 29 dias, dois disparos por dia, e uma geração extra por data, como nos projetos irmãos) está escrito; a geração extra de 2026-10-06 é a primeira que sai por ele |
-| Pacotes | Publicados em 2026-10-05 pelo GitHub Actions (a primeira geração, de 2026-10-02, ficou no repositório antigo): 56 arquivos, 5,9 GB com os leves; 4,6 GB os 27 completos, o maior com 594 MB (tabela acima e [`gerador/PENDENCIAS.md`](gerador/PENDENCIAS.md)) |
-| Origem dos tiles | Decidida em 2026-10-01: só o recorte do build da Protomaps (etapa A) |
-| Medições | M1 a M5 feitas ([`gerador/PENDENCIAS.md`](gerador/PENDENCIAS.md)) |
-| Decisões com os números | Base até o zoom 9, pacote de estado desde o zoom 0, pacote leve até o zoom 13, 3 gerações ([`gerador/PENDENCIAS.md`](gerador/PENDENCIAS.md), X2 a X6) |
-| Próximo passo | Conferir a geração extra de 2026-10-06, a primeira pelo agendamento; depois, a cada 29 dias |
+| Geração publicada | A da seção [Baixar](#baixar), sempre a mais recente; a data de cada geração está no `built_at` do [`catalogo.json`](catalogo.json) |
+| Gerador | Recorta o build por estado, passa a geração pelas nove travas de validação, monta o catálogo e publica ([`gerador/`](gerador/README.md)) |
+| Agendamento | Uma geração nova a cada 29 dias, pelo GitHub Actions, com dois disparos por dia para um cobrir o outro ([`docs/GERACAO.md`](docs/GERACAO.md)) |
+| Se a geração falhar | A geração publicada continua no ar, o disparo seguinte tenta de novo, e fica aberta uma [issue](https://github.com/Murkiriel/carcara/issues) "A geração agendada está falhando" até a próxima dar certo |
+| Pacotes | 56 arquivos por geração, cerca de 6 GB com os leves; os 27 completos somam cerca de 4,6 GB, o maior perto de 600 MB |
+| Gerações guardadas | As 3 mais recentes, como releases |
+| Origem dos tiles | Só o recorte do build da Protomaps (etapa A; a geração própria, etapa B, não está planejada: [`docs/DECISOES.md`](docs/DECISOES.md)) |
+| Medições e decisões com os números | Base até o zoom 9, pacote de estado desde o zoom 0, pacote leve até o zoom 13 ([`gerador/PENDENCIAS.md`](gerador/PENDENCIAS.md)) |
 
 ## Convenções
 

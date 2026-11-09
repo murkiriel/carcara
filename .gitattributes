@@ -1,2 +1,6 @@
+# Texto sempre com fim de linha LF, no repositório e na cópia de trabalho, em qualquer sistema: um editor que grava
+# CRLF não faz mais o arquivo inteiro aparecer como modificado.
+* text=auto eol=lf
+
 # Arquivos de tiles são binários: nada de conversão de fim de linha.
 *.pmtiles binary

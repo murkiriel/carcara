@@ -166,8 +166,9 @@ workflow a consulta por `scripts/due.py`.
 - Uma geração por vez: um disparo que chega com outra em curso espera, não cancela.
 - Se a geração falhar, tenta de novo no dia seguinte: o `built_at` publicado continua velho.
 - No agendamento, só roda no repositório oficial: um fork não gera sozinho.
-
-O workflow ainda não rodou no GitHub: o repositório não foi criado.
+- Job `alert`: no agendamento, se o `interval` ou o `generate` falhar, abre a issue "A geração agendada está
+  falhando", com o link do run; cada falha seguinte comenta nela em vez de abrir outra, e a primeira geração que dá
+  certo a fecha. Só tem permissão de mexer em issues. Disparo à mão não avisa: quem disparou já está olhando.
 
 ## Publicação
 

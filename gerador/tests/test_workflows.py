@@ -192,5 +192,42 @@ class GenerationWorkflowTest(unittest.TestCase):
         self.assertRegex(self.code, r"(?m)^permissions:\n  contents: write\n")
 
 
+class FailureAlertTest(unittest.TestCase):
+    """Uma geração agendada que falha abre uma issue (ou comenta na que já está aberta), e a primeira que dá certo a
+    fecha. Sem isso, a falha só aparece para quem abre a aba Actions."""
+
+    def setUp(self):
+        self.code = "\n".join(code_lines(workflows()["gerar.yml"]))
+        self.alert = job(self.code, "alert")
+
+    def test_there_is_an_alert_job(self):
+        self.assertNotEqual("", self.alert, "falta o job alert")
+
+    def test_runs_after_both_jobs_even_when_they_fail(self):
+        self.assertIn("needs: [interval, generate]\n", self.alert)
+        self.assertRegex(self.alert, r"if: always\(\) && ")
+
+    def test_only_on_schedule_and_only_in_the_official_repository(self):
+        self.assertIn("github.event_name == 'schedule'", self.alert)
+        self.assertIn(f"github.repository == '{config.GITHUB_REPO}'", self.alert)
+
+    def test_may_only_touch_issues(self):
+        self.assertRegex(self.alert, r"permissions:\n\s+issues: write\n")
+        self.assertNotIn("contents: write", self.alert)
+        self.assertNotIn("actions/checkout", self.alert)
+
+    def test_a_failure_in_either_job_opens_or_comments(self):
+        opening = step(self.alert, "Abrir ou comentar a issue de falha")
+        self.assertIn("needs.interval.result == 'failure'", opening)
+        self.assertIn("needs.generate.result", opening)
+        self.assertIn("gh issue create", opening)
+        self.assertIn("gh issue comment", opening)  # disparo seguinte que falha não abre outra
+
+    def test_a_success_closes_it(self):
+        closing = step(self.alert, "Fechar a issue de falha")
+        self.assertIn("if: needs.generate.result == 'success'\n", closing)
+        self.assertIn("gh issue close", closing)
+
+
 if __name__ == "__main__":
     unittest.main()

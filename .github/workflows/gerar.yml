@@ -135,3 +135,41 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           python scripts/publish.py --release --commit --push $ACCEPT_DROP
+
+  alert:
+    # Aviso de falha: sem ele, uma geração agendada que falha só aparece para quem abre a aba Actions, e o disparo
+    # seguinte falha calado de novo. Uma issue só por vez: cada falha seguinte comenta nela, e a primeira geração que
+    # dá certo a fecha. Só no agendamento: à mão, quem disparou já está olhando.
+    needs: [interval, generate]
+    if: always() && github.event_name == 'schedule' && github.repository == 'Murkiriel/carcara'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      TITLE: "A geração agendada está falhando"
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - name: Abrir ou comentar a issue de falha
+        if: needs.interval.result == 'failure' || needs.generate.result == 'failure' || needs.generate.result == 'cancelled'
+        run: |
+          number=$(gh issue list --state open --limit 100 --json number,title \
+            --jq "map(select(.title == env.TITLE)) | .[0].number // empty")
+          if [ -n "$number" ]; then
+            gh issue comment "$number" --body "Falhou de novo: $RUN_URL"
+          else
+            gh issue create --title "$TITLE" --body "A geração agendada falhou: $RUN_URL
+
+          O relatório (geracao.json, com o motivo) fica nos artefatos do run por 14 dias. A geração publicada continua a anterior, e o disparo seguinte tenta de novo. Cada nova falha comenta aqui; a primeira geração que der certo fecha esta issue."
+          fi
+
+      - name: Fechar a issue de falha
+        if: needs.generate.result == 'success'
+        run: |
+          number=$(gh issue list --state open --limit 100 --json number,title \
+            --jq "map(select(.title == env.TITLE)) | .[0].number // empty")
+          if [ -n "$number" ]; then
+            gh issue close "$number" --comment "Voltou a funcionar: $RUN_URL"
+          fi
