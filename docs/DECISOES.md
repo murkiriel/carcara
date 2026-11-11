@@ -61,7 +61,8 @@ Alternativas levantadas:
 | Arara | Colorida, como um mapa rico | Ligação mais fraca com a função |
 
 Nomes guardados para projetos futuros, para não gastar aqui: **Coruja** (busca de endereço offline) e
-**Quero-quero** (condição e risco da via).
+**Quero-quero** (condição e risco da via). A busca offline saiu depois com outro nome da lista acima: o
+[Sabiá](https://github.com/Murkiriel/sabia), desde 2026-10-05.
 
 Trocar o nome depois de publicar custa caro: ele vira endereço (repositório, nome dos arquivos, links). Se for
 mudar, é antes da primeira release. O que carrega o nome: a pasta, o repositório, o prefixo dos arquivos
@@ -180,7 +181,7 @@ ordem está declarada em [`ARQUITETURA.md`](ARQUITETURA.md) (formato do catálog
 
 Em 2026-11-11 o dono decidiu que **só a geração corrente precisa ser reproduzível**. A alternativa, arquivar as
 entradas de cada `build_id` (o arquivo mundial da Protomaps tem 138 GB e é recortado direto do servidor dela),
-fica para o dia em que for preciso auditar uma geração antiga.
+fica para o dia em que for preciso conferir uma geração antiga.
 
 - A Protomaps guarda os builds por cerca de 7 dias; depois disso, uma geração não pode mais ser refeita, e isso
   está declarado em [`GERACAO.md`](GERACAO.md), seção "Reprodutibilidade".

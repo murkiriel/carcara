@@ -32,8 +32,8 @@ build diário da Protomaps (etapa A)          malha das UFs (IBGE)
 | Arquivo | Conteúdo | Zoom |
 |---|---|---|
 | `carcara-base.pmtiles` | O Brasil inteiro em zoom baixo: visão geral do país para onde não há estado instalado | 0 a 9 (44 MB na medição M2, contra 15 MB até o zoom 8 e 106 MB até o 10) |
-| `carcara-<UF>.pmtiles` | Um por estado e o DF (27): todos os tiles que tocam o polígono da UF, com margem. De 24 MB (AP) a 594 MB (MG); 4,6 GB os 27 | 0 a 15 |
-| `carcara-<UF>-leve.pmtiles` | O mesmo estado, só até o zoom 13, para quem tem pouco espaço: cerca de 27% do tamanho do completo. De 7 MB (DF) a 183 MB (MG); 1,27 GB os 27 | 0 a 13 |
+| `carcara-<UF>.pmtiles` | Um por estado e o DF (27): todos os tiles que tocam o polígono da UF, com margem. De 24 MB (AP) a 595 MB (MG); 4,6 GB os 27 (geração `2026-11-09-486b0133`) | 0 a 15 |
+| `carcara-<UF>-leve.pmtiles` | O mesmo estado, só até o zoom 13, para quem tem pouco espaço: cerca de 27% do tamanho do completo. De 7 MB (DF) a 183 MB (MG); 1,27 GB os 27 (mesma geração) | 0 a 13 |
 | `carcara-recursos.tar.gz` | Ícones (`sprites/v4/`) e fontes dos rótulos (`fonts/`) da mesma versão do esquema, com as licenças e um `LEIAME.md`. 6,2 MB | não se aplica |
 
 ### Por que o pacote de estado começa no zoom 0
@@ -54,7 +54,7 @@ estado só com os zooms acima da base, obrigaria a ter sempre a base instalada p
 O esquema da Protomaps vai até o zoom 15. Acima disso não existe dado: quem desenha amplia o tile do zoom 15.
 Nenhum pacote de estado é publicado com menos que o zoom 15. Se um estado não couber no limite de 2 GiB por
 arquivo, ele é **dividido** em mais de um arquivo; reduzir o zoom em silêncio não é opção. Hoje nenhum chega
-perto: o maior tem 592 MB.
+perto: o maior, MG, tem 595 MB na geração `2026-11-09-486b0133`.
 
 ### Pacote leve
 
@@ -156,7 +156,7 @@ Pontos do contrato:
 ## Releases
 
 - Uma release por geração, com a etiqueta `build_id`. São 56 arquivos: a base, os 27 estados completos, os 27
-  leves e os recursos. Cerca de 5,9 GB por geração.
+  leves e os recursos. Cerca de 6 GB por geração (5,96 GB na `2026-11-09-486b0133`).
 - O `catalogo.json` da raiz aponta sempre para a geração mais recente. Quem consome usa o `release_url` do
   catálogo, nunca um link fixo.
 - Ficam no ar as 12 gerações mais recentes (uma por semana, cerca de 3 meses e 71 GB); as anteriores são apagadas
