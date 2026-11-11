@@ -186,6 +186,7 @@ ser conferido por sha256, retomado, atualizado e apagado como um arquivo só.
 |---|---|
 | [`docs/DECISOES.md`](docs/DECISOES.md) | O que foi decidido, o que é só proposta, e as alternativas descartadas |
 | [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md) | Pacotes, zooms, recorte por estado, `catalogo.json`, releases, estrutura do repositório, licenças |
+| [`docs/CATALOGO.md`](docs/CATALOGO.md#carcara) | O contrato de catálogo comum aos quatro geradores irmãos (v1), com o esquema JSON |
 | [`docs/GERACAO.md`](docs/GERACAO.md) | Como os pacotes são gerados (o recorte do build da Protomaps), validação, agendamento, publicação e reprodutibilidade |
 | [`docs/CONSUMO.md`](docs/CONSUMO.md) | Como um aplicativo ou site lê os pacotes |
 | [`docs/ESTILOS.md`](docs/ESTILOS.md) | Os estilos prontos do pacote de recursos (claro, escuro e mais três, em português, com prédios em 3D): como usar, trocar os endereços e combinar a base com os estados |

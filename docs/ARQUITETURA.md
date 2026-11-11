@@ -134,6 +134,7 @@ states             {UF: pacote}, um por estado
   bbox_tiles       área coberta pelos tiles do zoom mais fundo do pacote, na mesma ordem do bbox
                    (maior que o bbox: o recorte leva a margem e os tiles passam da divisa)
   light            o pacote leve do estado (só em states, opcional): file, bytes, sha256, tiles, minzoom, maxzoom
+contract           o mesmo catálogo no contrato comum aos quatro geradores irmãos (v1): docs/CATALOGO.md
 ```
 
 Pontos do contrato:
