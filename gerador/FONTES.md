@@ -286,7 +286,7 @@ por estado está em [`PENDENCIAS.md`](PENDENCIAS.md), seção "Geração complet
 
 | Afirmação | Onde aparece | Como conferir |
 |---|---|---|
-| O disparo agendado do workflow `gerar` com a regra do domingo (o job `interval` parando no meio da semana e gerando no domingo) | GERACAO, PENDENCIAS | Olhar os runs agendados depois de 2026-11-09. A regra antiga, dos 29 dias, foi vista funcionando: a geração agendada de 2026-10-06 publicou sozinha |
+| O disparo agendado do workflow `gerar` gerando num domingo normal, com a regra do domingo | GERACAO, PENDENCIAS | Olhar os runs agendados do domingo 2026-11-15. O resto da regra foi visto (seção "Agendamento com a regra do domingo") |
 | O OpenMapTiles vai só até o zoom 14 | DECISOES (D5) | Documentação do OpenMapTiles |
 | A Protomaps publica estilos prontos em mais de uma variação de cores | CONSUMO | Repositório `protomaps/basemaps`, pasta de estilos |
 | Opções `--osm_path` e `--output` do Planetiler | GERACAO | Documentação do Planetiler, na versão do perfil escolhida |
@@ -294,6 +294,17 @@ por estado está em [`PENDENCIAS.md`](PENDENCIAS.md), seção "Geração complet
 | A etapa B cabe na máquina gratuita do GitHub Actions | GERACAO | Não será conferido: é da etapa B, que não está planejada |
 | O MapLibre desenha um pacote real num aparelho de verdade (no emulador, a leitura por `pmtiles://file://` já foi conferida) | CONSUMO | Teste em um aparelho ARM |
 | O GitHub não serve bem leitura por faixas direto do navegador | CONSUMO | Teste com um arquivo de release |
+
+## Agendamento com a regra do domingo (conferido em 2026-11-11)
+
+Lido com `gh run list` e `gh run view` no workflow `gerar` e com `gh release list`, no repositório do projeto.
+
+| Fato | Valor |
+|---|---|
+| Domingo que falhou | Os disparos agendados de 2026-11-04 a 2026-11-08, inclusive os do domingo 2026-11-08, falharam: a API de malhas do IBGE não respondia ao Actions |
+| Nova tentativa no dia seguinte | O disparo agendado de 2026-11-09 às 16:19 UTC (segunda), no commit `ae0be2c` (malha versionada), passou pelo `interval`, gerou e publicou a `2026-11-09-486b0133` |
+| Parada no meio da semana | Os quatro disparos agendados seguintes (2026-11-09 22:22, 2026-11-10 14:52 e 19:44, 2026-11-11 14:22 UTC) terminaram com o `interval` em sucesso e o `generate` pulado |
+| Releases no ar | Três: `2026-10-05-5b5261c4`, `2026-10-06-681837e0` e `2026-11-09-486b0133`, a última marcada como mais recente |
 
 ## Crédito pedido pelas fontes (conferido em 2026-10-02)
 

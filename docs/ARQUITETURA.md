@@ -1,7 +1,9 @@
 # Arquitetura
 
-Desenho proposto em 2026-10-01. Nada disto existe ainda. Os números marcados como "a medir" dependem das
-medições de [`PENDENCIAS.md`](../gerador/PENDENCIAS.md).
+Desenho de 2026-10-01, em funcionamento: o gerador existe e há gerações publicadas como releases desde
+2026-10-05 (a mais recente é a do [`catalogo.json`](../catalogo.json); em 2026-11-11, a `2026-11-09-486b0133`). Os
+números de tamanho vêm das medições de [`PENDENCIAS.md`](../gerador/PENDENCIAS.md); os de cada geração estão no
+catálogo dela.
 
 O projeto usa só a **etapa A** (recorte do build da Protomaps). Onde este documento fala da etapa B, é registro
 de uma possibilidade sem data ([`DECISOES.md`](DECISOES.md), D6): o formato do catálogo já reserva os campos
@@ -63,8 +65,8 @@ detalhe de rua dos zooms 14 e 15. Serve para quem tem pouco espaço ou quer o es
 - Completo e leve do mesmo estado não se somam: o completo contém tudo o que o leve tem. Quem instala o completo
   pode apagar o leve.
 - A regra que decidiu (2026-10-01): publicar o leve se algum estado completo passasse de 500 MB na medição M1.
-  Minas Gerais passou (592 MB). É padrão de trabalho, ainda sem confirmação do dono; desligar é uma opção do
-  gerador.
+  Minas Gerais passou (592 MB). Confirmada pelo dono em 2026-10-02 (decisão X4 de
+  [`PENDENCIAS.md`](../gerador/PENDENCIAS.md)); desligar é uma opção do gerador.
 
 ### Recorte por estado
 
@@ -160,7 +162,7 @@ Pontos do contrato:
 - A release é criada como rascunho e só é publicada com todos os arquivos enviados e conferidos. Um envio que
   cai deixa um rascunho, que a limpeza remove.
 
-## Estrutura prevista do repositório
+## Estrutura do repositório
 
 ```
 carcara/
@@ -169,43 +171,45 @@ carcara/
 ├── LICENSE                   ODbL 1.0 (dados)
 ├── docs/                     estes documentos
 ├── gerador/
-│   ├── README.md             como instalar, testar e medir                            (existe)
-│   ├── LICENSE               MIT (código)                                             (existe)
-│   ├── requirements.txt                                                               (existe)
-│   ├── generate.py           ponto de entrada da geração                    (existe: recorta e valida)
-│   ├── ibge_malha_uf.json    a malha das UFs do IBGE, versionada (sha256 no config)   (existe)
+│   ├── README.md             como instalar, testar e medir
+│   ├── FONTES.md             de onde vem cada afirmação dos documentos
+│   ├── PENDENCIAS.md         medições, decisões em aberto e riscos
+│   ├── LICENSE               MIT (código)
+│   ├── requirements.txt
+│   ├── generate.py           ponto de entrada da geração: recorta, valida, monta o catálogo
+│   ├── ibge_malha_uf.json    a malha das UFs do IBGE, versionada (sha256 no config)
 │   ├── carcara/
-│   │   ├── config.py         endereços, zooms, margem, ferramenta, intervalo, gerações (existe)
-│   │   ├── net.py            download com retomada e novas tentativas                 (existe)
-│   │   ├── sources.py        build da Protomaps pelo índice, malha do IBGE conferida  (existe)
-│   │   ├── regions.py        polígonos das UFs com margem, GeoJSON para o recorte     (existe)
-│   │   ├── extraction.py     chama o pmtiles extract e lê o que ele informa           (existe)
-│   │   ├── packs.py          os pacotes de uma geração: estado, leve e base           (existe)
-│   │   ├── pmtiles_tool.py   instala o pmtiles fixado e recusa outra versão           (existe)
-│   │   ├── resources.py      monta o pacote de ícones e fontes                        (existe)
-│   │   ├── validation.py     as travas antes de publicar                              (existe)
-│   │   ├── mvt.py            lê as camadas de um tile, para as travas                 (existe)
-│   │   ├── catalog.py        monta o catalogo.json e a tabela do README               (existe)
-│   │   ├── publishing.py     release em rascunho, envio, publicação, limpeza das antigas (existe)
-│   │   ├── schedule.py       a regra do domingo; sem geração publicada, não gera      (existe)
-│   │   ├── alert.py          a issue "Geração falhando" das execuções agendadas      (existe)
-│   │   └── run_record.py     tempos e uso de máquina da geração                       (existe)
+│   │   ├── config.py         endereços, zooms, margem, ferramenta, intervalo, gerações
+│   │   ├── net.py            download com retomada e novas tentativas
+│   │   ├── sources.py        build da Protomaps pelo índice, malha do IBGE conferida
+│   │   ├── regions.py        polígonos das UFs com margem, GeoJSON para o recorte
+│   │   ├── extraction.py     chama o pmtiles extract e lê o que ele informa
+│   │   ├── packs.py          os pacotes de uma geração: estado, leve e base
+│   │   ├── pmtiles_tool.py   instala o pmtiles fixado e recusa outra versão
+│   │   ├── resources.py      monta o pacote de ícones e fontes
+│   │   ├── validation.py     as travas antes de publicar
+│   │   ├── mvt.py            lê as camadas de um tile, para as travas
+│   │   ├── catalog.py        monta o catalogo.json e a tabela do README
+│   │   ├── publishing.py     release em rascunho, envio, publicação, limpeza das antigas
+│   │   ├── schedule.py       a regra do domingo; sem geração publicada, não gera
+│   │   ├── alert.py          a issue "Geração falhando" das execuções agendadas
+│   │   └── run_record.py     tempos e uso de máquina da geração
 │   ├── scripts/
-│   │   ├── install_pmtiles.py   instala a ferramenta, com o sha256 conferido          (existe)
-│   │   ├── measure.py           simula os recortes e registra os tamanhos             (existe)
-│   │   ├── publish.py           linha de comando da publicação                        (existe)
-│   │   ├── due.py               diz ao workflow se está na hora de gerar              (existe)
-│   │   └── alert.py             abre, comenta ou fecha a issue de falha               (existe)
-│   ├── licencas/             textos de licença que vão dentro do pacote de recursos   (existe)
-│   ├── tests/                                                                         (existe)
+│   │   ├── install_pmtiles.py   instala a ferramenta, com o sha256 conferido
+│   │   ├── measure.py           simula os recortes e registra os tamanhos
+│   │   ├── publish.py           linha de comando da publicação
+│   │   ├── due.py               diz ao workflow se está na hora de gerar
+│   │   └── alert.py             abre, comenta ou fecha a issue de falha
+│   ├── licencas/             textos de licença que vão dentro do pacote de recursos
+│   ├── tests/
 │   └── data/                 fora do git: downloads, pacotes, medições, a ferramenta
 └── .github/workflows/
-    ├── gerar.yml             geração agendada e à mão                                 (existe)
-    └── testes.yml            testes do gerador                                        (existe)
+    ├── gerar.yml             geração agendada e à mão
+    └── testes.yml            testes do gerador
 ```
 
-O que está marcado "(existe)" já está no repositório; o resto é previsto. Desde 2026-10-05 (decisão X10 de
-[`PENDENCIAS.md`](../gerador/PENDENCIAS.md)), `FONTES.md` e `PENDENCIAS.md` ficam em `gerador/`, junto do código que
+Tudo o que está acima existe no repositório, menos `gerador/data/`, que fica fora do git. Desde 2026-10-05
+(decisão X10 de [`PENDENCIAS.md`](../gerador/PENDENCIAS.md)), `FONTES.md` e `PENDENCIAS.md` ficam em `gerador/`, junto do código que
 eles medem e explicam; os outros documentos ficam em `docs/`.
 
 ## Licenças e crédito

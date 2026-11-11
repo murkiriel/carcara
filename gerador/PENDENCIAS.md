@@ -1,7 +1,9 @@
 # Pendências
 
-Situação em 2026-10-01: o projeto só tem documentação, e o dono decidiu ficar na etapa A (o recorte do build da
-Protomaps; ver [`DECISOES.md`](../docs/DECISOES.md), D6). O que falta medir, o que falta decidir e o que pode dar errado.
+Situação em 2026-11-11: o gerador existe, roda no GitHub Actions e publica gerações como releases desde
+2026-10-05 (a mais recente é a do [`catalogo.json`](../catalogo.json); nesta data, a `2026-11-09-486b0133`). O
+projeto fica na etapa A, o recorte do build da Protomaps ([`DECISOES.md`](../docs/DECISOES.md), D6). Este documento
+guarda as medições que decidiram o desenho, o que ainda está em aberto e o que pode dar errado.
 
 ## Medições antes de escrever o gerador
 
@@ -263,7 +265,7 @@ X7, X8 e X12 tratavam da etapa B e estão na seção "Etapa B (sem data)", no fi
 | A geração baixa vários GB da Protomaps toda semana (cerca de 4,8 GB) | Uso pesado de um serviço gratuito | É o uso que a própria Protomaps recomenda (copiar para armazenamento próprio); manter os pedidos em paralelo no padrão; gerações completas só no ciclo semanal, nunca em teste repetido |
 | O agendamento do GitHub atrasa ou pula disparos | Geração atrasada | Dois disparos por dia, e a regra do domingo tenta de novo nos dias seguintes; o cron fica fora do minuto zero; ver "Lições herdadas" em [`GERACAO.md`](../docs/GERACAO.md) |
 | A API de malhas do IBGE não responde ao GitHub Actions | Toda geração agendada parava no começo, e a publicada envelhecia | **Resolvido em 2026-11-09**, como no Andorinha: a malha vai versionada em `gerador/ibge_malha_uf.json`, conferida pelo sha256 do config, e a geração não acessa mais o IBGE. De 2026-11-04 a 2026-11-09 as gerações agendadas falharam por isso (a API dava timeout nas 5 tentativas a partir do Actions). Trocar a malha (uma divisa mudou) é feito à mão, com o sha256 novo |
-| Um erro que só exista no caminho do agendamento | Aparece no primeiro disparo agendado que gerar | Visto em 2026-10-06: a geração agendada gerou e publicou sozinha (release `2026-10-06-681837e0`, catálogo e README commitados pelo robô). A regra do domingo, de 2026-11-09, ainda não gerou pelo agendamento |
+| Um erro que só exista no caminho do agendamento | Aparece no primeiro disparo agendado que gerar | Visto em 2026-10-06: a geração agendada gerou e publicou sozinha (release `2026-10-06-681837e0`, catálogo e README commitados pelo robô). Visto de novo com a regra do domingo: em 2026-11-09 (segunda), depois dos domingos que falharam pelo IBGE, um disparo agendado gerou e publicou a `2026-11-09-486b0133`, e os disparos de 2026-11-09 a 2026-11-11 pararam no job `interval`. Falta ver um domingo normal |
 | A máquina do GitHub Actions fica sem disco para a geração inteira | A geração para antes de baixar qualquer coisa (exige 12 GB livres; em 2026-10-02 havia 14) | Decisão do dono em 2026-10-02: se o disco virar problema, **dividir a geração em tarefas** (por exemplo, um job por grupo de estados, cada um enviando os seus arquivos, e um job final que valida, monta o catálogo e publica). Não feito: hoje cabe numa execução só |
 | Crédito ou licença da etapa A mal redigidos | Problema ao abrir o repositório | Conferido em 2026-10-02 ([`FONTES.md`](FONTES.md), "Crédito pedido pelas fontes"): faltava citar o ESA WorldCover, e o catálogo passou a citar. Visto em 2026-10-05: o crédito **dentro** de cada `.pmtiles` (o campo `attribution` dos metadados, que o MapLibre mostra sozinho) é o da origem, só "© OpenStreetMap"; o do ESA WorldCover está no catálogo, nas notas da release e no README. **Decidido pelo dono no mesmo dia:** a geração passa a escrever o crédito inteiro, com o do ESA, dentro de cada arquivo (`config.EMBEDDED_ATTRIBUTION`, por `pmtiles edit` antes do sha256), a partir da próxima geração |
 | Tiles mais ricos pesam mais para desenhar em aparelhos fracos | Mapa mais lento no zoom 15 real do que no zoom 13 ampliado | Medir em quem consome; a saída é otimizar o desenho, não empobrecer o pacote |
@@ -278,6 +280,8 @@ X7, X8 e X12 tratavam da etapa B e estão na seção "Etapa B (sem data)", no fi
 - **Dados acima do zoom 15.** O esquema não tem.
 
 ## Ordem sugerida do trabalho
+
+Cumprida: o repositório ficou público e com gerações publicadas em 2026-10-05. Fica como registro.
 
 1. Medições M1 a M5.
 2. Decisões X1 a X6, com os números na mão.

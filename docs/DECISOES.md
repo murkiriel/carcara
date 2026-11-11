@@ -1,8 +1,8 @@
 # Decisões
 
-Registro do que foi decidido até 2026-10-01 e por quê. A coluna "Situação" separa o que o dono **confirmou** do
-que é **proposta** ainda sem confirmação. Uma proposta vale como padrão de trabalho, mas pode mudar antes de o
-gerador ser escrito. As decisões que ainda dependem de medição estão em [`PENDENCIAS.md`](../gerador/PENDENCIAS.md).
+Registro do que foi decidido e por quê, desde 2026-10-01. A coluna "Situação" separa o que o dono **confirmou**
+do que é **proposta** ainda sem confirmação. Uma proposta vale como padrão de trabalho, mas pode mudar. As decisões
+que ainda dependem de medição estão em [`PENDENCIAS.md`](../gerador/PENDENCIAS.md).
 
 ## Resumo
 
@@ -10,7 +10,7 @@ gerador ser escrito. As decisões que ainda dependem de medição estão em [`PE
 |---|---|---|
 | D1 | Projeto independente, em repositório próprio | Confirmada (2026-10-01: o dono pediu a pasta própria) |
 | D2 | Nome `carcara` | Definitivo (2026-10-02: o dono manteve o nome) |
-| D3 | Por enquanto, só documentação | Confirmada (2026-10-01) |
+| D3 | Por enquanto, só documentação | Confirmada em 2026-10-01 e encerrada: o gerador foi escrito, e há gerações publicadas desde 2026-10-05 |
 | D4 | Formato dos pacotes: PMTiles | Confirmada com a etapa A (2026-10-01) |
 | D5 | Esquema de camadas: o do basemap da Protomaps, versão 4 | Confirmada com a etapa A (2026-10-01) |
 | D6 | Origem dos tiles: recorte do build da Protomaps (etapa A). A geração própria (etapa B) não está planejada | Confirmada (2026-10-01): só a etapa A |
@@ -22,8 +22,8 @@ gerador ser escrito. As decisões que ainda dependem de medição estão em [`PE
 | D12 | Geração toda semana, no domingo, com 12 gerações nas releases, aviso de falha por issue e `LICENCA-DADOS.txt` em cada release, como no Andorinha | Decidida pelo dono (2026-11-09) |
 
 "Confirmada com a etapa A" quer dizer: em 2026-10-01 o dono escolheu a etapa A e mandou executar o desenho
-como está. Os detalhes que ainda dependem de número (zoom da base, pacote leve, gerações mantidas) continuam
-em aberto em [`PENDENCIAS.md`](../gerador/PENDENCIAS.md).
+como está. Os detalhes que dependiam de número (zoom da base, pacote leve, gerações mantidas) foram decididos
+depois, com as medições na mão: decisões X2, X4 e X6 de [`PENDENCIAS.md`](../gerador/PENDENCIAS.md).
 
 ## D1: projeto independente
 

@@ -1,9 +1,11 @@
 # Como usar os pacotes
 
-Guia para quem vai ler os pacotes em um aplicativo ou site. Proposta de 2026-10-01: descreve como os pacotes
-foram pensados para ser usados. A leitura no Android foi conferida com um pacote real do Distrito Federal, num
-emulador (medição M5, em [`FONTES.md`](../gerador/FONTES.md)); o resto ainda não foi exercitado, porque nenhum pacote foi
-publicado.
+Guia para quem vai ler os pacotes em um aplicativo ou site. Há gerações publicadas desde 2026-10-05, como
+releases, e o [`catalogo.json`](../catalogo.json) da raiz aponta sempre para a mais recente (em 2026-11-11, a
+`2026-11-09-486b0133`). Os pacotes publicados são lidos em aplicativo Android pelo MapLibre. A leitura foi conferida
+com um pacote real do Distrito Federal num emulador (medição M5) e, em 2026-10-05, o desenho de um pacote publicado
+de Goiás foi comparado pixel a pixel com o do build de origem (ver [`FONTES.md`](../gerador/FONTES.md) e
+[`PENDENCIAS.md`](../gerador/PENDENCIAS.md)). O que não foi exercitado está dito em cada seção.
 
 ## Em resumo
 

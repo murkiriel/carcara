@@ -95,8 +95,8 @@ Usa o `gh` (GitHub CLI) já logado. A ordem é esta, e cada passo só acontece s
 2. a release sobe como **rascunho**; cada arquivo que falta, ou que está com outro tamanho ou outro sha256, é
    enviado; a release só é publicada quando o GitHub informa o tamanho e o sha256 certos de todos;
 3. o `catalogo.json` e a tabela de downloads do README são gravados na raiz e vão num commit só deles;
-4. depois do push, as releases antigas são apagadas: ficam a do catálogo e as anteriores mais recentes, 3 no
-   total. Só etiquetas no formato do `build_id` entram; a do catálogo publicado nunca; falha aqui vira aviso.
+4. depois do push, as releases antigas são apagadas: ficam a do catálogo e as anteriores mais recentes, 12 no
+   total (`CARCARA_KEEP_GENERATIONS`). Só etiquetas no formato do `build_id` entram; a do catálogo publicado nunca; falha aqui vira aviso.
 
 Se a subida cair no meio, fica um rascunho que ninguém vê, e rodar de novo retoma do que falta.
 
@@ -189,5 +189,5 @@ Tudo o que o gerador baixa ou produz vai para `data/`, que fica fora do git:
 
 ## Licença
 
-O código do gerador é MIT ([`LICENSE`](LICENSE)). Os pacotes que ele vai produzir são ODbL 1.0
+O código do gerador é MIT ([`LICENSE`](LICENSE)). Os pacotes que ele produz são ODbL 1.0
 ([`../LICENSE`](../LICENSE)).

@@ -1,8 +1,8 @@
 # Geração
 
-Como os pacotes são gerados e como serão validados e publicados. Proposta de 2026-10-01. O recorte (passos 1
-a 6 da etapa A) já existe no gerador e foi executado para o Distrito Federal e Goiás; a validação, o catálogo e a
-publicação ainda não. O projeto usa só a etapa A. As opções do `pmtiles` foram conferidas na documentação e no código-fonte da
+Como os pacotes são gerados, validados e publicados. Desenho de 2026-10-01, em funcionamento: o recorte, as
+travas, o catálogo e a publicação existem no gerador, e o GitHub Actions publica gerações desde 2026-10-05. O
+projeto usa só a etapa A. As opções do `pmtiles` foram conferidas na documentação e no código-fonte da
 ferramenta (ver [`FONTES.md`](../gerador/FONTES.md)).
 
 ## Etapa A: recorte do build da Protomaps
@@ -187,7 +187,7 @@ cada arquivo no disco tem o tamanho e o sha256 que o catálogo diz.
    não informar o sha256 de algum, ou se algum não bater, a release continua rascunho.
 4. Publicar a release.
 5. Gravar o `catalogo.json` e a tabela de downloads do README, em um commit só desses dois arquivos.
-6. Só depois do push, apagar as releases além das 3 mais recentes, e os rascunhos órfãos. A limpeza nunca apaga a release do
+6. Só depois do push, apagar as releases além das 12 mais recentes (`CARCARA_KEEP_GENERATIONS`), e os rascunhos órfãos. A limpeza nunca apaga a release do
    catálogo publicado nem etiqueta fora do formato do `build_id`, e falha na limpeza vira aviso, não derruba a
    publicação.
 
@@ -202,8 +202,8 @@ Coisas que já deram problema e que o gerador deve nascer sabendo:
 | O `ubuntu-latest` muda de versão com o tempo | Fixar a imagem (`ubuntu-24.04`) e as versões das actions |
 | O agendamento do GitHub atrasa horas e pode pular disparos, sobretudo em repositório novo e no minuto zero | Dois disparos por dia, e a regra "publicada de antes do último domingo" tenta de novo nos dias seguintes; o cron fica no minuto 17 |
 | Um run agendado que espera na fila lê o catálogo de antes da publicação e tenta gerar de novo | O job `interval` lê o catálogo do `main` atual, não o do commit que disparou |
-| `raw.githubusercontent.com` responde 404 em repositório privado | Enquanto o repositório for privado, a data vem do arquivo no checkout |
+| `raw.githubusercontent.com` responde 404 em repositório privado | A data vem do arquivo no checkout; ficou assim depois que o repositório ficou público, porque o checkout da ponta do `main` também resolve a fila (linha acima) |
 | O extrato do Brasil troca uma vez por dia, por volta de 01:00 UTC; um download nessa hora pode pegar meio arquivo | Conferir o md5 publicado ao lado, antes e depois do download |
 | Downloads grandes caem | Download com retomada e novas tentativas |
 | Apagar release é irreversível | As travas da limpeza descritas em "Publicação" |
-| Nos tiles de roteamento, a mesma geração não sai idêntica byte a byte em outra máquina | Não presumir que sai idêntica aqui: comparar contagens e tamanhos com tolerância. Na etapa A, o recorte do mesmo build deve sair idêntico; conferir na medição M4 |
+| Nos tiles de roteamento, a mesma geração não sai idêntica byte a byte em outra máquina | Não presumir que sai idêntica aqui: comparar contagens e tamanhos com tolerância. Na etapa A, o recorte do mesmo build sai idêntico: conferido na medição M3 (o DF recortado duas vezes deu o mesmo arquivo, byte a byte) |
