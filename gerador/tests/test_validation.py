@@ -7,7 +7,7 @@ from pathlib import Path
 from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from carcara import config, extraction, mvt, packs, regions, resources, validation  # noqa: E402
+from carcara import config, extraction, mvt, packs, regions, resources, styles, validation  # noqa: E402
 from tests import mvt_builder  # noqa: E402
 
 from shapely.geometry import Point, box  # noqa: E402
@@ -40,6 +40,14 @@ def resource_files() -> dict:
             files[f"{resources.SPRITES_FOLDER}{flavor}{density}.png"] = png(64, 64)
     files[resources.ICONS_LICENCE] = b"MIT"
     files[resources.README] = b"origem"
+    # Os estilos do repositório e as folhas do Carcará, com os ícones de origem e os próprios.
+    files.update(styles.committed())
+    files[styles.LICENCE] = b"BSD"
+    for flavor in styles.OWN_SPRITE_FLAVORS:
+        icons = [*validation.required_icons(flavor), *styles.OWN_ICONS]
+        for density in ("", "@2x"):
+            files[f"{styles.OWN_SPRITES_FOLDER}{flavor}{density}.json"] = sprite_index(icons)
+            files[f"{styles.OWN_SPRITES_FOLDER}{flavor}{density}.png"] = png(64, 64)
     return files
 
 
@@ -369,6 +377,32 @@ class ResourcesTest(WorldTest):
         (self.dist / resources.FILE_NAME).write_bytes(b"isto nao e um tar")
         self.resources_pack["bytes"] = 17
         self.assertOneProblem(self.problems(), "recursos", "carcara-recursos.tar.gz")
+
+    def test_missing_style(self):
+        self.rewrite(lambda files: files.pop("styles/dark.json"))
+        self.assertOneProblem(self.problems(), "recursos", "styles/dark.json")
+
+    def test_style_that_is_not_json(self):
+        self.rewrite(lambda files: files.update({"styles/light.json": b"{\"version\": 8,"}))
+        self.assertOneProblem(self.problems(), "recursos", "styles/light.json", "JSON")
+
+    def test_own_icon_missing_from_the_carcara_sheet(self):
+        def change(files):
+            names = [*validation.required_icons("dark"), "townhall"]
+            files[f"{styles.OWN_SPRITES_FOLDER}dark@2x.json"] = sprite_index(names)
+        self.rewrite(change)
+        problems = self.problems()
+        # A folha acusa o ícone que falta, e o estilo que o pede também.
+        self.assertTrue(any("carcara-v4/dark@2x.json" in p and "fuel" in p for p in problems), problems)
+        self.assertTrue(any("styles/dark.json" in p and "fuel (2x)" in p for p in problems), problems)
+
+    def test_style_asking_for_a_font_the_pack_does_not_have(self):
+        def change(files):
+            style = json.loads(files["styles/white.json"])
+            style["layers"][-1]["layout"]["text-font"] = ["Noto Sans Bold"]
+            files["styles/white.json"] = json.dumps(style).encode()
+        self.rewrite(change)
+        self.assertOneProblem(self.problems(), "recursos", "styles/white.json", "Noto Sans Bold")
 
     def test_plain_flavours_only_need_the_core_icons(self):
         # As folhas claras de uma cor só não têm os ícones dos pontos de interesse, e os estilos delas não os pedem.

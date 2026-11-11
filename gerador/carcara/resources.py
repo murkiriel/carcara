@@ -4,6 +4,9 @@ Vêm do repositório de recursos do basemap da Protomaps, numa revisão fixa (co
 entram as fontes em PBF por faixa (`fonts/<fonte>/<faixa>.pbf`) e as folhas de ícones da versão 4 do esquema
 (`sprites/v4/`), nos caminhos que o MapLibre procura. O resto (scripts, folhas de versões antigas) fica de fora.
 
+A isso se juntam os estilos prontos (`styles/`) e as folhas de ícones do Carcará (`sprites/carcara-v4/`, as de
+origem com dois ícones próprios no fim), montados por `styles.py`. Nada do que vem da origem muda de lugar.
+
 O arquivo de saída é reproduzível: a mesma revisão dá sempre o mesmo `.tar.gz`, byte a byte.
 """
 from __future__ import annotations
@@ -15,7 +18,7 @@ import tarfile
 from pathlib import Path
 from typing import Dict, Iterator, List
 
-from . import config, net
+from . import config, net, styles
 from .util import file_hash
 
 # Espera base entre tentativas de download, em segundos. Os testes zeram.
@@ -105,10 +108,20 @@ Origem: https://github.com/protomaps/basemaps-assets, revisão {revision}.
 Fontes: {", ".join(FONTSTACKS)}.
 Ícones: {", ".join(SPRITE_FLAVORS)}, cada um em 1x e 2x.
 
+## Estilos prontos
+
+Em styles/: {", ".join(f"{flavor}.json" for flavor in styles.FLAVORS)}, para o MapLibre, com rótulos em
+português e prédios em 3D. Antes de usar, trocar {styles.RESOURCES_TOKEN} pelo endereço desta pasta e
+{styles.TILES_TOKEN} pelo endereço dos tiles (por exemplo, pmtiles://file:///.../carcara-DF.pmtiles).
+As variações light e dark usam as folhas de {styles.OWN_SPRITES_FOLDER}: as de {SPRITES_FOLDER} com os
+ícones {" e ".join(styles.OWN_ICONS)} no fim. Como usar: docs/ESTILOS.md do repositório do gerador.
+
 ## Licenças
 
 - Fontes (fonts/): Noto Sans, SIL Open Font License 1.1. Texto em fonts/OFL.txt.
 - Ícones (sprites/): derivados de um conjunto de ícones sob a licença MIT. Texto em sprites/LICENCA.md.
+- Estilos (styles/): gerados pelo pacote @protomaps/basemaps, BSD de 3 cláusulas (desenho visual em CC0).
+  Ícones próprios de {styles.OWN_SPRITES_FOLDER}: MIT. Textos em styles/LICENCA.md.
 """.encode("utf-8")
 
 
@@ -128,7 +141,7 @@ def write_archive(files: Dict[str, bytes], dest: Path) -> None:
 
 def build(dist: Path) -> Dict[str, object]:
     """Monta `carcara-recursos.tar.gz` em `dist`. Devolve {path, file, bytes, sha256, revision, glyph_files,
-    sprite_files}."""
+    sprite_files, style_files}."""
     revision = config.ASSETS_REVISION
     config.RAW.mkdir(parents=True, exist_ok=True)
     upstream = config.RAW / f"basemaps-assets-{revision}.tar.gz"
@@ -154,9 +167,12 @@ def build(dist: Path) -> Dict[str, object]:
     packed = dict(files)
     packed[ICONS_LICENCE] = (config.GENERATOR_DIR / "licencas" / "ICONES_MIT.md").read_bytes()
     packed[README] = _readme(revision)
+    packed.update(styles.pack(files))
     dest = dist / FILE_NAME
     write_archive(packed, dest)
     return {"path": dest, "file": FILE_NAME, "bytes": dest.stat().st_size, "sha256": file_hash(dest),
             "revision": revision,
             "glyph_files": sum(1 for name in files if name.endswith(".pbf")),
-            "sprite_files": sum(1 for name in files if name.startswith(SPRITES_FOLDER))}
+            "sprite_files": sum(1 for name in files if name.startswith(SPRITES_FOLDER)),
+            "style_files": sum(1 for name in packed if name.startswith(styles.STYLES_FOLDER)
+                               and name.endswith(".json"))}

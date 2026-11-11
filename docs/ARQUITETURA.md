@@ -34,7 +34,7 @@ build diário da Protomaps (etapa A)          malha das UFs (IBGE)
 | `carcara-base.pmtiles` | O Brasil inteiro em zoom baixo: visão geral do país para onde não há estado instalado | 0 a 9 (44 MB na medição M2, contra 15 MB até o zoom 8 e 106 MB até o 10) |
 | `carcara-<UF>.pmtiles` | Um por estado e o DF (27): todos os tiles que tocam o polígono da UF, com margem. De 24 MB (AP) a 595 MB (MG); 4,6 GB os 27 (geração `2026-11-09-486b0133`) | 0 a 15 |
 | `carcara-<UF>-leve.pmtiles` | O mesmo estado, só até o zoom 13, para quem tem pouco espaço: cerca de 27% do tamanho do completo. De 7 MB (DF) a 183 MB (MG); 1,27 GB os 27 (mesma geração) | 0 a 13 |
-| `carcara-recursos.tar.gz` | Ícones (`sprites/v4/`) e fontes dos rótulos (`fonts/`) da mesma versão do esquema, com as licenças e um `LEIAME.md`. 6,2 MB | não se aplica |
+| `carcara-recursos.tar.gz` | Ícones (`sprites/v4/`) e fontes dos rótulos (`fonts/`) da mesma versão do esquema, estilos prontos (`styles/`, ver [`ESTILOS.md`](ESTILOS.md)) e as folhas de ícones com os ícones próprios (`sprites/carcara-v4/`), com as licenças e um `LEIAME.md`. 6,3 MB | não se aplica |
 
 ### Por que o pacote de estado começa no zoom 0
 
@@ -182,6 +182,8 @@ carcara/
 │   ├── requirements.in       dependências diretas, com a versão fixada
 │   ├── requirements.txt      gerado do .in: todas as dependências, com versão exata e hash
 │   ├── generate.py           ponto de entrada da geração: recorta, valida, monta o catálogo
+│   ├── estilos/              estilos prontos: gerar.mjs (Node, versões travadas no package-lock.json),
+│   │                         ícones próprios em SVG e o que o script gera (gerado/), que vai para o pacote
 │   ├── ibge_malha_uf.json    a malha das UFs do IBGE, versionada (sha256 no config)
 │   ├── carcara/
 │   │   ├── config.py         endereços, zooms, margem, ferramenta, intervalo, gerações
@@ -192,6 +194,8 @@ carcara/
 │   │   ├── packs.py          os pacotes de uma geração: estado, leve e base
 │   │   ├── pmtiles_tool.py   instala o pmtiles fixado e recusa outra versão
 │   │   ├── resources.py      monta o pacote de ícones e fontes
+│   │   ├── styles.py         estilos prontos e ícones próprios no pacote de recursos, e a conferência deles
+│   │   ├── png.py            lê e grava PNG, para juntar os ícones próprios às folhas
 │   │   ├── validation.py     as travas antes de publicar
 │   │   ├── mvt.py            lê as camadas de um tile, para as travas
 │   │   ├── catalog.py        monta o catalogo.json e a tabela do README
@@ -210,7 +214,7 @@ carcara/
 │   └── data/                 fora do git: downloads, pacotes, medições, a ferramenta
 └── .github/workflows/
     ├── gerar.yml             geração agendada e à mão
-    └── testes.yml            testes do gerador
+    └── testes.yml            testes do gerador e conferência dos estilos gerados
 ```
 
 Tudo o que está acima existe no repositório, menos `gerador/data/`, que fica fora do git. Desde 2026-10-05
@@ -226,6 +230,8 @@ eles medem e explicam; os outros documentos ficam em `docs/`.
 | Camada `landcover` dos tiles (zooms 0 a 7) | CC BY 4.0 | Derivada do ESA WorldCover. Crédito: "© ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium" |
 | Perfil de geração da Protomaps (etapa B) | BSD-3 | Manter o aviso de licença se o gerador embutir ou alterar o perfil |
 | Desenho dos estilos da Protomaps | CC0 | |
+| Estilos prontos do pacote de recursos | BSD-3 (código do `@protomaps/basemaps` que os gera) | O texto vai em `styles/LICENCA.md`, dentro do pacote |
+| Ícones próprios (posto e prefeitura) | MIT, como o código do gerador | |
 | Fontes do pacote de recursos | SIL Open Font License | Noto Sans Regular, Medium e Italic |
 | Ícones do pacote de recursos | derivados de um conjunto MIT | Manter o aviso |
 | Malha das UFs | IBGE | Citar a fonte |

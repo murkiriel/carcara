@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19">
+  <!-- Prefeitura: fachada com janelas, porta e bandeira. Cores da variação light; o gerar.mjs troca para a dark. -->
+  <rect x="0.5" y="0.5" width="18" height="18" rx="4.5" fill="#dcebfa" stroke="#8780ab" stroke-width="1"/>
+  <path d="M9.5 7.5V3.25" fill="none" stroke="#8780ab" stroke-width="1"/>
+  <path d="M10 3.25h3l-0.75 1 0.75 1h-3z" fill="#8780ab"/>
+  <path d="M4.5 14.5V7.5h10v7" fill="none" stroke="#8780ab" stroke-width="1"/>
+  <path d="M3.5 14.5h12" fill="none" stroke="#8780ab" stroke-width="1"/>
+  <rect x="6" y="9" width="1.5" height="1.75" fill="#8780ab"/>
+  <rect x="11.5" y="9" width="1.5" height="1.75" fill="#8780ab"/>
+  <rect x="8.5" y="11" width="2" height="3.5" fill="#8780ab"/>
+</svg>

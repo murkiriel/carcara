@@ -149,7 +149,8 @@ em [`LICENSE`](LICENSE)). Os tiles vêm do build da Protomaps, que também é OD
 - Se você publicar uma base derivada destes pacotes, ela precisa manter a ODbL.
 - A camada `landcover` (zooms 0 a 7) é derivada do ESA WorldCover, sob **CC BY 4.0**: cite "© ESA WorldCover project
   2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium".
-- Pacote de recursos: fontes Noto Sans sob a SIL Open Font License; ícones derivados de um conjunto MIT.
+- Pacote de recursos: fontes Noto Sans sob a SIL Open Font License; ícones derivados de um conjunto MIT; estilos
+  prontos gerados pelo `@protomaps/basemaps` (código BSD-3, desenho CC0), com os ícones próprios sob MIT.
 - Recorte por estado: malha das UFs do IBGE.
 
 O texto completo do crédito está no `attribution` do `catalogo.json`, e cada release leva também um
@@ -187,6 +188,7 @@ ser conferido por sha256, retomado, atualizado e apagado como um arquivo só.
 | [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md) | Pacotes, zooms, recorte por estado, `catalogo.json`, releases, estrutura do repositório, licenças |
 | [`docs/GERACAO.md`](docs/GERACAO.md) | Como os pacotes são gerados (o recorte do build da Protomaps), validação, agendamento, publicação e reprodutibilidade |
 | [`docs/CONSUMO.md`](docs/CONSUMO.md) | Como um aplicativo ou site lê os pacotes |
+| [`docs/ESTILOS.md`](docs/ESTILOS.md) | Os estilos prontos do pacote de recursos (claro, escuro e mais três, em português, com prédios em 3D): como usar, trocar os endereços e combinar a base com os estados |
 | [`gerador/FONTES.md`](gerador/FONTES.md) | Fontes externas: o que foi conferido, quando e onde |
 | [`gerador/PENDENCIAS.md`](gerador/PENDENCIAS.md) | Medições que faltam, decisões em aberto e riscos |
 

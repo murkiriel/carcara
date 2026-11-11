@@ -357,3 +357,28 @@ quando a versão maior do esquema subir.
 | Release | 56 arquivos, 5,94 GB, publicada (não é rascunho); `catalogo.json` e a tabela do README commitados pelo robô |
 | Conferência por fora | sha256 de dois pacotes baixados da release (um completo e um leve) igual ao do catálogo |
 | Repositório privado | O `catalogo.json` por endereço de arquivo bruto responde 404 para quem não está autenticado: enquanto o repositório for privado, ninguém de fora lê o catálogo nem baixa os pacotes |
+
+## Estilos prontos (conferido em 2026-11-11)
+
+O pacote npm `@protomaps/basemaps`, lido do registro do npm e do repositório `protomaps/basemaps`. Uso em
+[`docs/ESTILOS.md`](../docs/ESTILOS.md).
+
+| Item | Valor |
+|---|---|
+| Versões publicadas | De 5.0.0 (2025-02-18) a 5.7.2 (2026-03-10), a mais recente e a `latest` |
+| Versão usada | 5.7.2, integridade `sha512-K1Yk6bWdULulYg+R2QRVXx4NzJZan5YQhpejEG0c1/sXruJrfPIPZuakpf3jwAgVmjIRVQwAv+yRafDeN0aaUQ==` (no `package-lock.json`) |
+| Compatibilidade com os tiles | O `CHANGELOG.md` do repositório põe os estilos 5.x junto dos tiles 4.x: "Tiles 4.12.0, Styles 5.6.0" (escudos de rodovia), "Tiles 4.13.0, Styles 5.7.0" (mais ícones de pontos de interesse) e "Styles 5.7.2" depois dos tiles 4.14.1. As mudanças dos tiles até a 4.15.2 não renomeiam camada nem atributo |
+| Licença | `package.json`: "BSD-3-Clause". O `LICENSE.md` do repositório: BSD de 3 cláusulas, "Copyright 2019-2023 Protomaps LLC, Kelso Cartography"; o desenho visual dos estilos, CC0. O pacote npm não traz o arquivo de licença; o texto vai em `styles/LICENCA.md` do pacote de recursos |
+| Dependências do pacote | Nenhuma em tempo de execução (só de desenvolvimento) |
+| Idioma `pt` | Está na lista de idiomas do pacote (`language.ts`), com escrita latina |
+| Ícones dos escudos e dos pontos de interesse | Montados do dado: `["get", "kind"]` e `concat` com o tamanho do `shield_text` |
+| `@resvg/resvg-js` (desenha os ícones próprios) | 2.6.2, MPL-2.0, integridade `sha512-xBaJish5OeGmniDj9cW5PRa/PtmuVU3ziqrbr5xJj901ZDN4TosrVaNZpEiLZAxdfnhAe7uQ7QFWfjPe9d9K2Q==`; não vai para o pacote, só desenha os PNGs |
+
+Medido nos pacotes reais da geração `2026-11-09-486b0133`:
+
+| Item | Valor |
+|---|---|
+| Altura dos prédios | No retângulo de 0,2° x 0,2° sobre o Plano Piloto (zoom 15 do pacote do DF): 175.210 prédios com `height` e 1.316 sem (99%); mediana 4 m, valores mais comuns 3 m e 4 m; há um `height` negativo (-2) |
+| Pontos de interesse no mesmo retângulo | 158 `fuel` (`min_zoom` de 15 a 17) e 3 `townhall` (`min_zoom` 14 e 16), contados tile a tile (um ponto pode aparecer em dois tiles) |
+| Pacote de recursos com os estilos | 805 arquivos, 6.320.215 bytes; os 791 de antes, com os mesmos bytes, menos o `LEIAME.md`, que ganhou a seção dos estilos. Montado duas vezes, sai idêntico byte a byte |
+| Desenho | MapLibre GL JS 5.6.0 e pmtiles.js 4.3.0 num Chrome sem tela, com o DF e a base: as cinco variações desenham, sem erro e sem ícone faltando (lista em `docs/ESTILOS.md`). O validador do `@maplibre/maplibre-gl-style-spec` 23.3.0 não acusa nada nos cinco |

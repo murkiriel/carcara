@@ -1,0 +1,16 @@
+{
+  "name": "carcara-estilos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gera os estilos MapLibre e os ícones próprios do pacote de recursos a partir do @protomaps/basemaps",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "gerar": "node gerar.mjs",
+    "conferir": "node gerar.mjs --conferir"
+  },
+  "dependencies": {
+    "@protomaps/basemaps": "5.7.2",
+    "@resvg/resvg-js": "2.6.2"
+  }
+}
