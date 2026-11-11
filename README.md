@@ -83,6 +83,7 @@ Geração **2026-11-09-486b0133**: build da Protomaps de 2026-11-09, com dados d
 | [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md) | Pacotes, zooms, recorte por estado, `catalogo.json`, releases, estrutura do repositório, licenças |
 | [`docs/GERACAO.md`](docs/GERACAO.md) | Como os pacotes são gerados (o recorte do build da Protomaps), validação, agendamento e publicação |
 | [`docs/CONSUMO.md`](docs/CONSUMO.md) | Como um aplicativo ou site lê os pacotes |
+| [`docs/ESTILOS.md`](docs/ESTILOS.md) | Os estilos prontos do pacote de recursos (claro, escuro e mais três, em português, com prédios em 3D): como usar, trocar os endereços e combinar a base com os estados |
 | [`gerador/FONTES.md`](gerador/FONTES.md) | Fontes externas: o que foi conferido, quando e onde |
 | [`gerador/PENDENCIAS.md`](gerador/PENDENCIAS.md) | Medições que faltam, decisões em aberto e riscos |
 
@@ -137,7 +138,8 @@ Todo formato publicado tem um campo de versão (`"schema": 1`), que só sobe qua
 - **Cobertura do solo** (a camada `landcover`, nos zooms 0 a 7): derivada do ESA WorldCover, sob CC BY 4.0.
   Crédito obrigatório: "© ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium".
 - **Código do gerador:** MIT, como nos projetos irmãos.
-- **Recursos:** fontes Noto Sans sob SIL Open Font License; ícones derivados de um conjunto MIT.
+- **Recursos:** fontes Noto Sans sob SIL Open Font License; ícones derivados de um conjunto MIT; estilos gerados
+  pelo `@protomaps/basemaps`, BSD-3.
 - **Recorte por estado:** malha das UFs do IBGE.
 
 Os detalhes estão em [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md), seção "Licenças e crédito".

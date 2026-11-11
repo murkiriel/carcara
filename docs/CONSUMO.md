@@ -111,7 +111,11 @@ para isso).
 
 ## Estilo
 
-Os tiles seguem o esquema do basemap da Protomaps, versão 4. Servem:
+O pacote de recursos traz estilos prontos (`styles/`), claro, escuro e mais três variações, com rótulos em
+português e prédios em 3D: o aplicativo só troca `{recursos}` e `{tiles}` pelos endereços dele. Como usar e como
+combinar a base com os estados: [`ESTILOS.md`](ESTILOS.md).
+
+Os tiles seguem o esquema do basemap da Protomaps, versão 4. Servem também:
 
 - os estilos prontos da Protomaps (pacote de estilos `@protomaps/basemaps`, da versão 4.0.0 em diante), em mais
   de uma variação de cores;
@@ -135,6 +139,7 @@ O pacote `carcara-recursos.tar.gz` traz as pastas no formato que o MapLibre espe
 ```
 fonts/<nome da fonte>/<faixa>.pbf      ex.: fonts/Noto Sans Regular/0-255.pbf
 sprites/<versão>/<variação>.json|png   e as versões @2x
+styles/<variação>.json                 estilos prontos (ESTILOS.md)
 ```
 
 No estilo:
@@ -152,10 +157,15 @@ para a escrita devanágari que o pacote não traz.
 
 As folhas de ícones ficam em `sprites/v4/`, em cinco variações de cor: `light`, `dark`, `white`, `grayscale` e
 `black`, cada uma em 1x e 2x. As folhas `light` e `dark` têm 53 ícones; as outras três, só os 18 que não são de
-pontos de interesse. Não há ícone de posto de combustível nem de prefeitura (`townhall`), embora o estilo de
-referência peça este último. Os escudos de rodovia vão até 5 caracteres.
+pontos de interesse. Nelas não há ícone de posto de combustível nem de prefeitura (`townhall`), embora o estilo
+de referência peça este último. Os escudos de rodovia vão até 5 caracteres.
 
-O pacote traz ainda `LEIAME.md` (origem e revisão), `fonts/OFL.txt` e `sprites/LICENCA.md` (as licenças).
+Em `sprites/carcara-v4/` ficam as folhas `light` e `dark` de `sprites/v4/` com esses dois ícones acrescentados no
+fim (`fuel` e `townhall`, desenhos próprios); os estilos prontos claro e escuro usam essas. As de `sprites/v4/`
+continuam como vêm da origem.
+
+O pacote traz ainda `LEIAME.md` (origem e revisão), `fonts/OFL.txt`, `sprites/LICENCA.md` e `styles/LICENCA.md` (as
+licenças).
 
 ## Atualizar e apagar
 
