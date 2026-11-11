@@ -46,7 +46,7 @@ def build(light=True):
 class FormatTest(unittest.TestCase):
     def test_top_level_keys(self):
         self.assertEqual(["schema", "build_id", "built_at", "generator_commit", "tileset", "source", "tile_format",
-                          "tile_compression", "release_url", "attribution", "resources", "base", "states"],
+                          "tile_compression", "release_url", "attribution", "resources", "base", "states", "contract"],
                          list(build()))
 
     def test_identity_of_the_generation(self):

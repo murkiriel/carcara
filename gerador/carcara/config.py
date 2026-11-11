@@ -21,6 +21,10 @@ BUILD_BASE_URL = "https://build.protomaps.com/"
 # recusado: estilos escritos para a 4 podem não desenhar nada de um tile da 5.
 TILESET_MAJOR_VERSION = 4
 
+# A versão da especificação PMTiles dos arquivos (o byte 7 do cabeçalho, depois de "PMTiles"): a 3, a que o `pmtiles`
+# fixado abaixo escreve. Vai para o contrato de catálogo (docs/CATALOGO.md).
+PMTILES_SPEC_VERSION = 3
+
 # Zoom máximo dos pacotes de estado (o esquema não tem dado acima do 15), do pacote leve e do pacote base.
 MAX_ZOOM = 15
 LIGHT_MAX_ZOOM = 13
@@ -83,6 +87,14 @@ RELEASE_URL = "https://github.com/" + GITHUB_REPO + "/releases/download/{tag}/"
 ATTRIBUTION = ("© colaboradores do OpenStreetMap (ODbL 1.0); cobertura do solo: © ESA WorldCover project 2020 / "
                "Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium (CC BY 4.0); "
                "esquema e perfil: Protomaps; limites das UFs: IBGE")
+
+# As licenças em SPDX, para o contrato de catálogo (docs/CATALOGO.md): os pacotes (LICENSE da raiz), o código
+# (gerador/LICENSE) e o pacote de recursos (fontes Noto sob a SIL OFL 1.1, ícones de um conjunto MIT).
+DATA_LICENSE = "ODbL-1.0"
+CODE_LICENSE = "MIT"
+RESOURCES_LICENSE = "OFL-1.1 AND MIT"
+REPOSITORY_URL = "https://github.com/" + GITHUB_REPO
+IBGE_MESH_COPY_DATE = "2026-11-09"  # o dia em que a cópia da malha (abaixo) foi baixada
 
 # O crédito escrito dentro de cada pacote, no metadado `attribution`, que o MapLibre mostra sozinho no canto do mapa
 # (decisão do dono em 2026-10-05). O build da Protomaps traz só o do OpenStreetMap; a camada `landcover` (zooms 0 a 7)

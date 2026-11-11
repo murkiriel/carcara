@@ -81,6 +81,7 @@ Geração **2026-11-09-486b0133**: build da Protomaps de 2026-11-09, com dados d
 |---|---|
 | [`docs/DECISOES.md`](docs/DECISOES.md) | O que foi decidido, o que é só proposta, e as alternativas descartadas |
 | [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md) | Pacotes, zooms, recorte por estado, `catalogo.json`, releases, estrutura do repositório, licenças |
+| [`docs/CATALOGO.md`](docs/CATALOGO.md#carcara) | O contrato de catálogo comum aos quatro geradores irmãos (v1), com o esquema JSON |
 | [`docs/GERACAO.md`](docs/GERACAO.md) | Como os pacotes são gerados (o recorte do build da Protomaps), validação, agendamento e publicação |
 | [`docs/CONSUMO.md`](docs/CONSUMO.md) | Como um aplicativo ou site lê os pacotes |
 | [`gerador/FONTES.md`](gerador/FONTES.md) | Fontes externas: o que foi conferido, quando e onde |
