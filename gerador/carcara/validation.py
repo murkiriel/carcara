@@ -12,7 +12,8 @@ Cada trava devolve a lista dos problemas que achou, em frases. Uma geração só
 - queda: nenhum pacote perdeu mais que a tolerância de tiles ou de bytes em relação ao catálogo publicado;
 - versão: os metadados de cada pacote trazem a versão do esquema do build desta geração;
 - completude: cada UF pedida, a base e os recursos existem no disco, do tamanho anotado;
-- recursos: o pacote de recursos tem toda fonte e todo ícone que os estilos de referência do esquema pedem.
+- recursos: o pacote de recursos tem toda fonte e todo ícone que os estilos de referência do esquema pedem, e os
+  estilos prontos de `styles/` são JSON válido e só pedem camadas do esquema, fontes e ícones que o pacote tem.
 """
 from __future__ import annotations
 
@@ -23,7 +24,7 @@ import tarfile
 from pathlib import Path
 from typing import Callable, Dict, Iterator, List, Optional, Tuple
 
-from . import config, extraction, mvt, packs, resources
+from . import config, extraction, mvt, packs, resources, styles
 
 # Centro das capitais (nome, lat, lon). Um teste confere que cada ponto cai na UF pela malha do IBGE.
 CAPITALS: Dict[str, Tuple[str, float, float]] = {
@@ -294,8 +295,9 @@ def _png_size(data: bytes) -> Tuple[int, int]:
     return struct.unpack(">II", data[16:24])
 
 
-def _sprite_problems(files: Dict[str, bytes], flavor: str, density: str) -> List[str]:
-    base = f"{resources.SPRITES_FOLDER}{flavor}{density}"
+def _sprite_problems(files: Dict[str, bytes], flavor: str, density: str,
+                     folder: str = resources.SPRITES_FOLDER, extra: Tuple[str, ...] = ()) -> List[str]:
+    base = f"{folder}{flavor}{density}"
     try:
         index = json.loads(files[f"{base}.json"].decode("utf-8"))
         width, height = _png_size(files[f"{base}.png"])
@@ -304,7 +306,7 @@ def _sprite_problems(files: Dict[str, bytes], flavor: str, density: str) -> List
     except (ValueError, KeyError) as e:
         return [f"{base}.json e .png: não dá para ler ({e.__class__.__name__}: {e})"]
     found = []
-    missing = [icon for icon in required_icons(flavor) if icon not in index]
+    missing = [icon for icon in [*required_icons(flavor), *extra] if icon not in index]
     if missing:
         found.append(f"{base}.json: faltam os ícones {', '.join(missing[:8])}{'...' if len(missing) > 8 else ''}")
     outside = [name for name, icon in index.items()
@@ -326,7 +328,8 @@ def check_resources(dist: Path, resources_pack: Optional[dict]) -> List[str]:
     except (tarfile.TarError, OSError, EOFError) as e:
         return [f"trava recursos: {path.name} não abre ({e.__class__.__name__}: {e})"]
     found = []
-    missing = [name for name in [*resources.required(), resources.ICONS_LICENCE, resources.README] if name not in files]
+    missing = [name for name in [*resources.required(), resources.ICONS_LICENCE, resources.README, *styles.required()]
+               if name not in files]
     if missing:
         found.append(f"faltam {len(missing)} arquivos: {', '.join(missing[:5])}{'...' if len(missing) > 5 else ''}")
     for flavor in resources.SPRITE_FLAVORS:
@@ -334,6 +337,14 @@ def check_resources(dist: Path, resources_pack: Optional[dict]) -> List[str]:
             if f"{resources.SPRITES_FOLDER}{flavor}{density}.json" in files \
                     and f"{resources.SPRITES_FOLDER}{flavor}{density}.png" in files:
                 found += _sprite_problems(files, flavor, density)
+    for flavor in styles.OWN_SPRITE_FLAVORS:
+        for density in styles.DENSITIES:
+            if all(name in files for name in styles.sprite_files(styles.OWN_SPRITES_FOLDER, flavor)):
+                found += _sprite_problems(files, flavor, density, styles.OWN_SPRITES_FOLDER, styles.OWN_ICONS)
+    for flavor in styles.FLAVORS:
+        name = styles.style_file(flavor)
+        if name in files:
+            found += styles.problems(name, files[name], files)
     return [f"trava recursos: {path.name}: {problem}" for problem in found]
 
 

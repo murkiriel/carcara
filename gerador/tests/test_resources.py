@@ -1,5 +1,6 @@
 import gzip
 import io
+import json
 import sys
 import tarfile
 import tempfile
@@ -8,11 +9,18 @@ from pathlib import Path
 from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from carcara import config, resources  # noqa: E402
+from carcara import config, png, resources, styles  # noqa: E402
 from tests.fake_server import FakeServer  # noqa: E402
 
 REVISION = "0123456789abcdef0123456789abcdef01234567"
 TOP = f"basemaps-assets-{REVISION}/"
+
+
+def sheet(flavor: str, density: str) -> bytes:
+    """Uma folha de ícones de verdade, pequena, com um pixel que diz de qual variação ela é."""
+    image = png.Image(8, 4)
+    image.pixels[0:4] = bytes((len(flavor), len(density), 7, 255))
+    return png.encode(image)
 
 
 def upstream_files(without=(), extra=None) -> dict:
@@ -25,7 +33,7 @@ def upstream_files(without=(), extra=None) -> dict:
     for flavor in resources.SPRITE_FLAVORS:
         for density in ("", "@2x"):
             files[f"sprites/v4/{flavor}{density}.json"] = b"{}"
-            files[f"sprites/v4/{flavor}{density}.png"] = f"png {flavor}{density}".encode()
+            files[f"sprites/v4/{flavor}{density}.png"] = sheet(flavor, density)
             files[f"sprites/v3/{flavor}{density}.json"] = b"{}"
             files[f"sprites/v3/{flavor}{density}.png"] = b"antigo"
     for name in without:
@@ -103,7 +111,7 @@ class BuildTest(unittest.TestCase):
         for stack in resources.FONTSTACKS:
             self.assertEqual(f"{stack} 0-255".encode(), inside[f"fonts/{stack}/0-255.pbf"])
             self.assertEqual(256, sum(1 for name in inside if name.startswith(f"fonts/{stack}/")))
-        self.assertEqual(b"png light@2x", inside["sprites/v4/light@2x.png"])
+        self.assertEqual(sheet("light", "@2x"), inside["sprites/v4/light@2x.png"])
         self.assertEqual(20, sum(1 for name in inside if name.startswith("sprites/v4/")))
         self.assertEqual(b"SIL OFL 1.1", inside["fonts/OFL.txt"])
         self.assertIn(b"MIT", inside["sprites/LICENCA.md"])
@@ -162,7 +170,7 @@ class BuildTest(unittest.TestCase):
 
     def test_content_different_from_the_pinned_one_is_refused(self):
         # A revisão é fixa; se o conteúdo baixado não é o que foi conferido, algo mudou no caminho.
-        changed = upstream_files(extra={"sprites/v4/light.png": b"outra coisa"})
+        changed = upstream_files(extra={"sprites/v4/light.png": sheet("outra", "coisa")})
         self.publish(changed, pin=False)
         with self.assertRaises(RuntimeError) as ctx:
             resources.build(self.dist)
@@ -189,6 +197,45 @@ class BuildTest(unittest.TestCase):
         resources.build(self.dist)
         resources.build(self.dist)
         self.assertEqual(1, sum(1 for path, _ in self.server.requests if path.endswith(".tar.gz")))
+
+
+    def test_pack_has_the_styles_and_the_own_sprites_and_keeps_the_upstream_ones(self):
+        files = upstream_files()
+        inside = members(resources.build(self.dist)["path"])
+        for flavor in styles.FLAVORS:
+            self.assertEqual((styles.STYLES_DIR / f"{flavor}.json").read_bytes(), inside[f"styles/{flavor}.json"])
+        self.assertIn(b"BSD", inside["styles/LICENCA.md"])
+        for flavor in styles.OWN_SPRITE_FLAVORS:
+            for density in ("", "@2x"):
+                index = json.loads(inside[f"sprites/carcara-v4/{flavor}{density}.json"])
+                self.assertEqual(set(styles.OWN_ICONS), set(index))
+                composed = png.decode(inside[f"sprites/carcara-v4/{flavor}{density}.png"])
+                upstream = png.decode(files[f"sprites/v4/{flavor}{density}.png"])
+                # A folha de origem fica no canto de cima, como estava; os ícones próprios vêm embaixo.
+                self.assertEqual(upstream.pixel(0, 0), composed.pixel(0, 0))
+                self.assertTrue(all(entry["y"] > upstream.height for entry in index.values()))
+        # A estrutura de antes não muda: o que vem da origem continua no mesmo caminho, com os mesmos bytes.
+        for name, data in resources.select(files).items():
+            self.assertEqual(data, inside[name], name)
+        self.assertEqual([], [name for name in inside if name.startswith("sprites/carcara-v4/")
+                              and name.split("/")[-1].split(".")[0].split("@")[0] not in styles.OWN_SPRITE_FLAVORS])
+
+    def test_reports_the_styles(self):
+        self.assertEqual(len(styles.FLAVORS), resources.build(self.dist)["style_files"])
+
+    def test_readme_inside_explains_the_styles(self):
+        text = members(resources.build(self.dist)["path"])["LEIAME.md"].decode("utf-8")
+        self.assertIn("styles/", text)
+        self.assertIn("{recursos}", text)
+        self.assertIn("{tiles}", text)
+        self.assertIn("BSD", text)
+
+    def test_upstream_sheet_that_does_not_read_is_refused(self):
+        self.publish(upstream_files(extra={"sprites/v4/dark.png": b"isto nao e png"}))
+        with self.assertRaises(RuntimeError) as ctx:
+            resources.build(self.dist)
+        self.assertIn("sprites/v4/dark", str(ctx.exception))
+        self.assertFalse((self.dist / "carcara-recursos.tar.gz").exists())
 
 
 class DeterministicGzipTest(unittest.TestCase):
