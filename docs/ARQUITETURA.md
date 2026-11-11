@@ -129,7 +129,8 @@ states             {UF: pacote}, um por estado
   tiles            quantos tiles endereçados o pacote tem
   minzoom, maxzoom zooms do pacote
   bbox             área que o pacote atende: o polígono da UF no IBGE (na base, o Brasil),
-                   [lat mín, lon mín, lat máx, lon máx], arredondado para fora; use para escolher o que baixar
+                   [lat_min, lon_min, lat_max, lon_max], latitude primeiro, em graus WGS84,
+                   arredondado para fora; use para escolher o que baixar
   bbox_tiles       área coberta pelos tiles do zoom mais fundo do pacote, na mesma ordem do bbox
                    (maior que o bbox: o recorte leva a margem e os tiles passam da divisa)
   light            o pacote leve do estado (só em states, opcional): file, bytes, sha256, tiles, minzoom, maxzoom
@@ -139,8 +140,11 @@ Pontos do contrato:
 
 - **`tileset.version`** faz o papel que a versão do motor faz nos tiles de roteamento. Quem consome deve recusar
   uma versão **maior** (o primeiro número) que não conhece. Versões menores só acrescentam.
-- **`bbox` na ordem latitude, longitude**, igual ao catálogo dos tiles de roteamento, para a mesma conta servir
-  aos dois. O cabeçalho do PMTiles usa longitude primeiro; não confundir os dois.
+- **`bbox` e `bbox_tiles` são `[lat_min, lon_min, lat_max, lon_max]`, latitude primeiro**, em graus decimais no
+  WGS84 (EPSG:4326), igual ao catálogo dos tiles de roteamento, para a mesma conta servir aos dois. É o
+  **contrário** do GeoJSON (`bbox` como `[oeste, sul, leste, norte]` e pontos como `[lon, lat]`) e do cabeçalho do
+  PMTiles (longitude primeiro); não confundir. A ordem fica como está e é declarada aqui (decisão D13, de
+  2026-11-11): trocá-la quebraria em silêncio quem já lê o catálogo.
 - **Estado dividido em mais de um arquivo:** não é preciso hoje (o maior estado tem 592 MB, medição M1) e não
   entra no formato. Se um dia for, `file`, `bytes` e `sha256` passariam a ser uma lista em `parts`, e isso sobe
   o `schema`. Até lá, a trava de tamanho barra a publicação de um arquivo perto de 2 GiB.

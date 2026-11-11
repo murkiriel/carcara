@@ -18,11 +18,19 @@ de Goiás foi comparado pixel a pixel com o do build de origem (ver [`FONTES.md`
 
 ## Escolher os pacotes
 
-- O `bbox` de cada pacote é `[lat mín, lon mín, lat máx, lon máx]` da área que ele atende; o `bbox_tiles`, na
-  mesma ordem, é a área que os tiles do zoom mais fundo dele cobrem, um pouco maior. Um ponto pode cair no
+- O `bbox` de cada pacote é `[lat_min, lon_min, lat_max, lon_max]` da área que ele atende, em graus decimais no
+  WGS84 (EPSG:4326); o `bbox_tiles`, na mesma ordem, é a área que os tiles do zoom mais fundo dele cobrem, um pouco
+  maior. Um ponto pode cair no
   `bbox` de mais de um estado (retângulos se sobrepõem): baixar todos os que contêm o ponto, ou conferir contra o
   polígono se o aplicativo tiver a malha.
 - Para uma rota, juntar os estados cujo `bbox` toca o retângulo da rota.
+
+**Atenção à ordem: latitude primeiro.** O `bbox` do catálogo é o contrário do GeoJSON (`bbox` como
+`[oeste, sul, leste, norte]`, pontos como `[lon, lat]`) e do cabeçalho do PMTiles (longitude primeiro, como o
+`getBounds()` abaixo e a opção `--bbox` do `pmtiles`). O Distrito Federal, por exemplo, aparece como
+`[-16.05, -48.29, -15.5, -47.3]`: latitudes de -16,05 a -15,5 e longitudes de -48,29 a -47,3. Ler na ordem
+do GeoJSON por engano dá um retângulo errado, sem erro nenhum. A ordem é a mesma do catálogo dos tiles de
+roteamento e fica como está (decisão D13, de 2026-11-11, em [`DECISOES.md`](DECISOES.md)).
 - A base cobre o Brasil inteiro em zoom baixo. Sem ela, fora dos estados instalados não há mapa.
 
 ## Ler os tiles
@@ -79,7 +87,8 @@ versão 0.3.6) abre um arquivo local com `Reader(File)` ou `Reader(FileChannel)`
 - Um tile que não está no pacote volta como `null`, sem exceção: é assim que se descobre que é hora de procurar
   em outro pacote.
 - Ler é rápido: 100 tiles do zoom 15, lidos e descompactados em sequência, levaram cerca de 0,16 s num emulador.
-- `getBounds()` devolve oeste, sul, leste, norte (longitude primeiro), como o cabeçalho do arquivo.
+- `getBounds()` devolve oeste, sul, leste, norte (longitude primeiro), como o cabeçalho do arquivo: a ordem
+  contrária à do `bbox` do catálogo.
 - Não compartilhar o mesmo leitor entre threads sem conferir que a biblioteca permite: um leitor por thread, ou
   um conjunto de leitores, é o caminho seguro.
 - O `y` segue a convenção XYZ (origem no canto superior esquerdo), a mesma dos endereços `/{z}/{x}/{y}`.

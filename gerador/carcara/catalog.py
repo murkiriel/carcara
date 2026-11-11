@@ -17,10 +17,11 @@
                                                                         "minzoom", "maxzoom"}}, ...}
     }
 
-`bbox` = [lat mín, lon mín, lat máx, lon máx] da área que o pacote atende (o polígono da UF no IBGE; na base, o
-país), arredondado para fora. `bbox_tiles` = a área que os tiles do zoom mais fundo do pacote cobrem: é maior, porque
-o recorte leva a margem e os tiles passam da divisa. O cabeçalho do PMTiles usa longitude primeiro; aqui é latitude
-primeiro, como nos catálogos dos projetos irmãos.
+`bbox` = [lat_min, lon_min, lat_max, lon_max] da área que o pacote atende (o polígono da UF no IBGE; na base, o
+país), em graus WGS84, arredondado para fora. `bbox_tiles` = a área que os tiles do zoom mais fundo do pacote cobrem:
+é maior, porque o recorte leva a margem e os tiles passam da divisa. O GeoJSON e o cabeçalho do PMTiles usam
+longitude primeiro; aqui é latitude primeiro, como nos catálogos dos projetos irmãos (decisão D13: a ordem fica e é
+declarada em docs/ARQUITETURA.md e docs/CONSUMO.md).
 
 `light` é opcional: uma geração sem pacotes leves não escreve a chave.
 """

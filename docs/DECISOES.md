@@ -20,6 +20,7 @@ que ainda dependem de medição estão em [`PENDENCIAS.md`](../gerador/PENDENCIA
 | D10 | Gerações diferentes podem conviver; versões maiores do esquema, não | Confirmada com a etapa A (2026-10-01) |
 | D11 | Recorte pela malha das UFs do IBGE, com margem | Confirmada com a etapa A (2026-10-01) |
 | D12 | Geração toda semana, no domingo, com 12 gerações nas releases, aviso de falha por issue e `LICENCA-DADOS.txt` em cada release, como no Andorinha | Decidida pelo dono (2026-11-09) |
+| D13 | O `bbox` do catálogo fica `[lat_min, lon_min, lat_max, lon_max]`, latitude primeiro, em WGS84, e a ordem é declarada nos documentos | Decidida pelo dono (2026-11-11) |
 
 "Confirmada com a etapa A" quer dizer: em 2026-10-01 o dono escolheu a etapa A e mandou executar o desenho
 como está. Os detalhes que dependiam de número (zoom da base, pacote leve, gerações mantidas) foram decididos
@@ -156,6 +157,23 @@ Cada estado é recortado pelo polígono oficial da UF, com uma margem, e não po
 estado comprido ou diagonal inclui muito território vizinho, e o pacote cresceria sem necessidade. A malha e a
 margem são as mesmas dos tiles de roteamento, para um aplicativo poder escolher os pacotes dos dois projetos com
 a mesma conta.
+
+## D13: ordem do `bbox`
+
+O `bbox` e o `bbox_tiles` do catálogo são `[lat_min, lon_min, lat_max, lon_max]`, em graus decimais no WGS84
+(EPSG:4326). É a ordem dos catálogos dos projetos irmãos, e o contrário do GeoJSON e do cabeçalho do PMTiles, que
+põem a longitude primeiro.
+
+Em 2026-11-11 o dono decidiu **manter a ordem e declará-la**, em vez de migrar para a ordem do GeoJSON:
+
+- é a mesma nos catálogos irmãos, e a mesma conta escolhe os pacotes de todos;
+- quem já lê o catálogo continua certo; uma troca na mesma chave faria um leitor antigo errar em silêncio, com
+  retângulos errados e nenhum erro;
+- migrar não traz ganho de função.
+
+Se um dia a ordem mudar, entra com chave de nome novo e `schema` novo, nunca trocando o conteúdo de `bbox`. A
+ordem está declarada em [`ARQUITETURA.md`](ARQUITETURA.md) (formato do catálogo) e em [`CONSUMO.md`](CONSUMO.md)
+(escolher os pacotes); o formato do `catalogo.json` não muda.
 
 ## Alternativas descartadas para o projeto como um todo
 

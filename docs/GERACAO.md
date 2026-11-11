@@ -52,7 +52,7 @@ bytes necessárias.
 | Opção | O que faz | Padrão |
 |---|---|---|
 | `--region` | Arquivo GeoJSON local (Polygon ou MultiPolygon) com a área de interesse | |
-| `--bbox` | Retângulo: `lon mín, lat mín, lon máx, lat máx` | |
+| `--bbox` | Retângulo: `lon mín, lat mín, lon máx, lat máx` (longitude primeiro, ao contrário do `bbox` do catálogo) | |
 | `--maxzoom` | Zoom máximo, inclusive | o do arquivo |
 | `--minzoom` | Zoom mínimo, inclusive. Maior que zero "pode exigir muito mais pedidos" | 0 |
 | `--download-threads` | Pedidos em paralelo | 4 |

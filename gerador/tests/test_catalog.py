@@ -254,6 +254,29 @@ class DocumentationTest(unittest.TestCase):
                                                               flags=re.MULTILINE))
         self.assertEqual([], missing)
 
+    def test_the_bbox_order_is_declared_where_the_catalog_is_described(self):
+        """Decisão D13: o `bbox` fica latitude primeiro, ao contrário do GeoJSON e do PMTiles, e isso fica escrito
+        onde quem consome procura."""
+        for name in ("ARQUITETURA.md", "CONSUMO.md"):
+            text = (REPO / "docs" / name).read_text(encoding="utf-8")
+            self.assertIn("[lat_min, lon_min, lat_max, lon_max]", text, name)
+            self.assertIn("WGS84", text, name)
+            self.assertIn("GeoJSON", text, name)
+
+    def test_the_published_catalog_has_latitude_first(self):
+        """O catálogo publicado na raiz, na ordem declarada: latitudes do Brasil (de -34 a 6) nas posições 0 e 2,
+        longitudes (de -75 a -28) nas posições 1 e 3."""
+        path = REPO / "catalogo.json"
+        if not path.exists():
+            self.skipTest("sem catalogo.json na raiz")
+        published = json.loads(path.read_text(encoding="utf-8"))
+        packs = {"base": published["base"], **published["states"]}
+        for name, pack in packs.items():
+            for key in ("bbox", "bbox_tiles"):
+                lat_min, lon_min, lat_max, lon_max = pack[key]
+                self.assertTrue(-35 <= lat_min < lat_max <= 7, f"{name} {key}: {pack[key]}")
+                self.assertTrue(-75 <= lon_min < lon_max <= -28, f"{name} {key}: {pack[key]}")
+
 
 if __name__ == "__main__":
     unittest.main()
