@@ -53,7 +53,7 @@ jobs:
       # A data vem do catalogo.json do checkout, não de um endereço de arquivo bruto do GitHub: num repositório
       # privado esse endereço responde 404 e a data sumiria. No agendamento, o checkout é da ponta do main, não do
       # commit em que o disparo foi criado: um disparo que esperou na fila atrás de uma publicação vê o catálogo novo.
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event_name == 'schedule' && 'main' || github.ref }}
 
@@ -77,16 +77,16 @@ jobs:
       STATES: ${{ inputs.states }}
       ACCEPT_DROP: ${{ inputs.accept_drop == true && '--accept-drop' || '' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event_name == 'schedule' && 'main' || github.ref }}
 
-      - uses: actions/setup-python@v7
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
 
       - name: Dependências
-        run: pip install -r requirements.txt
+        run: pip install --require-hashes -r requirements.txt
 
       - name: Ferramenta pmtiles (versão fixada, sha256 conferido)
         run: python scripts/install_pmtiles.py --dest "$RUNNER_TEMP/pmtiles"
@@ -117,7 +117,7 @@ jobs:
           cp data/recursos.log data/dist/geracao.json data/dist/catalogo.json data/dist/pacotes.json relatorio/ 2>/dev/null || true
           ls -la relatorio data/dist 2>/dev/null || true
 
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: relatorio-da-geracao
@@ -145,7 +145,7 @@ jobs:
       contents: read
       issues: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Issue "Geração falhando"
         env:

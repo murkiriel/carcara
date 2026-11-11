@@ -179,7 +179,8 @@ carcara/
 │   ├── FONTES.md             de onde vem cada afirmação dos documentos
 │   ├── PENDENCIAS.md         medições, decisões em aberto e riscos
 │   ├── LICENSE               MIT (código)
-│   ├── requirements.txt
+│   ├── requirements.in       dependências diretas, com a versão fixada
+│   ├── requirements.txt      gerado do .in: todas as dependências, com versão exata e hash
 │   ├── generate.py           ponto de entrada da geração: recorta, valida, monta o catálogo
 │   ├── ibge_malha_uf.json    a malha das UFs do IBGE, versionada (sha256 no config)
 │   ├── carcara/

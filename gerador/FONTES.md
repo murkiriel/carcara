@@ -306,6 +306,25 @@ Lido com `gh run list` e `gh run view` no workflow `gerar` e com `gh release lis
 | Parada no meio da semana | Os quatro disparos agendados seguintes (2026-11-09 22:22, 2026-11-10 14:52 e 19:44, 2026-11-11 14:22 UTC) terminaram com o `interval` em sucesso e o `generate` pulado |
 | Releases no ar | Três: `2026-10-05-5b5261c4`, `2026-10-06-681837e0` e `2026-11-09-486b0133`, a última marcada como mais recente |
 
+## Dependências e actions travadas (conferido em 2026-11-11)
+
+As actions foram resolvidas pela etiqueta exata que a `@v7` usada até então apontava, com
+`gh api repos/actions/<action>/git/ref/tags/<tag>`. As três etiquetas são leves (o objeto já é o commit), e cada
+commit foi conferido com `gh api repos/actions/<action>/commits/<sha>`. Nenhuma versão subiu.
+
+| Action | `@v7` apontava para | Commit fixado |
+|---|---|---|
+| `actions/checkout` | `v7.0.1` | `3d3c42e5aac5ba805825da76410c181273ba90b1` |
+| `actions/setup-python` | `v7.1.0` | `6d4fd22b20465ccc0f7354476588e8df7c9ca0e0` |
+| `actions/upload-artifact` | `v7.0.2` | `cf430e030ddbb5b0abf93d22962f4752f3646cd9` |
+
+| Fato | Valor |
+|---|---|
+| Dependências travadas | `uv pip compile` (uv 0.13.7) do `requirements.in` (só `shapely==2.1.2`) deu `numpy==2.5.4` e `shapely==2.1.2`, com os hashes de todos os arquivos publicados de cada um |
+| Instalação com hashes | Num ambiente novo de Python 3.12.3, Linux x86_64 (a plataforma do `ubuntu-24.04`), `python -m pip install --no-cache-dir --require-hashes -r gerador/requirements.txt` (pip 26.3) baixou e instalou as rodas `cp312` de manylinux dos dois |
+| Hash errado | O mesmo comando, com os hashes do shapely trocados por zeros, para com erro de hash e não instala |
+| Versão do Python | O numpy 2.5.4 pede Python 3.12 ou mais novo (`Requires-Python`) |
+
 ## Crédito pedido pelas fontes (conferido em 2026-10-02)
 
 Lido no `README.md` e no `LICENSE_DATA.md` do repositório `protomaps/basemaps`, na página de downloads da

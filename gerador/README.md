@@ -9,8 +9,21 @@ de recorte, escolhe o build, recorta os pacotes (o de cada estado, o leve e a ba
 
 ## O que é preciso
 
-- Python 3.9 ou mais novo (testado no 3.12).
-- As dependências de [`requirements.txt`](requirements.txt): `pip install -r requirements.txt`.
+- Python 3.12, a versão do CI.
+- As dependências travadas de [`requirements.txt`](requirements.txt), com o hash de cada pacote conferido:
+
+  ```
+  pip install --require-hashes -r requirements.txt
+  ```
+
+  As dependências diretas ficam em [`requirements.in`](requirements.in); o `requirements.txt` é gerado dele, com
+  todas as transitivas, a versão exata e os hashes, e é resolvido para o Python 3.12 (o numpy travado pede 3.12 ou
+  mais novo). Para mudar uma dependência, edite o `requirements.in` e gere o outro de novo, da raiz do repositório,
+  com o comando que está no topo dele:
+
+  ```
+  uv pip compile gerador/requirements.in --generate-hashes --python-version 3.12 -o gerador/requirements.txt
+  ```
 - O binário `pmtiles` na versão fixada em [`carcara/config.py`](carcara/config.py). O script abaixo baixa o
   arquivo da release da ferramenta, confere o sha256 e deixa o binário em `data/ferramentas/`:
 

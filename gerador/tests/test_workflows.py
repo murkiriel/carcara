@@ -32,12 +32,32 @@ class RunnerTest(unittest.TestCase):
             for image in images:
                 self.assertRegex(image, r"^ubuntu-\d+\.\d+$", f"{name}: runs-on {image}")
 
-    def test_actions_are_pinned_to_a_major_version(self):
+    def test_actions_are_pinned_by_commit_sha(self):
+        """Toda action pelo SHA de 40 caracteres do commit, com a tag exata em comentário (decisão D14): uma etiqueta
+        como `@v7` pode ser movida pelo dono da action, e o mesmo workflow passaria a rodar outro código."""
         for name, text in workflows().items():
-            uses = re.findall(r"^\s*-?\s*uses:\s*(\S+)\s*$", text, flags=re.MULTILINE)
+            uses = re.findall(r"^\s*-?\s*uses:\s*(.+?)\s*$", "\n".join(code_lines(text)), flags=re.MULTILINE)
             self.assertTrue(uses, f"{name}: nenhuma action")
             for action in uses:
-                self.assertRegex(action, r"^actions/[\w-]+@v\d+$", f"{name}: {action}")
+                self.assertRegex(action, r"^actions/[\w-]+@[0-9a-f]{40} # v\d+\.\d+\.\d+$", f"{name}: {action}")
+
+    def test_each_action_has_a_single_pin(self):
+        """A mesma action no mesmo commit em todos os workflows: subir a versão é trocar todas juntas."""
+        pins = {}
+        for name, text in workflows().items():
+            for action, sha, tag in re.findall(r"uses:\s*([\w-]+/[\w-]+)@(\S+)\s*#\s*(\S+)", text):
+                pins.setdefault(action, set()).add((sha, tag))
+        self.assertTrue(pins)
+        for action, found in pins.items():
+            self.assertEqual(1, len(found), f"{action}: {sorted(found)}")
+
+    def test_dependencies_are_installed_only_with_hashes(self):
+        """Todo `pip install` dos workflows instala o requirements.txt travado e confere o hash de cada pacote
+        (decisão D14): nada é resolvido de novo na hora."""
+        for name, text in workflows().items():
+            installs = [line.strip() for line in code_lines(text) if "pip install" in line]
+            for line in installs:
+                self.assertEqual("run: pip install --require-hashes -r requirements.txt", line, f"{name}: {line}")
 
 
 class TestsWorkflowTest(unittest.TestCase):
@@ -55,7 +75,7 @@ class TestsWorkflowTest(unittest.TestCase):
         self.assertNotIn("wget", self.code)
 
     def test_installs_the_pinned_requirements(self):
-        self.assertIn("pip install -r requirements.txt", self.code)
+        self.assertIn("pip install --require-hashes -r requirements.txt", self.code)
 
     def test_can_only_read_the_repository(self):
         self.assertRegex(self.code, r"permissions:\n\s+contents: read")
@@ -154,7 +174,7 @@ class GenerationWorkflowTest(unittest.TestCase):
         self.assertRegex(self.code, r"(?m)^concurrency:\n  group: generate\n  cancel-in-progress: false")
 
     def test_generates_with_the_pinned_tool_and_requirements(self):
-        self.assertIn("pip install -r requirements.txt", self.generate)
+        self.assertIn("pip install --require-hashes -r requirements.txt", self.generate)
         self.assertIn("python scripts/install_pmtiles.py", self.generate)
         self.assertIn("python generate.py", self.generate)
         self.assertNotIn("curl", self.code)

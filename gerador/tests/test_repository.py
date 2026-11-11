@@ -52,6 +52,52 @@ class LicencesTest(unittest.TestCase):
         self.assertTrue(text.startswith("MIT License"))
 
 
+class LockedRequirementsTest(unittest.TestCase):
+    """Decisão D14: as dependências diretas ficam em requirements.in, e o requirements.txt, gerado dele, trava todas,
+    transitivas incluídas, com versão exata e hash, para o `pip install --require-hashes` dos workflows."""
+
+    GENERATOR = REPO / "gerador"
+
+    @staticmethod
+    def requirements(text: str):
+        """{nome: versão} das linhas `nome==versão` (sem comentários, continuações nem opções)."""
+        found = {}
+        for line in text.splitlines():
+            match = re.match(r"^([A-Za-z0-9][A-Za-z0-9._-]*)==([^\s;#\\]+)", line)
+            if match:
+                found[match.group(1).lower()] = match.group(2)
+        return found
+
+    def setUp(self):
+        self.direct = (self.GENERATOR / "requirements.in").read_text(encoding="utf-8")
+        self.locked = (self.GENERATOR / "requirements.txt").read_text(encoding="utf-8")
+
+    def test_direct_dependencies_are_pinned(self):
+        lines = [line.split("#")[0].strip() for line in self.direct.splitlines()]
+        lines = [line for line in lines if line]
+        self.assertTrue(lines)
+        for line in lines:
+            self.assertRegex(line, r"^[A-Za-z0-9][A-Za-z0-9._-]*==\S+$")
+
+    def test_the_lock_has_every_direct_dependency_in_the_same_version(self):
+        locked = self.requirements(self.locked)
+        for name, version in self.requirements(self.direct).items():
+            self.assertEqual(version, locked.get(name), name)
+
+    def test_every_locked_package_has_an_exact_version_and_a_hash(self):
+        blocks = re.split(r"\n(?=[A-Za-z0-9])", self.locked)
+        packages = [block for block in blocks if re.match(r"^[A-Za-z0-9]", block)]
+        self.assertGreater(len(packages), len(self.requirements(self.direct)), "faltam as transitivas")
+        for block in packages:
+            self.assertRegex(block, r"^[A-Za-z0-9][A-Za-z0-9._-]*==\S+ \\\n", block.splitlines()[0])
+            self.assertRegex(block, r"--hash=sha256:[0-9a-f]{64}", block.splitlines()[0])
+
+    def test_the_lock_says_how_to_regenerate_it(self):
+        head = "\n".join(self.locked.splitlines()[:3])
+        self.assertIn("pip compile gerador/requirements.in --generate-hashes --python-version 3.12 "
+                      "-o gerador/requirements.txt", head)
+
+
 class IgnoredDataTest(unittest.TestCase):
     def test_generated_data_stays_out_of_git(self):
         self.assertIn("gerador/data/", (REPO / ".gitignore").read_text(encoding="utf-8").splitlines())

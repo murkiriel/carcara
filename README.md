@@ -96,6 +96,7 @@ Geração **2026-11-09-486b0133**: build da Protomaps de 2026-11-09, com dados d
 | Se a geração falhar | A geração publicada continua no ar, o disparo seguinte tenta de novo, e fica aberta uma [issue](https://github.com/Murkiriel/carcara/issues) "Geração falhando" até a próxima dar certo |
 | Pacotes | 56 arquivos por geração, cerca de 6 GB com os leves, mais o `LICENCA-DADOS.txt` com a licença e a atribuição; os 27 completos somam cerca de 4,6 GB, o maior perto de 600 MB |
 | Gerações guardadas | As 12 mais recentes (cerca de 3 meses), como releases |
+| Reprodutibilidade | Só a geração corrente pode ser refeita: a Protomaps guarda os builds por cerca de 7 dias, e o b3sum do build usado fica no `catalogo.json`. Dependências travadas com hash e actions fixadas por SHA ([`docs/GERACAO.md`](docs/GERACAO.md#reprodutibilidade)) |
 | Origem dos tiles | Só o recorte do build da Protomaps (etapa A; a geração própria, etapa B, não está planejada: [`docs/DECISOES.md`](docs/DECISOES.md)) |
 | Medições e decisões com os números | Base até o zoom 9, pacote de estado desde o zoom 0, pacote leve até o zoom 13 ([`gerador/PENDENCIAS.md`](gerador/PENDENCIAS.md)) |
 
@@ -115,7 +116,7 @@ A regra em uma frase: **arquivos e pastas de dados em português; código e form
 | Commits, releases, nomes dos passos de workflow | português | |
 | Siglas e nomes próprios | como são | `ibge`, `osm`, `pmtiles` |
 
-Nomes que o ecossistema espera ficam como são: `README.md`, `LICENSE`, `requirements.txt`, e, dentro do pacote de
+Nomes que o ecossistema espera ficam como são: `README.md`, `LICENSE`, `requirements.in`, `requirements.txt`, e, dentro do pacote de
 recursos, as pastas `fonts/` e `sprites/` no formato que o MapLibre procura.
 
 Todo formato publicado tem um campo de versão (`"schema": 1`), que só sobe quando um leitor antigo quebraria.

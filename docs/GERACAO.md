@@ -191,6 +191,36 @@ cada arquivo no disco tem o tamanho e o sha256 que o catálogo diz.
    catálogo publicado nem etiqueta fora do formato do `build_id`, e falha na limpeza vira aviso, não derruba a
    publicação.
 
+## Reprodutibilidade
+
+**Só a geração corrente é reproduzível** (decisão D14, de 2026-11-11). Refazer uma geração exige o mesmo build da
+Protomaps, e a Protomaps guarda os builds por cerca de 7 dias (todos os da última semana e o mais recente de cada
+versão). Passado isso, a geração não pode mais ser refeita: o projeto não arquiva os builds, e as releases antigas
+ficam como foram publicadas, até a limpeza.
+
+O que fica registrado de cada geração, para conferir o que ela usou:
+
+- o **b3sum do build**, como o índice da Protomaps o informa: inteiro em `source.checksum` do catálogo, e os 8
+  primeiros caracteres no `build_id`; junto, o endereço (`source.url`), a data do build e a dos dados do
+  OpenStreetMap;
+- o `generator_commit`, o commit do gerador que fez a geração;
+- o tamanho e o sha256 de cada pacote.
+
+Com o mesmo build, o recorte sai idêntico byte a byte (medição M3). O resto do que entra na geração fica fixo no
+repositório, para o mesmo commit fazer a mesma coisa dentro da janela do build:
+
+| Entrada | Como fica fixa |
+|---|---|
+| Ferramenta `pmtiles` | Versão e sha256 de cada arquivo em `config.py`; o instalador confere |
+| Malha das UFs | `gerador/ibge_malha_uf.json`, conferida pelo sha256 do `config.py` |
+| Ícones e fontes | Revisão fixa da origem, com o conteúdo conferido pelo sha256 do `config.py` |
+| Dependências Python | `gerador/requirements.in` tem as diretas; `gerador/requirements.txt`, gerado dele, trava todas, transitivas incluídas, com versão exata e hash, e os workflows instalam com `pip install --require-hashes`. O comando que o gera está no topo dele |
+| Actions do GitHub | Pelo SHA de 40 caracteres do commit, com a tag em comentário (`uses: actions/checkout@<sha> # v7.0.1`); subir uma versão é trocar o SHA e o comentário em todos os workflows juntos |
+| Máquina | Imagem `ubuntu-24.04`, nunca a `-latest` |
+
+Os testes de `gerador/tests/test_workflows.py` e `test_repository.py` barram action sem SHA, `pip install` sem
+`--require-hashes` e pacote sem hash no `requirements.txt`.
+
 ## Lições herdadas dos projetos irmãos
 
 Coisas que já deram problema e que o gerador deve nascer sabendo:
@@ -199,7 +229,7 @@ Coisas que já deram problema e que o gerador deve nascer sabendo:
 |---|---|
 | O IBGE manda a malha compactada com gzip para os executores do GitHub, mesmo sem o pedido aceitar compressão | O download detecta e descompacta (vale para qualquer download) |
 | A API de malhas do IBGE deixou de responder aos executores do GitHub (desde 2026-11-04; de um endereço no Brasil, responde) | A malha vai versionada no repositório, com o sha256 no config, como no Andorinha; a geração não acessa o IBGE |
-| O `ubuntu-latest` muda de versão com o tempo | Fixar a imagem (`ubuntu-24.04`) e as versões das actions |
+| O `ubuntu-latest` muda de versão com o tempo | Fixar a imagem (`ubuntu-24.04`) e as actions, pelo SHA do commit (seção "Reprodutibilidade") |
 | O agendamento do GitHub atrasa horas e pode pular disparos, sobretudo em repositório novo e no minuto zero | Dois disparos por dia, e a regra "publicada de antes do último domingo" tenta de novo nos dias seguintes; o cron fica no minuto 17 |
 | Um run agendado que espera na fila lê o catálogo de antes da publicação e tenta gerar de novo | O job `interval` lê o catálogo do `main` atual, não o do commit que disparou |
 | `raw.githubusercontent.com` responde 404 em repositório privado | A data vem do arquivo no checkout; ficou assim depois que o repositório ficou público, porque o checkout da ponta do `main` também resolve a fila (linha acima) |

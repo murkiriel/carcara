@@ -1,0 +1,3 @@
+# Dependências diretas do gerador, com a versão fixada. O requirements.txt é gerado daqui, com todas as
+# transitivas e os hashes; depois de mudar este arquivo, gere o outro de novo (o comando está no topo dele).
+shapely==2.1.2     # polígono de cada UF com a margem, pela malha do IBGE

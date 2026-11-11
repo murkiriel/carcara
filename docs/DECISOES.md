@@ -21,6 +21,7 @@ que ainda dependem de medição estão em [`PENDENCIAS.md`](../gerador/PENDENCIA
 | D11 | Recorte pela malha das UFs do IBGE, com margem | Confirmada com a etapa A (2026-10-01) |
 | D12 | Geração toda semana, no domingo, com 12 gerações nas releases, aviso de falha por issue e `LICENCA-DADOS.txt` em cada release, como no Andorinha | Decidida pelo dono (2026-11-09) |
 | D13 | O `bbox` do catálogo fica `[lat_min, lon_min, lat_max, lon_max]`, latitude primeiro, em WGS84, e a ordem é declarada nos documentos | Decidida pelo dono (2026-11-11) |
+| D14 | Só a geração corrente é reproduzível; dependências travadas com hash e actions fixadas por SHA | Decidida pelo dono (2026-11-11) |
 
 "Confirmada com a etapa A" quer dizer: em 2026-10-01 o dono escolheu a etapa A e mandou executar o desenho
 como está. Os detalhes que dependiam de número (zoom da base, pacote leve, gerações mantidas) foram decididos
@@ -174,6 +175,23 @@ Em 2026-11-11 o dono decidiu **manter a ordem e declará-la**, em vez de migrar 
 Se um dia a ordem mudar, entra com chave de nome novo e `schema` novo, nunca trocando o conteúdo de `bbox`. A
 ordem está declarada em [`ARQUITETURA.md`](ARQUITETURA.md) (formato do catálogo) e em [`CONSUMO.md`](CONSUMO.md)
 (escolher os pacotes); o formato do `catalogo.json` não muda.
+
+## D14: reprodutibilidade
+
+Em 2026-11-11 o dono decidiu que **só a geração corrente precisa ser reproduzível**. A alternativa, arquivar as
+entradas de cada `build_id` (o arquivo mundial da Protomaps tem 138 GB e é recortado direto do servidor dela),
+fica para o dia em que for preciso auditar uma geração antiga.
+
+- A Protomaps guarda os builds por cerca de 7 dias; depois disso, uma geração não pode mais ser refeita, e isso
+  está declarado em [`GERACAO.md`](GERACAO.md), seção "Reprodutibilidade".
+- O catálogo de cada geração registra o b3sum do build usado (`source.checksum`), o commit do gerador e o sha256
+  de cada pacote. Nenhuma chave nova: o formato do `catalogo.json` não muda.
+- **Dependências travadas:** as diretas em `gerador/requirements.in`; o `gerador/requirements.txt`, gerado dele,
+  fixa todas, transitivas incluídas, com hash, e os workflows instalam com `pip install --require-hashes`.
+- **Actions fixadas por SHA:** toda `uses:` aponta para o commit, com a tag em comentário. Uma etiqueta como `@v7`
+  pode ser movida pelo dono da action.
+
+Os testes dos workflows e do repositório barram quem fugir das duas regras.
 
 ## Alternativas descartadas para o projeto como um todo
 
