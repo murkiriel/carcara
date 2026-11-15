@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "build_id": "2026-11-09-486b0133",
-  "built_at": "2026-11-09T16:25:25Z",
-  "generator_commit": "ae0be2c",
+  "build_id": "2026-11-15-77a87421",
+  "built_at": "2026-11-15T14:07:51Z",
+  "generator_commit": "29cc904",
   "tileset": {
     "name": "protomaps-basemap",
     "version": "4.15.2",
@@ -10,24 +10,24 @@
   },
   "source": {
     "kind": "protomaps-build",
-    "timestamp": "2026-11-09T09:05:07.016Z",
-    "url": "https://build.protomaps.com/20261109.pmtiles",
-    "checksum": "486b01339886dc58b27f2ee70ee74badece550a8a0f4da980a67e9a9252d84a7",
-    "osm_timestamp": "2026-11-09T04:00:00Z"
+    "timestamp": "2026-11-15T09:09:48.528Z",
+    "url": "https://build.protomaps.com/20261115.pmtiles",
+    "checksum": "77a87421aba19e2a6d71201939683fea0fabdea403ce2a2417d795945a0a6fe9",
+    "osm_timestamp": "2026-11-15T04:00:00Z"
   },
   "tile_format": "mvt",
   "tile_compression": "gzip",
-  "release_url": "https://github.com/murkiriel/carcara/releases/download/2026-11-09-486b0133/",
+  "release_url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/",
   "attribution": "© colaboradores do OpenStreetMap (ODbL 1.0); cobertura do solo: © ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium (CC BY 4.0); esquema e perfil: Protomaps; limites das UFs: IBGE",
   "resources": {
     "file": "carcara-recursos.tar.gz",
-    "bytes": 6155919,
-    "sha256": "1f76ad9e375ea04dce317317b97f7dd6736e9214c62d6e22ffa6cc635cb7b115"
+    "bytes": 6320215,
+    "sha256": "2c96f4186eb606e35ee25e0e31317916e4a860e201f0f4ae91a3bb4fb8fbaf1e"
   },
   "base": {
     "file": "carcara-base.pmtiles",
-    "bytes": 44160981,
-    "sha256": "0a37191fe53bcb5f751bfda297974cf5de22863afc48fb81ed42c4fee0668c2b",
+    "bytes": 44185241,
+    "sha256": "a128d267102ca59f296c40e7c3bd081c83850649f3ae1b3acffeefa4047efaa2",
     "tiles": 2295,
     "minzoom": 0,
     "maxzoom": 9,
@@ -48,8 +48,8 @@
     "AC": {
       "name": "Acre",
       "file": "carcara-AC.pmtiles",
-      "bytes": 62311523,
-      "sha256": "ff0d8cf0e1dea08191ef3a83352f13a8c612b1f9ac166942afe5c2e0d12da737",
+      "bytes": 62314253,
+      "sha256": "1425fc450ed4858cb09ab4524cb74e1cf26c73859dfcf506a9f1ef1740efc944",
       "tiles": 165980,
       "minzoom": 0,
       "maxzoom": 15,
@@ -67,8 +67,8 @@
       ],
       "light": {
         "file": "carcara-AC-leve.pmtiles",
-        "bytes": 20093760,
-        "sha256": "a883861af6b73192444847564241529f6ad03d8e2f069eb768b7bde3f9f4b38f",
+        "bytes": 20094953,
+        "sha256": "e006af1f5a4b03bbefe7ebfa3a90317eb7605a028f5e0da0fad17b5f896f95f0",
         "tiles": 10841,
         "minzoom": 0,
         "maxzoom": 13
@@ -77,8 +77,8 @@
     "AL": {
       "name": "Alagoas",
       "file": "carcara-AL.pmtiles",
-      "bytes": 35658234,
-      "sha256": "4601ea1fa0981776e603a3223ad3ee356165d495c90dea268db61df7d646ab13",
+      "bytes": 35691027,
+      "sha256": "54de85988901b0c78b3bd3ee30796c9062d464166324f1e5541a05a4fdb7929d",
       "tiles": 31765,
       "minzoom": 0,
       "maxzoom": 15,
@@ -96,8 +96,8 @@
       ],
       "light": {
         "file": "carcara-AL-leve.pmtiles",
-        "bytes": 10098507,
-        "sha256": "e2af42798ccf40904da62d35224c498de33c37b8fb6ad7b2f61da379b046f897",
+        "bytes": 10109099,
+        "sha256": "04f968f7cc04290fcbb9d9c6c03a7c9f0ab85118c3fcf7669b3e728e2e5993aa",
         "tiles": 2187,
         "minzoom": 0,
         "maxzoom": 13
@@ -106,8 +106,8 @@
     "AM": {
       "name": "Amazonas",
       "file": "carcara-AM.pmtiles",
-      "bytes": 213705552,
-      "sha256": "ae52a5278461d881e8322e796c8425f926d7eb8c5974c000d3692299ccd47705",
+      "bytes": 213802398,
+      "sha256": "0f1c10cda0c2f2dc1df7509ac9f2c33ede167e51823b66c9b926874787c36bad",
       "tiles": 1455690,
       "minzoom": 0,
       "maxzoom": 15,
@@ -125,8 +125,8 @@
       ],
       "light": {
         "file": "carcara-AM-leve.pmtiles",
-        "bytes": 64336625,
-        "sha256": "f8086820eb578fa8e9c6a8a9c60590ac694c60f89f76232d961e883fcb675b72",
+        "bytes": 64377254,
+        "sha256": "fc412f2a41de3be63458005d95dfc128b630eb531011a232a086d508aa0e47e1",
         "tiles": 92351,
         "minzoom": 0,
         "maxzoom": 13
@@ -135,8 +135,8 @@
     "AP": {
       "name": "Amapá",
       "file": "carcara-AP.pmtiles",
-      "bytes": 23787686,
-      "sha256": "376b6b51564311f6300d323716d478b4f240caba86685cb2e534f665dfb697d3",
+      "bytes": 23793711,
+      "sha256": "a0396b08a7af0df2d73892cd4dac97bb8bd228def49b49bf7d83fae4a50d4b58",
       "tiles": 141635,
       "minzoom": 0,
       "maxzoom": 15,
@@ -154,8 +154,8 @@
       ],
       "light": {
         "file": "carcara-AP-leve.pmtiles",
-        "bytes": 7732727,
-        "sha256": "bb8b7e5954e564199dce530c7e718e6f291262272cea0e657adb38b9a214884b",
+        "bytes": 7733500,
+        "sha256": "865370070cd181036a6645fd19270d48621270bae0158260a3e0cb329cccdf66",
         "tiles": 9280,
         "minzoom": 0,
         "maxzoom": 13
@@ -164,8 +164,8 @@
     "BA": {
       "name": "Bahia",
       "file": "carcara-BA.pmtiles",
-      "bytes": 296394136,
-      "sha256": "b5fa218c7db86c08c675e333a79ac4f5efe4380f6a2d1ab828fdc255e111d7d9",
+      "bytes": 296432868,
+      "sha256": "40f992d2f08526b18a55d92b4db22c48354229b67340a0c3b6eec17406d72239",
       "tiles": 562894,
       "minzoom": 0,
       "maxzoom": 15,
@@ -183,8 +183,8 @@
       ],
       "light": {
         "file": "carcara-BA-leve.pmtiles",
-        "bytes": 77160707,
-        "sha256": "8897d9cafc6f95399851e53befe33ecf84188d393527a52c8d4415a9624b506c",
+        "bytes": 77169671,
+        "sha256": "7913fe95c5281c265aec9fe0d57e3a1ef46c8cef630d87c9101e4247e3bc925b",
         "tiles": 36071,
         "minzoom": 0,
         "maxzoom": 13
@@ -193,8 +193,8 @@
     "CE": {
       "name": "Ceará",
       "file": "carcara-CE.pmtiles",
-      "bytes": 159701812,
-      "sha256": "3b77c98854fa9f7a42b086154a013ea1d3c6b5f399600a6293cd6e49e956c92f",
+      "bytes": 159948851,
+      "sha256": "ba1e7e82668bafc7ae30d319f096b2f4fd4e11093631f83f680bb6e37fbfc4df",
       "tiles": 146423,
       "minzoom": 0,
       "maxzoom": 15,
@@ -212,8 +212,8 @@
       ],
       "light": {
         "file": "carcara-CE-leve.pmtiles",
-        "bytes": 31717559,
-        "sha256": "bbd99846837af019b025d7afea81d7000de1f0997600c5b26f37cdccbe32545b",
+        "bytes": 31790777,
+        "sha256": "df1545ccdee9cc3899e74fcb309721deb51c764743caff0441633a37e211fd38",
         "tiles": 9524,
         "minzoom": 0,
         "maxzoom": 13
@@ -222,8 +222,8 @@
     "DF": {
       "name": "Distrito Federal",
       "file": "carcara-DF.pmtiles",
-      "bytes": 48122777,
-      "sha256": "f99cea8a24adf678f6766333934d44f92fac53681c07381c31311d99c6ac0a0c",
+      "bytes": 48125233,
+      "sha256": "4f80720aec6e37e3f35e0377d3b61e9c7c40cee1008c75cac016158648c93874",
       "tiles": 7868,
       "minzoom": 0,
       "maxzoom": 15,
@@ -241,8 +241,8 @@
       ],
       "light": {
         "file": "carcara-DF-leve.pmtiles",
-        "bytes": 7119851,
-        "sha256": "ff5b0760332f8d7e85a867119c4970be1610cc98a8cca6f42bf9fc278ae9e569",
+        "bytes": 7120965,
+        "sha256": "8dc402f0ffde95fc5d7b9f5e38d1844b7d7e16fea9b2c8df6d464ff2b7d010b6",
         "tiles": 576,
         "minzoom": 0,
         "maxzoom": 13
@@ -251,8 +251,8 @@
     "ES": {
       "name": "Espírito Santo",
       "file": "carcara-ES.pmtiles",
-      "bytes": 364460931,
-      "sha256": "8b32ff173cd9810d261e10a812870c7c904a5e7698da51aa9d193abb921e092c",
+      "bytes": 364462163,
+      "sha256": "e2358e39eede70832500b5fd4da097ab4d76e310e2a59fda5a0370e98995f2d7",
       "tiles": 54797,
       "minzoom": 0,
       "maxzoom": 15,
@@ -270,8 +270,8 @@
       ],
       "light": {
         "file": "carcara-ES-leve.pmtiles",
-        "bytes": 124898803,
-        "sha256": "15156414e96f5e07d632e43480748dcf3785f86a2d9fab5a85ead89f5c98efcb",
+        "bytes": 124899387,
+        "sha256": "98130f2bb4c0ed92e1dea2d0b32a0f4f45752686025ccae17db14ff8c5f58c98",
         "tiles": 3670,
         "minzoom": 0,
         "maxzoom": 13
@@ -280,8 +280,8 @@
     "GO": {
       "name": "Goiás",
       "file": "carcara-GO.pmtiles",
-      "bytes": 184774923,
-      "sha256": "802d1aabb9d5d7ce143df6cbac240d7083e98d69b45a03341fc300a7b6cfb85c",
+      "bytes": 185142391,
+      "sha256": "13e6197d361a09d02922057a34eef5f6023ef8e42946436a07437c732efb0786",
       "tiles": 355106,
       "minzoom": 0,
       "maxzoom": 15,
@@ -299,8 +299,8 @@
       ],
       "light": {
         "file": "carcara-GO-leve.pmtiles",
-        "bytes": 50931897,
-        "sha256": "afca22e1fb53c12c27c62867af088033911eeeba65ffac9f62eeaec39953eea8",
+        "bytes": 51050414,
+        "sha256": "335b9782b83bbdfb9cf2f2e88d2313491f2fb2b8d8ffd9a1a95de76c56adc488",
         "tiles": 22896,
         "minzoom": 0,
         "maxzoom": 13
@@ -309,8 +309,8 @@
     "MA": {
       "name": "Maranhão",
       "file": "carcara-MA.pmtiles",
-      "bytes": 113099519,
-      "sha256": "679493d1c77206932c4b0691780f143ecfb3c7eebb38478e11fa1aeb7133cd4a",
+      "bytes": 113141881,
+      "sha256": "d54b5bb89fda7b1a0e73a1667b26fdb7ef7983dcc77b5491ad3fac75ce0fa193",
       "tiles": 324222,
       "minzoom": 0,
       "maxzoom": 15,
@@ -328,8 +328,8 @@
       ],
       "light": {
         "file": "carcara-MA-leve.pmtiles",
-        "bytes": 28177141,
-        "sha256": "32abfb2b492a51ab90af0adf71eaf7057ca99583f7c9cee97bfa98ec1a9c7b21",
+        "bytes": 28185181,
+        "sha256": "6c8468ccce662187be4f1a7969b11e800f1fd9f7ebd811dedd95063e4cc8ebe5",
         "tiles": 20930,
         "minzoom": 0,
         "maxzoom": 13
@@ -338,8 +338,8 @@
     "MG": {
       "name": "Minas Gerais",
       "file": "carcara-MG.pmtiles",
-      "bytes": 595335598,
-      "sha256": "7ca36d51641ab99cbcb3622efb83dc53d6fc5fbcedf588a0c43b8a8de95cd9ea",
+      "bytes": 595701153,
+      "sha256": "0dced3b1fd88d046ab064cf71c3cdfdf49799e7e2dabd3512121646aef43e556",
       "tiles": 616660,
       "minzoom": 0,
       "maxzoom": 15,
@@ -357,8 +357,8 @@
       ],
       "light": {
         "file": "carcara-MG-leve.pmtiles",
-        "bytes": 183298107,
-        "sha256": "5a3b0eef437d1a1879e040641ea6535a64e5edc2abd9484a5d1aa2c3e8eae954",
+        "bytes": 183421337,
+        "sha256": "e0b03d0e5f19a1ead7d4e79b6f6965a43ffbfb77ba9e9d1f1a52f4346e52b906",
         "tiles": 39438,
         "minzoom": 0,
         "maxzoom": 13
@@ -367,8 +367,8 @@
     "MS": {
       "name": "Mato Grosso do Sul",
       "file": "carcara-MS.pmtiles",
-      "bytes": 111568084,
-      "sha256": "a52ce821bde786b57fa5288df21ca5b66e03ed9b625932d0ff0432ac607c3b23",
+      "bytes": 111587388,
+      "sha256": "f178e7a7a76f25d04b0d40046345efb105249e34d6b44ee3a591cc375e0cc684",
       "tiles": 385183,
       "minzoom": 0,
       "maxzoom": 15,
@@ -386,8 +386,8 @@
       ],
       "light": {
         "file": "carcara-MS-leve.pmtiles",
-        "bytes": 29560880,
-        "sha256": "f3f8cdd8ab4c926915d9de8e354f7987b8bc32a40b1d7304b776dcfdfae4a58c",
+        "bytes": 29566299,
+        "sha256": "1019b02feabede619c070efaada81a42258ce35d4aaaee3215434b5f3632bb67",
         "tiles": 24691,
         "minzoom": 0,
         "maxzoom": 13
@@ -396,8 +396,8 @@
     "MT": {
       "name": "Mato Grosso",
       "file": "carcara-MT.pmtiles",
-      "bytes": 232235899,
-      "sha256": "12183966cc51c2204030f229a2dcbdd7d219fea0267fea70d12688daf41ac371",
+      "bytes": 232598016,
+      "sha256": "701424695ad5007b13bb67f25aa3ed268fab1993c308591dc3123a6e32c28d04",
       "tiles": 886897,
       "minzoom": 0,
       "maxzoom": 15,
@@ -415,8 +415,8 @@
       ],
       "light": {
         "file": "carcara-MT-leve.pmtiles",
-        "bytes": 59314636,
-        "sha256": "5b7789cafba763661675df7eb1f4ac9aba1bfd3179da87014b09237579fc2807",
+        "bytes": 59396181,
+        "sha256": "31ccbd70758a2a2d7dacacc15a53d97b79cfbd08bb31cfecd599f812c66e490d",
         "tiles": 56413,
         "minzoom": 0,
         "maxzoom": 13
@@ -425,8 +425,8 @@
     "PA": {
       "name": "Pará",
       "file": "carcara-PA.pmtiles",
-      "bytes": 206752878,
-      "sha256": "f41f3280675df5c9094207382e05f42ce9d1397408e8c8c3299d9fce9a6f25ee",
+      "bytes": 206766134,
+      "sha256": "1e5a51c0547ca9f227434436215ea4d5ba3e2f0a2ebab67872b1efb2968f8c04",
       "tiles": 1165728,
       "minzoom": 0,
       "maxzoom": 15,
@@ -444,8 +444,8 @@
       ],
       "light": {
         "file": "carcara-PA-leve.pmtiles",
-        "bytes": 56204431,
-        "sha256": "3f15ad8bfd0f014ef5703fad1736c7c6d02bb8b88a6aafdb5acbeafc54455600",
+        "bytes": 56207599,
+        "sha256": "9b610ef4e6ea3e52cdc4de5fd0c2c7356b30e8c798e83a55bcbd545d6a78670c",
         "tiles": 73981,
         "minzoom": 0,
         "maxzoom": 13
@@ -454,8 +454,8 @@
     "PB": {
       "name": "Paraíba",
       "file": "carcara-PB.pmtiles",
-      "bytes": 75902286,
-      "sha256": "2b037a38f46f402e9c538d1e85414a787001992566b718a1976a2cf2f1854bc4",
+      "bytes": 75927374,
+      "sha256": "955afb9143dfa4217ef4e1d11db6c81854419e5b68fdfda7024303666696512e",
       "tiles": 62521,
       "minzoom": 0,
       "maxzoom": 15,
@@ -473,8 +473,8 @@
       ],
       "light": {
         "file": "carcara-PB-leve.pmtiles",
-        "bytes": 21193522,
-        "sha256": "153b9327243361092b7f672ccdf8dd9e771aec8b6b754663087cdedbbb5d6c02",
+        "bytes": 21198642,
+        "sha256": "be4aa95a2d45c4b52ff801e73b30589261e17248454068faa7d72dd43671c3ed",
         "tiles": 4231,
         "minzoom": 0,
         "maxzoom": 13
@@ -483,8 +483,8 @@
     "PE": {
       "name": "Pernambuco",
       "file": "carcara-PE.pmtiles",
-      "bytes": 105616074,
-      "sha256": "6f0604a8f15e796fcb0ec13dfd47ecfad92d1e70141332cdb29888e5eb9e3def",
+      "bytes": 105641757,
+      "sha256": "4558834c34871e33f4ac704b4bac84020c335c2dd4019fa145e92aaba42c5cfb",
       "tiles": 105303,
       "minzoom": 0,
       "maxzoom": 15,
@@ -502,8 +502,8 @@
       ],
       "light": {
         "file": "carcara-PE-leve.pmtiles",
-        "bytes": 26413533,
-        "sha256": "d62cde3cdaa0548479ede2efe98839b65843186200ddac88e1e2b2e9e49b9009",
+        "bytes": 26419795,
+        "sha256": "7fbdfdce5583a0e12815218507e0747afb15f938e4b9f835f732ec4225a01de9",
         "tiles": 7037,
         "minzoom": 0,
         "maxzoom": 13
@@ -512,8 +512,8 @@
     "PI": {
       "name": "Piauí",
       "file": "carcara-PI.pmtiles",
-      "bytes": 115653394,
-      "sha256": "fcee398d26924b12dfdbf8f548a55136ef6ac24477f0914ef39ca57e7e20a6c0",
+      "bytes": 115719817,
+      "sha256": "d9febbc0186e78a7c1c89eb1807ede92103fb407b33b2940d137ec119ae9efa9",
       "tiles": 248897,
       "minzoom": 0,
       "maxzoom": 15,
@@ -531,8 +531,8 @@
       ],
       "light": {
         "file": "carcara-PI-leve.pmtiles",
-        "bytes": 25288737,
-        "sha256": "7f300ebb94b1817d6227aa517e31d20e012249312e86f54953cf266e02aba596",
+        "bytes": 25301907,
+        "sha256": "528469aa0e24cb531113d3b53172e4d697b957eb9c0a3010ac762e83ba609dff",
         "tiles": 16134,
         "minzoom": 0,
         "maxzoom": 13
@@ -541,8 +541,8 @@
     "PR": {
       "name": "Paraná",
       "file": "carcara-PR.pmtiles",
-      "bytes": 330246341,
-      "sha256": "69a57b6c45e724ab5ceeb5366966797aebfaf04e1136dea1c82609e63189f317",
+      "bytes": 330606793,
+      "sha256": "e17f50beb227f104924d0a56e19accf1ea8d3d009560aeeacedd5f32c6070c82",
       "tiles": 231867,
       "minzoom": 0,
       "maxzoom": 15,
@@ -560,8 +560,8 @@
       ],
       "light": {
         "file": "carcara-PR-leve.pmtiles",
-        "bytes": 100267085,
-        "sha256": "2f7cef0ee53d74c5f57cfc36dc274ccf9369c6b1357f8e77daf092b93dc3fe67",
+        "bytes": 100377302,
+        "sha256": "c8dce20b55044af8b25d00fc8f65c88aa217d979176afcf195285d55b922a6ce",
         "tiles": 14914,
         "minzoom": 0,
         "maxzoom": 13
@@ -570,8 +570,8 @@
     "RJ": {
       "name": "Rio de Janeiro",
       "file": "carcara-RJ.pmtiles",
-      "bytes": 116337223,
-      "sha256": "c4c4c9bcfc41fc38b8510804013fc895c2090cabad53de6992dd13740d431d9a",
+      "bytes": 116537251,
+      "sha256": "4e8edf1c0aec88bb671556952955107331bc454f3d476f2587f449d1b897dc39",
       "tiles": 57532,
       "minzoom": 0,
       "maxzoom": 15,
@@ -589,8 +589,8 @@
       ],
       "light": {
         "file": "carcara-RJ-leve.pmtiles",
-        "bytes": 31900189,
-        "sha256": "1bf713b6ff32ec5dc1c5f609c55a12f7e5a96f821f3ce40c92e779595ff3684b",
+        "bytes": 31919291,
+        "sha256": "5082163dae66ef91dfd7964e55182dd9e1f7f8f0fd0d44fa924e733d68bca7c4",
         "tiles": 3875,
         "minzoom": 0,
         "maxzoom": 13
@@ -599,8 +599,8 @@
     "RN": {
       "name": "Rio Grande do Norte",
       "file": "carcara-RN.pmtiles",
-      "bytes": 43803344,
-      "sha256": "b3c0e6a6f1eac75bc50f11bf1269aa8fac7845d9269acfc4eb129cd4756daa59",
+      "bytes": 43807062,
+      "sha256": "29cc2d2ea96f8008cb47c48cf663c7e1a36e1691f750eabb926cd65a28a59a1c",
       "tiles": 56411,
       "minzoom": 0,
       "maxzoom": 15,
@@ -618,8 +618,8 @@
       ],
       "light": {
         "file": "carcara-RN-leve.pmtiles",
-        "bytes": 12293146,
-        "sha256": "3c7f6ddcb70cfb3bc644d6c0606b8b98796bc7961fb4fe81f940dfed0b999baa",
+        "bytes": 12293588,
+        "sha256": "1327df6fcc67b72c4cf1c3d8919a87f54c5f1921534a50691d24b914406bf2ec",
         "tiles": 3795,
         "minzoom": 0,
         "maxzoom": 13
@@ -628,8 +628,8 @@
     "RO": {
       "name": "Rondônia",
       "file": "carcara-RO.pmtiles",
-      "bytes": 53676492,
-      "sha256": "3234bd4980dae647d89bb125f64d80da4bad594f946cacf0b169a23dbdb09356",
+      "bytes": 53692824,
+      "sha256": "53f8605b7343b44a2713eac6b4fabc23e7627685138b51fd7ecc156f5cf7e4a5",
       "tiles": 239663,
       "minzoom": 0,
       "maxzoom": 15,
@@ -647,8 +647,8 @@
       ],
       "light": {
         "file": "carcara-RO-leve.pmtiles",
-        "bytes": 15269316,
-        "sha256": "0ce49c6b3b9b1fa9fd8ec5ad06517cc163e65b3930dd8ed251ec3ca85f861f06",
+        "bytes": 15275259,
+        "sha256": "8fca4a47b9bba612d7317d70d27257a012bd4733512116b6d834f6f0455c9f67",
         "tiles": 15524,
         "minzoom": 0,
         "maxzoom": 13
@@ -657,8 +657,8 @@
     "RR": {
       "name": "Roraima",
       "file": "carcara-RR.pmtiles",
-      "bytes": 38973453,
-      "sha256": "a41f0fcfb665e7cbc05b80188b39957f614653c2d77780ce2c32830b4cd56d45",
+      "bytes": 38976655,
+      "sha256": "eb9bb95c94dd37819ed65dfe09d54b070072469889377db7165d62ce88ad1698",
       "tiles": 220303,
       "minzoom": 0,
       "maxzoom": 15,
@@ -676,8 +676,8 @@
       ],
       "light": {
         "file": "carcara-RR-leve.pmtiles",
-        "bytes": 11752540,
-        "sha256": "85cf084773e6a5754efa07f7773005ebc40a4ddb132981f7699ae95ba00fe8a5",
+        "bytes": 11753893,
+        "sha256": "1f043d8ea71bb765487afce66049a4131a0613fa984f270cc1cc3f5ce7304b04",
         "tiles": 14360,
         "minzoom": 0,
         "maxzoom": 13
@@ -686,8 +686,8 @@
     "RS": {
       "name": "Rio Grande do Sul",
       "file": "carcara-RS.pmtiles",
-      "bytes": 284476046,
-      "sha256": "26dc297e44a84104db6f1fa5119649a228cfb4a4132b6bfb8374786b8a5d2d8a",
+      "bytes": 284528207,
+      "sha256": "68e944cf0bdcc3303e7bbc13bbe7f1fd685924c38258ce4ec593a28cc9049549",
       "tiles": 347690,
       "minzoom": 0,
       "maxzoom": 15,
@@ -705,8 +705,8 @@
       ],
       "light": {
         "file": "carcara-RS-leve.pmtiles",
-        "bytes": 68768702,
-        "sha256": "2cd7a40f56f74a498051362cedf2f91b35f8640f3907c00c213235954a59c21b",
+        "bytes": 68782591,
+        "sha256": "99743177b082ee15830d9736034c3ecaa422e445ff4b0593cbfaf507e0a38350",
         "tiles": 22475,
         "minzoom": 0,
         "maxzoom": 13
@@ -715,8 +715,8 @@
     "SC": {
       "name": "Santa Catarina",
       "file": "carcara-SC.pmtiles",
-      "bytes": 228811889,
-      "sha256": "df6d3c34eae3af9740222722a34e04caae17d9291156f20a19b6426691fedebf",
+      "bytes": 228838142,
+      "sha256": "048f8a2cba9793bb43ece39c2e5a72855efc881e450dedeac7836754b07a22de",
       "tiles": 123775,
       "minzoom": 0,
       "maxzoom": 15,
@@ -734,8 +734,8 @@
       ],
       "light": {
         "file": "carcara-SC-leve.pmtiles",
-        "bytes": 57865190,
-        "sha256": "a3a09b312b1610560cb669020cd993ff8f2d6f9649ca768617cb9801062748a6",
+        "bytes": 57866075,
+        "sha256": "5f97a6ededff376405fb05f02a61977a916534fb202bee04a5d75c532e5fb3fe",
         "tiles": 8141,
         "minzoom": 0,
         "maxzoom": 13
@@ -744,8 +744,8 @@
     "SE": {
       "name": "Sergipe",
       "file": "carcara-SE.pmtiles",
-      "bytes": 29649616,
-      "sha256": "a60da953105d85c14fc21fd0438f62662024976f418eee525405b2c14acbc90c",
+      "bytes": 29651233,
+      "sha256": "432287bed6bc53dc5a8f8f94c137bb467def2bcf947cc4ad9a544623937ad750",
       "tiles": 25376,
       "minzoom": 0,
       "maxzoom": 15,
@@ -763,8 +763,8 @@
       ],
       "light": {
         "file": "carcara-SE-leve.pmtiles",
-        "bytes": 7889108,
-        "sha256": "7ba09d06cb60f5526acea66ccfc34d6eaebb279af7d603473e64d0866fd8c649",
+        "bytes": 7890723,
+        "sha256": "c3f66d969c9ae53635dddb4e3944ad0f372c8d899a5847760fa2362a79ddbd70",
         "tiles": 1759,
         "minzoom": 0,
         "maxzoom": 13
@@ -773,8 +773,8 @@
     "SP": {
       "name": "São Paulo",
       "file": "carcara-SP.pmtiles",
-      "bytes": 496971349,
-      "sha256": "ebb8c49fbbbdd90248d2098b66b68a30c142b595f0ede9d2351eed64eb7fb2cf",
+      "bytes": 497063321,
+      "sha256": "0ff6a4577d5b9169cbd6cc4f643a3416776d4a2a2cc30b311d7b591e65383e3c",
       "tiles": 283071,
       "minzoom": 0,
       "maxzoom": 15,
@@ -792,8 +792,8 @@
       ],
       "light": {
         "file": "carcara-SP-leve.pmtiles",
-        "bytes": 126456227,
-        "sha256": "1e4b4f493338b156b216e0ff5c10e9a70dc44185978b4153b1022abd8d5968fc",
+        "bytes": 126472444,
+        "sha256": "b1a52d41f6b22afd8231e58af1173c793454d3518844b2536b149617d489c572",
         "tiles": 18346,
         "minzoom": 0,
         "maxzoom": 13
@@ -802,8 +802,8 @@
     "TO": {
       "name": "Tocantins",
       "file": "carcara-TO.pmtiles",
-      "bytes": 68786589,
-      "sha256": "2232f0bb29c79ffd5a23fe1e5d5c6317f1932e5a608b353a596b04685eec346f",
+      "bytes": 68805272,
+      "sha256": "f714cb7d91950ab42b6dd62d5edfb9226740bec63cdbcd52c59e762af6493490",
       "tiles": 279025,
       "minzoom": 0,
       "maxzoom": 15,
@@ -821,12 +821,1506 @@
       ],
       "light": {
         "file": "carcara-TO-leve.pmtiles",
-        "bytes": 17238983,
-        "sha256": "bc889b38f3ba1f88f319b48efd96bda4e560c941225c62211af3d1ce23079be7",
+        "bytes": 17250062,
+        "sha256": "dfb8d0397d0aafd6469c3f2e6e50a95bf98bdb824b770d67392ff26f7420d378",
         "tiles": 18074,
         "minzoom": 0,
         "maxzoom": 13
       }
     }
+  },
+  "contract": {
+    "name": "catalogo-comum",
+    "version": 1,
+    "min_reader_version": 1,
+    "dataset": "carcara",
+    "build_id": "2026-11-15-77a87421",
+    "built_at": "2026-11-15T14:07:51Z",
+    "release_url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/",
+    "generator": {
+      "repository": "https://github.com/murkiriel/carcara",
+      "commit": "29cc904296d98fbe1e1b49fbce9f942c1b5dbc8f"
+    },
+    "license": {
+      "data": "ODbL-1.0",
+      "code": "MIT",
+      "attribution": "© colaboradores do OpenStreetMap (ODbL 1.0); cobertura do solo: © ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium (CC BY 4.0); esquema e perfil: Protomaps; limites das UFs: IBGE"
+    },
+    "coordinates": {
+      "crs": "EPSG:4326",
+      "bbox_order": "lat_min,lon_min,lat_max,lon_max"
+    },
+    "osm_snapshot": {
+      "date": "2026-11-15T04:00:00Z",
+      "md5": null
+    },
+    "sources": [
+      {
+        "id": "protomaps-build",
+        "name": "Protomaps, build diário do basemap (OpenStreetMap)",
+        "url": "https://build.protomaps.com/20261115.pmtiles",
+        "date": "2026-11-15T09:09:48.528Z",
+        "version": "4.15.2",
+        "license": "ODbL-1.0",
+        "checksums": {
+          "b3sum": "77a87421aba19e2a6d71201939683fea0fabdea403ce2a2417d795945a0a6fe9"
+        }
+      },
+      {
+        "id": "ibge-malha-uf",
+        "name": "IBGE, malha das UFs (cópia versionada no repositório)",
+        "url": "https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?formato=application/vnd.geo%2Bjson&intrarregiao=UF&qualidade=maxima",
+        "date": "2026-11-09",
+        "license": null,
+        "checksums": {
+          "sha256": "4435b2e0e62de6d68f5c5387e01efc31655242948ae9434b78a3b5b05582e497"
+        }
+      },
+      {
+        "id": "protomaps-basemaps-assets",
+        "name": "Protomaps, fontes e ícones do basemap",
+        "url": "https://github.com/protomaps/basemaps-assets/archive/028c18f713baecad011301ff7a69acc39bcc2ae7.tar.gz",
+        "date": null,
+        "version": "028c18f713baecad011301ff7a69acc39bcc2ae7",
+        "license": "OFL-1.1 AND MIT",
+        "checksums": {
+          "sha256": "adc3f37d6993a52f1562eb89d7a0e7b1f279bd17ca4838c9225e7dfc372a4968"
+        },
+        "note": "sha256 do conteúdo que entra no pacote de recursos (resources.content_digest), não do arquivo baixado"
+      }
+    ],
+    "compatibility": {
+      "mix_generations": true,
+      "data_format": {
+        "name": "pmtiles",
+        "version": "3"
+      },
+      "carcara": {
+        "tileset": {
+          "name": "protomaps-basemap",
+          "version": "4.15.2",
+          "major": 4
+        },
+        "pmtiles_version": 3,
+        "tile_type": "mvt",
+        "tile_compression": "gzip",
+        "glyphs": {
+          "file": "recursos",
+          "template": "fonts/{fontstack}/{range}.pbf",
+          "fontstacks": [
+            "Noto Sans Regular",
+            "Noto Sans Medium",
+            "Noto Sans Italic"
+          ]
+        },
+        "sprites": {
+          "file": "recursos",
+          "template": "sprites/v4/{flavor}",
+          "flavors": [
+            "light",
+            "dark",
+            "white",
+            "grayscale",
+            "black"
+          ]
+        }
+      }
+    },
+    "files": [
+      {
+        "id": "base",
+        "kind": "base",
+        "region": "BR",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-base.pmtiles",
+        "sha256": "a128d267102ca59f296c40e7c3bd081c83850649f3ae1b3acffeefa4047efaa2",
+        "bytes": 44185241,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -33.76,
+          -74.0,
+          5.28,
+          -29.29
+        ],
+        "coverage_level": "BASE_HIGHWAYS_ONLY",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 9,
+        "tiles": 2295
+      },
+      {
+        "id": "AC",
+        "kind": "uf",
+        "region": "AC",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-AC.pmtiles",
+        "sha256": "1425fc450ed4858cb09ab4524cb74e1cf26c73859dfcf506a9f1ef1740efc944",
+        "bytes": 62314253,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -11.15,
+          -74.0,
+          -7.11,
+          -66.62
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 165980
+      },
+      {
+        "id": "AC-leve",
+        "kind": "uf_light",
+        "region": "AC",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-AC-leve.pmtiles",
+        "sha256": "e006af1f5a4b03bbefe7ebfa3a90317eb7605a028f5e0da0fad17b5f896f95f0",
+        "bytes": 20094953,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -11.15,
+          -74.0,
+          -7.11,
+          -66.62
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 10841
+      },
+      {
+        "id": "AL",
+        "kind": "uf",
+        "region": "AL",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-AL.pmtiles",
+        "sha256": "54de85988901b0c78b3bd3ee30796c9062d464166324f1e5541a05a4fdb7929d",
+        "bytes": 35691027,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -10.5,
+          -38.24,
+          -8.81,
+          -35.15
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 31765
+      },
+      {
+        "id": "AL-leve",
+        "kind": "uf_light",
+        "region": "AL",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-AL-leve.pmtiles",
+        "sha256": "04f968f7cc04290fcbb9d9c6c03a7c9f0ab85118c3fcf7669b3e728e2e5993aa",
+        "bytes": 10109099,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -10.5,
+          -38.24,
+          -8.81,
+          -35.15
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 2187
+      },
+      {
+        "id": "AM",
+        "kind": "uf",
+        "region": "AM",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-AM.pmtiles",
+        "sha256": "0f1c10cda0c2f2dc1df7509ac9f2c33ede167e51823b66c9b926874787c36bad",
+        "bytes": 213802398,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -9.82,
+          -73.81,
+          2.25,
+          -56.09
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 1455690
+      },
+      {
+        "id": "AM-leve",
+        "kind": "uf_light",
+        "region": "AM",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-AM-leve.pmtiles",
+        "sha256": "fc412f2a41de3be63458005d95dfc128b630eb531011a232a086d508aa0e47e1",
+        "bytes": 64377254,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -9.82,
+          -73.81,
+          2.25,
+          -56.09
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 92351
+      },
+      {
+        "id": "AP",
+        "kind": "uf",
+        "region": "AP",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-AP.pmtiles",
+        "sha256": "a0396b08a7af0df2d73892cd4dac97bb8bd228def49b49bf7d83fae4a50d4b58",
+        "bytes": 23793711,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -1.24,
+          -54.88,
+          4.51,
+          -49.87
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 141635
+      },
+      {
+        "id": "AP-leve",
+        "kind": "uf_light",
+        "region": "AP",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-AP-leve.pmtiles",
+        "sha256": "865370070cd181036a6645fd19270d48621270bae0158260a3e0cb329cccdf66",
+        "bytes": 7733500,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -1.24,
+          -54.88,
+          4.51,
+          -49.87
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 9280
+      },
+      {
+        "id": "BA",
+        "kind": "uf",
+        "region": "BA",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-BA.pmtiles",
+        "sha256": "40f992d2f08526b18a55d92b4db22c48354229b67340a0c3b6eec17406d72239",
+        "bytes": 296432868,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -18.34,
+          -46.58,
+          -8.53,
+          -37.34
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 562894
+      },
+      {
+        "id": "BA-leve",
+        "kind": "uf_light",
+        "region": "BA",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-BA-leve.pmtiles",
+        "sha256": "7913fe95c5281c265aec9fe0d57e3a1ef46c8cef630d87c9101e4247e3bc925b",
+        "bytes": 77169671,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -18.34,
+          -46.58,
+          -8.53,
+          -37.34
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 36071
+      },
+      {
+        "id": "CE",
+        "kind": "uf",
+        "region": "CE",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-CE.pmtiles",
+        "sha256": "ba1e7e82668bafc7ae30d319f096b2f4fd4e11093631f83f680bb6e37fbfc4df",
+        "bytes": 159948851,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -7.86,
+          -41.43,
+          -2.78,
+          -37.25
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 146423
+      },
+      {
+        "id": "CE-leve",
+        "kind": "uf_light",
+        "region": "CE",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-CE-leve.pmtiles",
+        "sha256": "df1545ccdee9cc3899e74fcb309721deb51c764743caff0441633a37e211fd38",
+        "bytes": 31790777,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -7.86,
+          -41.43,
+          -2.78,
+          -37.25
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 9524
+      },
+      {
+        "id": "DF",
+        "kind": "uf",
+        "region": "DF",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-DF.pmtiles",
+        "sha256": "4f80720aec6e37e3f35e0377d3b61e9c7c40cee1008c75cac016158648c93874",
+        "bytes": 48125233,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -16.05,
+          -48.29,
+          -15.5,
+          -47.3
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 7868
+      },
+      {
+        "id": "DF-leve",
+        "kind": "uf_light",
+        "region": "DF",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-DF-leve.pmtiles",
+        "sha256": "8dc402f0ffde95fc5d7b9f5e38d1844b7d7e16fea9b2c8df6d464ff2b7d010b6",
+        "bytes": 7120965,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -16.05,
+          -48.29,
+          -15.5,
+          -47.3
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 576
+      },
+      {
+        "id": "ES",
+        "kind": "uf",
+        "region": "ES",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-ES.pmtiles",
+        "sha256": "e2358e39eede70832500b5fd4da097ab4d76e310e2a59fda5a0370e98995f2d7",
+        "bytes": 364462163,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -21.31,
+          -41.88,
+          -17.89,
+          -29.29
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 54797
+      },
+      {
+        "id": "ES-leve",
+        "kind": "uf_light",
+        "region": "ES",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-ES-leve.pmtiles",
+        "sha256": "98130f2bb4c0ed92e1dea2d0b32a0f4f45752686025ccae17db14ff8c5f58c98",
+        "bytes": 124899387,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -21.31,
+          -41.88,
+          -17.89,
+          -29.29
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 3670
+      },
+      {
+        "id": "GO",
+        "kind": "uf",
+        "region": "GO",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-GO.pmtiles",
+        "sha256": "13e6197d361a09d02922057a34eef5f6023ef8e42946436a07437c732efb0786",
+        "bytes": 185142391,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -19.5,
+          -53.25,
+          -12.39,
+          -45.9
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 355106
+      },
+      {
+        "id": "GO-leve",
+        "kind": "uf_light",
+        "region": "GO",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-GO-leve.pmtiles",
+        "sha256": "335b9782b83bbdfb9cf2f2e88d2313491f2fb2b8d8ffd9a1a95de76c56adc488",
+        "bytes": 51050414,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -19.5,
+          -53.25,
+          -12.39,
+          -45.9
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 22896
+      },
+      {
+        "id": "MA",
+        "kind": "uf",
+        "region": "MA",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-MA.pmtiles",
+        "sha256": "d54b5bb89fda7b1a0e73a1667b26fdb7ef7983dcc77b5491ad3fac75ce0fa193",
+        "bytes": 113141881,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -10.26,
+          -48.76,
+          -1.04,
+          -41.79
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 324222
+      },
+      {
+        "id": "MA-leve",
+        "kind": "uf_light",
+        "region": "MA",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-MA-leve.pmtiles",
+        "sha256": "6c8468ccce662187be4f1a7969b11e800f1fd9f7ebd811dedd95063e4cc8ebe5",
+        "bytes": 28185181,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -10.26,
+          -48.76,
+          -1.04,
+          -41.79
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 20930
+      },
+      {
+        "id": "MG",
+        "kind": "uf",
+        "region": "MG",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-MG.pmtiles",
+        "sha256": "0dced3b1fd88d046ab064cf71c3cdfdf49799e7e2dabd3512121646aef43e556",
+        "bytes": 595701153,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -22.93,
+          -51.05,
+          -14.23,
+          -39.85
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 616660
+      },
+      {
+        "id": "MG-leve",
+        "kind": "uf_light",
+        "region": "MG",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-MG-leve.pmtiles",
+        "sha256": "e0b03d0e5f19a1ead7d4e79b6f6965a43ffbfb77ba9e9d1f1a52f4346e52b906",
+        "bytes": 183421337,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -22.93,
+          -51.05,
+          -14.23,
+          -39.85
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 39438
+      },
+      {
+        "id": "MS",
+        "kind": "uf",
+        "region": "MS",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-MS.pmtiles",
+        "sha256": "f178e7a7a76f25d04b0d40046345efb105249e34d6b44ee3a591cc375e0cc684",
+        "bytes": 111587388,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -24.07,
+          -58.17,
+          -17.16,
+          -50.92
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 385183
+      },
+      {
+        "id": "MS-leve",
+        "kind": "uf_light",
+        "region": "MS",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-MS-leve.pmtiles",
+        "sha256": "1019b02feabede619c070efaada81a42258ce35d4aaaee3215434b5f3632bb67",
+        "bytes": 29566299,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -24.07,
+          -58.17,
+          -17.16,
+          -50.92
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 24691
+      },
+      {
+        "id": "MT",
+        "kind": "uf",
+        "region": "MT",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-MT.pmtiles",
+        "sha256": "701424695ad5007b13bb67f25aa3ed268fab1993c308591dc3123a6e32c28d04",
+        "bytes": 232598016,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -18.05,
+          -61.64,
+          -7.34,
+          -50.22
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 886897
+      },
+      {
+        "id": "MT-leve",
+        "kind": "uf_light",
+        "region": "MT",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-MT-leve.pmtiles",
+        "sha256": "31ccbd70758a2a2d7dacacc15a53d97b79cfbd08bb31cfecd599f812c66e490d",
+        "bytes": 59396181,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -18.05,
+          -61.64,
+          -7.34,
+          -50.22
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 56413
+      },
+      {
+        "id": "PA",
+        "kind": "uf",
+        "region": "PA",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-PA.pmtiles",
+        "sha256": "1e5a51c0547ca9f227434436215ea4d5ba3e2f0a2ebab67872b1efb2968f8c04",
+        "bytes": 206766134,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -9.85,
+          -58.9,
+          2.6,
+          -46.06
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 1165728
+      },
+      {
+        "id": "PA-leve",
+        "kind": "uf_light",
+        "region": "PA",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-PA-leve.pmtiles",
+        "sha256": "9b610ef4e6ea3e52cdc4de5fd0c2c7356b30e8c798e83a55bcbd545d6a78670c",
+        "bytes": 56207599,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -9.85,
+          -58.9,
+          2.6,
+          -46.06
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 73981
+      },
+      {
+        "id": "PB",
+        "kind": "uf",
+        "region": "PB",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-PB.pmtiles",
+        "sha256": "955afb9143dfa4217ef4e1d11db6c81854419e5b68fdfda7024303666696512e",
+        "bytes": 75927374,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -8.31,
+          -38.77,
+          -6.02,
+          -34.79
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 62521
+      },
+      {
+        "id": "PB-leve",
+        "kind": "uf_light",
+        "region": "PB",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-PB-leve.pmtiles",
+        "sha256": "be4aa95a2d45c4b52ff801e73b30589261e17248454068faa7d72dd43671c3ed",
+        "bytes": 21198642,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -8.31,
+          -38.77,
+          -6.02,
+          -34.79
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 4231
+      },
+      {
+        "id": "PE",
+        "kind": "uf",
+        "region": "PE",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-PE.pmtiles",
+        "sha256": "4558834c34871e33f4ac704b4bac84020c335c2dd4019fa145e92aaba42c5cfb",
+        "bytes": 105641757,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -9.49,
+          -41.36,
+          -3.83,
+          -32.39
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 105303
+      },
+      {
+        "id": "PE-leve",
+        "kind": "uf_light",
+        "region": "PE",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-PE-leve.pmtiles",
+        "sha256": "7fbdfdce5583a0e12815218507e0747afb15f938e4b9f835f732ec4225a01de9",
+        "bytes": 26419795,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -9.49,
+          -41.36,
+          -3.83,
+          -32.39
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 7037
+      },
+      {
+        "id": "PI",
+        "kind": "uf",
+        "region": "PI",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-PI.pmtiles",
+        "sha256": "d9febbc0186e78a7c1c89eb1807ede92103fb407b33b2940d137ec119ae9efa9",
+        "bytes": 115719817,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -10.93,
+          -46.03,
+          -2.74,
+          -40.37
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 248897
+      },
+      {
+        "id": "PI-leve",
+        "kind": "uf_light",
+        "region": "PI",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-PI-leve.pmtiles",
+        "sha256": "528469aa0e24cb531113d3b53172e4d697b957eb9c0a3010ac762e83ba609dff",
+        "bytes": 25301907,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -10.93,
+          -46.03,
+          -2.74,
+          -40.37
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 16134
+      },
+      {
+        "id": "PR",
+        "kind": "uf",
+        "region": "PR",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-PR.pmtiles",
+        "sha256": "e17f50beb227f104924d0a56e19accf1ea8d3d009560aeeacedd5f32c6070c82",
+        "bytes": 330606793,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -26.72,
+          -54.62,
+          -22.51,
+          -48.02
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 231867
+      },
+      {
+        "id": "PR-leve",
+        "kind": "uf_light",
+        "region": "PR",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-PR-leve.pmtiles",
+        "sha256": "c8dce20b55044af8b25d00fc8f65c88aa217d979176afcf195285d55b922a6ce",
+        "bytes": 100377302,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -26.72,
+          -54.62,
+          -22.51,
+          -48.02
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 14914
+      },
+      {
+        "id": "RJ",
+        "kind": "uf",
+        "region": "RJ",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-RJ.pmtiles",
+        "sha256": "4e8edf1c0aec88bb671556952955107331bc454f3d476f2587f449d1b897dc39",
+        "bytes": 116537251,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -23.37,
+          -44.89,
+          -20.76,
+          -40.95
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 57532
+      },
+      {
+        "id": "RJ-leve",
+        "kind": "uf_light",
+        "region": "RJ",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-RJ-leve.pmtiles",
+        "sha256": "5082163dae66ef91dfd7964e55182dd9e1f7f8f0fd0d44fa924e733d68bca7c4",
+        "bytes": 31919291,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -23.37,
+          -44.89,
+          -20.76,
+          -40.95
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 3875
+      },
+      {
+        "id": "RN",
+        "kind": "uf",
+        "region": "RN",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-RN.pmtiles",
+        "sha256": "29cc2d2ea96f8008cb47c48cf663c7e1a36e1691f750eabb926cd65a28a59a1c",
+        "bytes": 43807062,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -6.99,
+          -38.59,
+          -4.83,
+          -34.96
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 56411
+      },
+      {
+        "id": "RN-leve",
+        "kind": "uf_light",
+        "region": "RN",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-RN-leve.pmtiles",
+        "sha256": "1327df6fcc67b72c4cf1c3d8919a87f54c5f1921534a50691d24b914406bf2ec",
+        "bytes": 12293588,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -6.99,
+          -38.59,
+          -4.83,
+          -34.96
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 3795
+      },
+      {
+        "id": "RO",
+        "kind": "uf",
+        "region": "RO",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-RO.pmtiles",
+        "sha256": "53f8605b7343b44a2713eac6b4fabc23e7627685138b51fd7ecc156f5cf7e4a5",
+        "bytes": 53692824,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -13.7,
+          -66.82,
+          -7.97,
+          -59.77
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 239663
+      },
+      {
+        "id": "RO-leve",
+        "kind": "uf_light",
+        "region": "RO",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-RO-leve.pmtiles",
+        "sha256": "8fca4a47b9bba612d7317d70d27257a012bd4733512116b6d834f6f0455c9f67",
+        "bytes": 15275259,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -13.7,
+          -66.82,
+          -7.97,
+          -59.77
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 15524
+      },
+      {
+        "id": "RR",
+        "kind": "uf",
+        "region": "RR",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-RR.pmtiles",
+        "sha256": "eb9bb95c94dd37819ed65dfe09d54b070072469889377db7165d62ce88ad1698",
+        "bytes": 38976655,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -1.59,
+          -64.83,
+          5.28,
+          -58.88
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 220303
+      },
+      {
+        "id": "RR-leve",
+        "kind": "uf_light",
+        "region": "RR",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-RR-leve.pmtiles",
+        "sha256": "1f043d8ea71bb765487afce66049a4131a0613fa984f270cc1cc3f5ce7304b04",
+        "bytes": 11753893,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -1.59,
+          -64.83,
+          5.28,
+          -58.88
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 14360
+      },
+      {
+        "id": "RS",
+        "kind": "uf",
+        "region": "RS",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-RS.pmtiles",
+        "sha256": "68e944cf0bdcc3303e7bbc13bbe7f1fd685924c38258ce4ec593a28cc9049549",
+        "bytes": 284528207,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -33.76,
+          -57.65,
+          -27.08,
+          -49.69
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 347690
+      },
+      {
+        "id": "RS-leve",
+        "kind": "uf_light",
+        "region": "RS",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-RS-leve.pmtiles",
+        "sha256": "99743177b082ee15830d9736034c3ecaa422e445ff4b0593cbfaf507e0a38350",
+        "bytes": 68782591,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -33.76,
+          -57.65,
+          -27.08,
+          -49.69
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 22475
+      },
+      {
+        "id": "SC",
+        "kind": "uf",
+        "region": "SC",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-SC.pmtiles",
+        "sha256": "048f8a2cba9793bb43ece39c2e5a72855efc881e450dedeac7836754b07a22de",
+        "bytes": 228838142,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -29.36,
+          -53.84,
+          -25.95,
+          -48.35
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 123775
+      },
+      {
+        "id": "SC-leve",
+        "kind": "uf_light",
+        "region": "SC",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-SC-leve.pmtiles",
+        "sha256": "5f97a6ededff376405fb05f02a61977a916534fb202bee04a5d75c532e5fb3fe",
+        "bytes": 57866075,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -29.36,
+          -53.84,
+          -25.95,
+          -48.35
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 8141
+      },
+      {
+        "id": "SE",
+        "kind": "uf",
+        "region": "SE",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-SE.pmtiles",
+        "sha256": "432287bed6bc53dc5a8f8f94c137bb467def2bcf947cc4ad9a544623937ad750",
+        "bytes": 29651233,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -11.57,
+          -38.25,
+          -9.51,
+          -36.39
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 25376
+      },
+      {
+        "id": "SE-leve",
+        "kind": "uf_light",
+        "region": "SE",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-SE-leve.pmtiles",
+        "sha256": "c3f66d969c9ae53635dddb4e3944ad0f372c8d899a5847760fa2362a79ddbd70",
+        "bytes": 7890723,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -11.57,
+          -38.25,
+          -9.51,
+          -36.39
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 1759
+      },
+      {
+        "id": "SP",
+        "kind": "uf",
+        "region": "SP",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-SP.pmtiles",
+        "sha256": "0ff6a4577d5b9169cbd6cc4f643a3416776d4a2a2cc30b311d7b591e65383e3c",
+        "bytes": 497063321,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -25.31,
+          -53.12,
+          -19.77,
+          -44.16
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 283071
+      },
+      {
+        "id": "SP-leve",
+        "kind": "uf_light",
+        "region": "SP",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-SP-leve.pmtiles",
+        "sha256": "b1a52d41f6b22afd8231e58af1173c793454d3518844b2536b149617d489c572",
+        "bytes": 126472444,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -25.31,
+          -53.12,
+          -19.77,
+          -44.16
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 18346
+      },
+      {
+        "id": "TO",
+        "kind": "uf",
+        "region": "TO",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-TO.pmtiles",
+        "sha256": "f714cb7d91950ab42b6dd62d5edfb9226740bec63cdbcd52c59e762af6493490",
+        "bytes": 68805272,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -13.47,
+          -50.75,
+          -5.16,
+          -45.69
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 15,
+        "tiles": 279025
+      },
+      {
+        "id": "TO-leve",
+        "kind": "uf_light",
+        "region": "TO",
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-TO-leve.pmtiles",
+        "sha256": "dfb8d0397d0aafd6469c3f2e6e50a95bf98bdb824b770d67392ff26f7420d378",
+        "bytes": 17250062,
+        "bytes_unpacked": null,
+        "media_type": "application/vnd.pmtiles",
+        "unpack": [],
+        "format": "pmtiles",
+        "bbox": [
+          -13.47,
+          -50.75,
+          -5.16,
+          -45.69
+        ],
+        "coverage_level": "DETAILED",
+        "requires": [
+          "recursos"
+        ],
+        "minzoom": 0,
+        "maxzoom": 13,
+        "tiles": 18074
+      },
+      {
+        "id": "recursos",
+        "kind": "resources",
+        "region": null,
+        "url": "https://github.com/murkiriel/carcara/releases/download/2026-11-15-77a87421/carcara-recursos.tar.gz",
+        "sha256": "2c96f4186eb606e35ee25e0e31317916e4a860e201f0f4ae91a3bb4fb8fbaf1e",
+        "bytes": 6320215,
+        "bytes_unpacked": null,
+        "media_type": "application/gzip",
+        "unpack": [
+          "gzip",
+          "tar"
+        ],
+        "format": "glyphs-sprites",
+        "bbox": null,
+        "coverage_level": null,
+        "requires": [],
+        "license": "OFL-1.1 AND MIT"
+      }
+    ]
   }
 }
